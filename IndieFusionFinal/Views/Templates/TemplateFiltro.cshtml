@@ -1,0 +1,306 @@
+﻿@model IEnumerable<IndieFusionFinal.Models.Game>
+
+@{
+    ViewData["Title"] = "Filtro de Jogos";
+    var imagePath = Context.Session.GetString("ImagePath") ?? "/IF/Img/Icones/PerfilWhite.png";
+    var genreImage = Model.FirstOrDefault()?.Genre?.ImagePath;
+}
+
+<header>
+    <nav>
+        <!-- Top Bar -->
+        <section id="top" class="topbar">
+            <div class="topbar_container">
+                <div class="topbar__content">
+                    <div class="logo-container">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                            <div class="topbar__logo">
+                                <h4 class="logo-text">
+                                    INDIE
+                                    <span> FUSION</span>
+                                </h4>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="topbar__menu"></div>
+                    <div class="mode-container">
+                        <button id="btnMode" class="topbar__btn">
+                            <img src="~/Img/Icones/moon.png" alt="Modo Escuro">
+                        </button>
+                        <span class="mode-nome">Temas</span>
+                    </div>
+
+                    <!-- Menu de seleção de temas -->
+
+
+                    <div id="themeMenu" class="theme-menu">
+                        <div class="theme-group">
+                            <div class="theme-category" onclick="toggleThemeOptions('light')">Light Mode</div>
+                            <div class="theme-options" id="light-options">
+                                <div class="theme-option" onclick="changeTheme('NebulosaSolarLightMode')">Nebulosa Solar</div>
+                                <div class="theme-option" onclick="changeTheme('AuroraNebulosaLightMode')">Aurora Nebulosa</div>
+                                <div class="theme-option" onclick="changeTheme('GalaxiaAzuladaLightMode')">Galáxia Azulada</div>
+                                <div class="theme-option" onclick="changeTheme('NebulosaLilasLightMode')">Nebulosa Lilás</div>
+                                <div class="theme-option" onclick="changeTheme('EstrelaDouradaLightMode')">Estrela Dourada</div>
+                            </div>
+                        </div>
+
+                        <div class="theme-group">
+                            <div class="theme-category" onclick="toggleThemeOptions('dark')">Dark Mode</div>
+                            <div class="theme-options" id="dark-options">
+                                <div class="theme-option" onclick="changeTheme('NebulosaVermelhaMode')">Nebulosa Vermelha</div>
+                                <div class="theme-option" onclick="changeTheme('BuracoNegroMode')">Buraco Negro</div>
+                                <div class="theme-option" onclick="changeTheme('AuroraBorealMode')">Aurora Boreal</div>
+                                <div class="theme-option" onclick="changeTheme('EstrelaAzulMode')">Estrela Azul</div>
+                                <div class="theme-option" onclick="changeTheme('NebulosaLilasMode')">Nebulosa Lilás</div>
+                            </div>
+                        </div>
+
+                        <div class="theme-group">
+                            <div class="theme-category" onclick="toggleThemeOptions('neon')">Neon Mode</div>
+                            <div class="theme-options" id="neon-options">
+                                <div class="theme-option" onclick="changeTheme('Neon1Mode')">Neon Trifecta</div>
+                                <div class="theme-option" onclick="changeTheme('NeonSpectrumMode')">Neon Spectrum</div>
+                                <div class="theme-option" onclick="changeTheme('NeonVaporwaveMode')">Neon Vaporwave</div>
+                                <div class="theme-option" onclick="changeTheme('NeonCyberMode')">Neon Cyber</div>
+                                <div class="theme-option" onclick="changeTheme('NeonAuroraMode')">Neon Aurora</div>
+                            </div>
+                        </div>
+
+                        <div class="theme-group">
+                            <div class="theme-category" onclick="toggleThemeOptions('colors')">Cores Padrões</div>
+                            <div class="theme-options" id="colors-options">
+                                <div class="theme-option" onclick="changeTheme('GalaxiaPadraoMode')">Galáxia Padrão</div>
+                                <div class="theme-option" onclick="changeTheme('darkGalaxyAMOLEDMode')">Dark Galaxy</div>
+                                <div class="theme-option" onclick="changeTheme('GalaxiaPadraoLightMode')">Light Galaxy</div>
+                                <div class="theme-option" onclick="changeTheme('YingYangNeonGalaticoMode')">Ying Yang Galatico</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="NavLeft" class="sidebar">
+            <div class="sidebar_container">
+                <ul class="sidebar__menu">
+                    <!-- Item do Menu (sem link) -->
+                    <li>
+                        <div class="menu-item">
+                            <!-- Link para a ação TemplateFiltro no controller Templates -->
+                            <a asp-controller="Templates" asp-action="TemplateFiltro" asp-area="">
+                                <span>Menu</span>
+                                <img src="~/Img/Icones/menuBar.webp" alt="Menu">
+                            </a>
+                        </div>
+                    </li>
+                    <!-- Aventura -->
+                    <li>
+                        <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 6 })">
+                            <div class="menu-item">
+                                <span>Aventura</span>
+                                <img src="~/Img/Icones/Bag.png" alt="Aventura">
+                            </div>
+                        </a>
+                    </li>
+                    <!-- Plataforma -->
+                    <li>
+                        <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 2 })">
+                            <div class="menu-item">
+                                <span>Plataforma</span>
+                                <img src="~/Img/Icones/Block.png" alt="Plataforma">
+                            </div>
+                        </a>
+                    </li>
+                    <!-- Corrida -->
+                    <li>
+                        <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 3 })">
+                            <div class="menu-item">
+                                <span>Corrida</span>
+                                <img src="~/Img/Icones/Car.png" alt="Corrida">
+                            </div>
+                        </a>
+                    </li>
+                    <!-- RPG -->
+                    <li>
+                        <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 8 })">
+                            <div class="menu-item">
+                                <span>RPG</span>
+                                <img src="~/Img/Icones/Dice.png" alt="RPG">
+                            </div>
+                        </a>
+                    </li>
+                    <!-- Tiro -->
+                    <li>
+                        <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 5 })">
+                            <div class="menu-item">
+                                <span>Tiro</span>
+                                <img src="~/Img/Icones/Mira.png" alt="Tiro">
+                            </div>
+                        </a>
+                    </li>
+                    <!-- Luta -->
+                    <li>
+                        <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 1 })">
+                            <div class="menu-item">
+                                <span>Luta</span>
+                                <img src="~/Img/Icones/Punch.png" alt="Luta">
+                            </div>
+                        </a>
+                    </li>
+                    <!-- Terror -->
+                    <li>
+                        <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 4 })">
+                            <div class="menu-item">
+                                <span>Terror</span>
+                                <img src="~/Img/Icones/Skel.png" alt="Terror">
+                            </div>
+                        </a>
+                    </li>
+                    <!-- Info -->
+                    <li>
+                        <a href="/">
+                            <div class="menu-item">
+                                <span>Info</span>
+                                <img src="~/Img/Icones/inf.png" alt="Info">
+                            </div>
+                        </a>
+                    </li>
+                    <!-- Logo -->
+                    <div class="sidebar__logo">
+                        <img src="~/Img/Icones/Logo.png" alt="Logo IndieFusion">
+                    </div>
+                </ul>
+            </div>
+        </section>
+    </nav>
+</header>
+
+<section id="tableT2" class="tableBlc2">
+    <div class="tableBlc_container2Filtro">
+        <div style="display: flex; align-items: center;">
+            <h2 style="margin-right: 20px;">@ViewData["GenreName"]</h2>
+            @if (!string.IsNullOrEmpty(ViewData["GenreImage"]?.ToString()))
+            {
+                <img src="@Url.Content(ViewData["GenreImage"].ToString())" alt="" style="width: 50px; height: auto;" />
+            }
+        </div>
+        <form method="get">
+            <div class="form-group">
+                <label for="nomeJogo">Buscar por nome:</label>
+                <input type="text" name="nomeJogo" placeholder="Digite o nome do jogo..."
+                       value="@ViewData["NomeJogo"]" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="Classification_Id">Classificação</label>
+                <select id="Classification_Id" name="Classification_Id" class="form-control" asp-items="ViewBag.Classification_Id">
+                    <option value="">Todas</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Genre_Id">Gênero</label>
+                <select id="Genre_Id" name="Genre_Id" class="form-control" asp-items="ViewBag.Genre_Id">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+
+            <!-- Filtro adicional para o segundo gênero -->
+            <div class="form-group">
+                <label for="Genre2_Id">Segundo Gênero</label>
+                <select id="Genre2_Id" name="Genre2_Id" class="form-control" asp-items="ViewBag.Genre2_Id">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </form>
+    </div>
+</section>
+
+<section id="gameT" class="gameBlc">
+    <h3>Jogos</h3>
+    <div class="gameBlc_container">
+
+        <!-- Exibição dos Jogos -->
+        @if (Model != null && Model.Any()) // Verifica se há jogos no Model
+        {
+            <div class="row">
+                @foreach (var game in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+                        <!-- Cada jogo em um card -->
+                        <div class="cardG" style="width: 100%;">
+                            @if (!string.IsNullOrEmpty(game.ImagePath))
+                            {
+                                <a href="@Url.Action("TemplateJogo", "Templates", new { id = game.Id })">
+                                    <img src="@game.ImagePath" class="card-img-top" alt="@game.Title" style="height: 200px; width: 100%;" />
+                                </a>
+                            }
+                            else
+                            {
+                                <img src="/images/default-image.png" class="card-img-top" alt="Imagem padrão" style="height: auto; width: 100%;" />
+                            }
+
+                            <div class="card-body text-center">
+                                <!-- Exibe o título do jogo -->
+                                <p class="card-text" >@game.Title</p>
+                                @if (!string.IsNullOrEmpty(game.price))
+                                {
+                                    <p class="card-text">Preço: R$@game.price</p>
+                                }
+                                else
+                                {
+                                    <p class="card-text">Preço: Não disponível</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>Nenhum jogo encontrado.</p> <!-- Mensagem caso não existam jogos -->
+        }
+    </div>
+</section>
+
+<script src="~/js/script.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const genreSelect = document.getElementById('Genre_Id');
+        const genre2Select = document.getElementById('Genre2_Id');
+
+        function updateSecondGenreOptions() {
+            const selectedValue = genreSelect.value;
+
+            // Habilitar todas as opções no segundo seletor
+            Array.from(genre2Select.options).forEach(option => {
+                option.disabled = false;
+            });
+
+            // Desabilitar a opção selecionada no primeiro seletor
+            if (selectedValue) {
+                const optionToDisable = genre2Select.querySelector(`option[value="${selectedValue}"]`);
+                if (optionToDisable) {
+                    optionToDisable.disabled = true;
+                }
+            }
+
+            // Garantir que a segunda seleção não tenha um valor inválido
+            if (genre2Select.value === selectedValue) {
+                genre2Select.value = '';
+            }
+        }
+
+        // Atualizar as opções sempre que o primeiro seletor mudar
+        genreSelect.addEventListener('change', updateSecondGenreOptions);
+
+        // Inicializar as opções no carregamento da página
+        updateSecondGenreOptions();
+    });
+</script>

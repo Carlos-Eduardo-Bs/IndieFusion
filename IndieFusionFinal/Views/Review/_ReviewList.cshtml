@@ -1,0 +1,24 @@
+﻿@model List<IndieFusionFinal.Models.Review>
+
+<div class="reviews" id="reviewsList">
+    <h3>Comentários</h3>
+    @if (Model != null && Model.Any()) // Usando Any() para verificar se há comentários
+    {
+        foreach (var review in Model)
+        {
+            <div class="review">
+                <p><strong>@(review.Like ? "👍 Like" : "👎 Dislike")</strong> - @review.User?.Name ?? "Usuário Desconhecido"</p>
+                @if (!string.IsNullOrEmpty(review.Comment))
+                {
+                    <p>@review.Comment</p>
+                }
+                <hr />
+            </div>
+        }
+    }
+    else
+    {
+        <p>Nenhum comentário ainda.</p>
+    }
+</div>
+

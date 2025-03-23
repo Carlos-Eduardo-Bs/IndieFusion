@@ -1,0 +1,571 @@
+﻿@using IndieFusionFinal.Migrations
+@model List<IndieFusionFinal.Models.Game>
+@{
+    ViewData["Title"] = "Index";
+    var userId = Context.Session.GetInt32("UserId");
+    var userType = Context.Session.GetInt32("UserType");
+    var username = Context.Session.GetString("Username"); //Obtém o nome de usuário da sessão usando Context
+    var imagePath = Context.Session.GetString("ImagePath") ?? "/IF/Img/Icones/PerfilWhite.png";
+
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="./Css/Media.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+          referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" />
+    <title>IndieFusion</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <!-- Top Bar -->
+            <section id="top" class="topbar">
+                <div class="topbar_container">
+                    <div class="topbar__content">
+
+
+                        <div class="logo-container">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                                <div class="topbar__logo">
+                                    <h4 class="logo-text">
+                                        INDIE
+                                        <span> FUSION</span>
+                                    </h4>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="topbar__menuhome">
+                            <ul>
+                                <a class="nav-link" asp-area="" asp-controller="News" asp-action="Index">Notícias</a>
+                                @if (userId == null)
+                                {
+                                    <li>
+                                        <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link " data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastrar</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="topbar__menuhomePerfil">
+                            @if (userId != null)
+                            {
+                                <li class="perfil-container">
+                                    <button id="perfilBtn">
+                                        <img src="@Url.Content(imagePath)" alt="Perfil" class="img-thumbnail" />
+                                    </button>
+                                    <span id="perfilNome" class="perfil-nome">@username.ToUpper()</span>
+                                    <div id="menu" class="menu">
+                                        @if (userType == 1)
+                                        {
+                                            <a asp-area="" asp-controller="Users" asp-action="Index">Área Restrita</a>
+                                            <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                                        }
+                                        else if (userType == 2)
+                                        {
+                                            <a asp-area="" asp-controller="GameMakers" asp-action="GameUser">Meus Jogos</a>
+                                            <a asp-area="" asp-controller="Templates" asp-action="TemplatePerfil">Perfil</a>
+                                            <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                            <a asp-area="" asp-controller="Templates" asp-action="TemplatePerfil">Perfil</a>
+                                            <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                                        }
+                                    </div>
+                                </li>
+                            }
+
+                            <div class="mode-container">
+                                <button id="btnMode" class="topbar__btn">
+                                    <img src="~/Img/Icones/moon.png" alt="Modo Escuro">
+                                </button>
+                                <span class="mode-nome">Temas</span>
+                            </div>
+
+                            <!-- Menu de seleção de temas -->
+
+
+                            <div id="themeMenu" class="theme-menu">
+                                <div class="theme-group">
+                                    <div class="theme-category" onclick="toggleThemeOptions('light')">Light Mode</div>
+                                    <div class="theme-options" id="light-options">
+                                        <div class="theme-option" onclick="changeTheme('NebulosaSolarLightMode')">Nebulosa Solar</div>
+                                        <div class="theme-option" onclick="changeTheme('AuroraNebulosaLightMode')">Aurora Nebulosa</div>
+                                        <div class="theme-option" onclick="changeTheme('GalaxiaAzuladaLightMode')">Galáxia Azulada</div>
+                                        <div class="theme-option" onclick="changeTheme('NebulosaLilasLightMode')">Nebulosa Lilás</div>
+                                        <div class="theme-option" onclick="changeTheme('EstrelaDouradaLightMode')">Estrela Dourada</div>
+                                    </div>
+                                </div>
+
+                                <div class="theme-group">
+                                    <div class="theme-category" onclick="toggleThemeOptions('dark')">Dark Mode</div>
+                                    <div class="theme-options" id="dark-options">
+                                        <div class="theme-option" onclick="changeTheme('NebulosaVermelhaMode')">Nebulosa Vermelha</div>
+                                        <div class="theme-option" onclick="changeTheme('BuracoNegroMode')">Buraco Negro</div>
+                                        <div class="theme-option" onclick="changeTheme('AuroraBorealMode')">Aurora Boreal</div>
+                                        <div class="theme-option" onclick="changeTheme('EstrelaAzulMode')">Estrela Azul</div>
+                                        <div class="theme-option" onclick="changeTheme('NebulosaLilasMode')">Nebulosa Lilás</div>
+                                    </div>
+                                </div>
+
+                                <div class="theme-group">
+                                    <div class="theme-category" onclick="toggleThemeOptions('neon')">Neon Mode</div>
+                                    <div class="theme-options" id="neon-options">
+                                        <div class="theme-option" onclick="changeTheme('Neon1Mode')">Neon Trifecta</div>
+                                        <div class="theme-option" onclick="changeTheme('NeonSpectrumMode')">Neon Spectrum</div>
+                                        <div class="theme-option" onclick="changeTheme('NeonVaporwaveMode')">Neon Vaporwave</div>
+                                        <div class="theme-option" onclick="changeTheme('NeonCyberMode')">Neon Cyber</div>
+                                        <div class="theme-option" onclick="changeTheme('NeonAuroraMode')">Neon Aurora</div>
+                                    </div>
+                                </div>
+
+                                <div class="theme-group">
+                                    <div class="theme-category" onclick="toggleThemeOptions('colors')">Cores Padrões</div>
+                                    <div class="theme-options" id="colors-options">
+                                        <div class="theme-option" onclick="changeTheme('GalaxiaPadraoMode')">Galáxia Padrão</div>
+                                        <div class="theme-option" onclick="changeTheme('darkGalaxyAMOLEDMode')">Dark Galaxy</div>
+                                        <div class="theme-option" onclick="changeTheme('GalaxiaPadraoLightMode')">Light Galaxy</div>
+                                        <div class="theme-option" onclick="changeTheme('YingYangNeonGalaticoMode')">Ying Yang Galatico</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+            <!-- Modal Login -->
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form asp-action="Login" method="post">
+                                <div class="mb-3">
+                                    <label for="nickname" class="form-label">Usuário</label>
+                                    <input type="text" class="form-control" id="nickname" name="nickname" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <!-- Área para exibir a mensagem de erro -->
+                                <div id="errorMessage" class="alert alert-danger" style="display: none;">
+                                    <!-- Mensagem de erro será exibida aqui -->
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </form>
+                            <p class="mt-3">
+                                Não tem conta?
+                                <a href="#" id="linkCadastro">Crie uma!</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Cadastro -->
+            <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cadastroModalLabel">Cadastrar Usuário</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form asp-action="Cadastro" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nickname" class="form-label">NickName</label>
+                                    <input type="text" class="form-control" id="nickname" name="nickname" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" id="password" name="password" required minlength="6">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="birthDate" class="form-label">Data de Nascimento</label>
+                                    <input type="date" class="form-control" id="birthDate" name="birthDate" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imageFile" class="form-label">Imagem</label>
+                                    <input type="file" class="form-control" id="imageFile" name="imageFile">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Sidebar -->
+            <section id="NavLeft" class="sidebar">
+                <div class="sidebar_container">
+                    <ul class="sidebar__menu">
+                        <!-- Item do Menu (sem link) -->
+                        <li>
+
+                            <div class="menu-item">
+                                <!-- Link para a ação TemplateFiltro no controller Templates -->
+                                <a asp-controller="Templates" asp-action="TemplateFiltro" asp-area="">
+                                    <span>Menu</span>
+                                    <img src="./Img/Icones/menuBar.webp" alt="Menu">
+                                </a>
+                            </div>
+
+                        </li>
+                        <!-- Aventura -->
+                        <li>
+                            <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 6 })">
+                                <div class="menu-item">
+                                    <span>Aventura</span>
+                                    <img src="./Img/Icones/Bag.png" alt="Aventura">
+                                </div>
+                            </a>
+                        </li>
+                        <!-- Plataforma -->
+                        <li>
+                            <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 2 })">
+                                <div class="menu-item">
+                                    <span>Plataforma</span>
+                                    <img src="./Img/Icones/Block.png" alt="Plataforma">
+                                </div>
+                            </a>
+                        </li>
+                        <!-- Corrida -->
+                        <li>
+                            <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 3 })">
+                                <div class="menu-item">
+                                    <span>Corrida</span>
+                                    <img src="./Img/Icones/Car.png" alt="Corrida">
+                                </div>
+                            </a>
+                        </li>
+                        <!-- RPG -->
+                        <li>
+                            <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 8 })">
+                                <div class="menu-item">
+                                    <span>RPG</span>
+                                    <img src="./Img/Icones/Dice.png" alt="RPG">
+                                </div>
+                            </a>
+                        </li>
+                        <!-- Tiro -->
+                        <li>
+                            <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 5 })">
+                                <div class="menu-item">
+                                    <span>Tiro</span>
+                                    <img src="./Img/Icones/Mira.png" alt="Tiro">
+                                </div>
+                            </a>
+                        </li>
+                        <!-- Luta -->
+                        <li>
+                            <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 1 })">
+                                <div class="menu-item">
+                                    <span>Luta</span>
+                                    <img src="./Img/Icones/Punch.png" alt="Luta">
+                                </div>
+                            </a>
+                        </li>
+                        <!-- Terror -->
+                        <li>
+                            <a href="@Url.Action("TemplateFiltro", "Templates", new { nomeJogo = "", Classification_Id = "", Genre_Id = 4 })">
+                                <div class="menu-item">
+                                    <span>Terror</span>
+                                    <img src="./Img/Icones/Skel.png" alt="Terror">
+                                </div>
+                            </a>
+                        </li>
+                        <!-- Info -->
+                        <li>
+                            <a href="/">
+                                <div class="menu-item">
+                                    <span>Info</span>
+                                    <img src="./Img/Icones/inf.png" alt="Info">
+                                </div>
+                            </a>
+                        </li>
+                        <!-- Logo -->
+                        <div class="sidebar__logo">
+                            <img src="./Img/Icones/Logo.png" alt="Logo IndieFusion">
+                        </div>
+                    </ul>
+                </div>
+            </section>
+        </nav>
+    </header>
+
+    <main>
+        <section id="gameMid" class="game-section">
+            <h2>Destaques</h2>
+            <div class="game-section__content">
+                @if (!Model.Any())
+                {
+                    <p>Nenhum jogo disponível no momento.</p>
+                }
+                @if (Model.Any())
+                {
+                    var random = new Random();
+                    var destaque = Model.OrderBy(g => random.Next()).First();
+
+                    <div class="game-card">
+                        <a href="@Url.Action("TemplateJogo", "Templates", new { id = destaque.Id })">
+                            <div class="game-card__images">
+                                <!-- Imagem principal -->
+                                <div class="game-card__main-image">
+                                    @if (!string.IsNullOrEmpty(destaque.ImagePath))
+                                    {
+                                        <img src="@Url.Content(destaque.ImagePath)" alt="@destaque.Title">
+                                    }
+                                </div>
+                                <!-- Imagens adicionais -->
+                                <div class="game-card__additional-images">
+                                    <div class="additional-images__row">
+                                        @if (!string.IsNullOrEmpty(destaque.AdditionalImage1))
+                                        {
+                                            <img src="@Url.Content(destaque.AdditionalImage1)" alt="@destaque.Title">
+                                        }
+                                        @if (!string.IsNullOrEmpty(destaque.AdditionalImage2))
+                                        {
+                                            <img src="@Url.Content(destaque.AdditionalImage2)" alt="@destaque.Title">
+                                        }
+                                    </div>
+                                    <div class="additional-images__row">
+                                        @if (!string.IsNullOrEmpty(destaque.AdditionalImage3))
+                                        {
+                                            <img src="@Url.Content(destaque.AdditionalImage3)" alt="@destaque.Title">
+                                        }
+                                        @if (!string.IsNullOrEmpty(destaque.AdditionalImage4))
+                                        {
+                                            <img src="@Url.Content(destaque.AdditionalImage4)" alt="@destaque.Title">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <h3>@destaque.Title</h3>
+                        <span>R$ @destaque.price</span>
+                    </div>
+                }
+
+            </div>
+        </section>
+        <!-- Carrossel de Jogos Aleatórios -->
+        <section id="carousel" class="carousel">
+            <div class="carousel__wrapper">
+                @if (!Model.Any())
+                {
+                    <p>Nenhum jogo disponível no momento.</p>
+                }
+                else
+                {
+                    <!-- Seleciona 4 jogos aleatórios -->
+                    var random = new Random();
+                    var jogosAleatorios = Model.OrderBy(g => random.Next()).Take(6);
+                    foreach (var game in jogosAleatorios)
+                    {
+                        <div class="carousel__item">
+                            <a href="@Url.Action("TemplateJogo", "Templates", new { id = game.Id })">
+                                <img src="@game.ImagePath" alt="@game.Title" style="height: 200px; width: 100%; object-fit: cover; border-radius: 10px;">
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+            <button class="carousel__button carousel__button--prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel__button carousel__button--next" onclick="moveSlide(1)">&#10095;</button>
+        </section>
+
+        <!-- Parte de Filtro dos jogos -->
+        <!-- Parte de Filtro dos jogos -->
+
+        <section id="gameCenter" class="game-section">
+            <h2>Biblioteca de jogos</h2>
+
+            <!-- Botões de Filtro -->
+            <button class="filter-toggle-btn" onclick="toggleFilterBox('category-box')">Filtrar jogos</button>
+            <button class="filter-toggle-btn" onclick="toggleFilterBox('price-box')">Filtrar Preços</button>
+
+            <!-- Contêiner de Filtros -->
+            <div class="game-section__filters-container">
+                <!-- Caixa de Categorias (escondida inicialmente) -->
+                <div class="filters-box filters-left" id="category-box" style="display: none;">
+                    <button class="active" data-category="all" onclick="filterGames('all')">Todos</button>
+
+                    @if (ViewBag.Categories != null)
+                    {
+                        @foreach (var category in ViewBag.Categories as List<string>)
+                        {
+                            <button data-category="@category" onclick="filterGames('@category')">@category</button>
+                        }
+                    }
+                </div>
+
+                <!-- Caixa de Preços (escondida inicialmente) -->
+                <div class="filters-box filters-right" id="price-box" style="display: none;">
+                    <button onclick="sortGames('asc')">Menor para Maior</button>
+                    <button onclick="sortGames('desc')">Maior para Menor</button>
+                </div>
+            </div>
+
+            <!-- Exibição dos Jogos -->
+            <div class="game-section__Filters">
+                @if (!Model.Any())
+                {
+                    <p>Nenhum jogo disponível no momento.</p>
+                }
+                else
+                {
+                    @foreach (var game in Model)
+                    {
+                        <div class="game-cardFilter" data-price="@game.price" data-category="@game.Genre.Description">
+                            <a href="@Url.Action("TemplateJogo", "Templates", new { id = game.Id })">
+                                <img src="@game.ImagePath" alt="@game.Title" class="game-image">
+                            </a>
+                            <h3>@game.Title</h3>
+                            <span>R$ @game.price</span>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+    </main>
+
+    <!-- Script para controlar o comportamento -->
+    <script>
+                document.addEventListener('DOMContentLoaded', function () {
+            // Seleção dos elementos do DOM para os modais
+            const linkCadastro = document.getElementById('linkCadastro');
+            const loginModalEl = document.getElementById('loginModal');
+            const cadastroModalEl = document.getElementById('cadastroModal');
+
+            // Instâncias dos modais do Bootstrap
+            const loginModal = new bootstrap.Modal(loginModalEl);
+            const cadastroModal = new bootstrap.Modal(cadastroModalEl);
+
+            // Evento para abrir o modal de cadastro a partir do modal de login
+            linkCadastro.addEventListener('click', function (event) {
+                event.preventDefault(); // Impede o comportamento padrão de navegação do link
+
+                // Fecha o modal de login
+                loginModal.hide();
+
+                // Aguarda o fechamento do modal de login antes de abrir o de cadastro
+                loginModalEl.addEventListener('hidden.bs.modal', function () {
+                    cadastroModal.show();
+                }, { once: true }); // O evento será executado apenas uma vez
+            });
+
+            // Pega a mensagem de erro do TempData
+            const errorMessage = '@TempData["ErrorMessage"]'; // Acesse a mensagem de erro
+
+            // Exibe a mensagem de erro, se presente
+            if (errorMessage) {
+                const errorMessageElement = document.getElementById('errorMessage');
+                if (errorMessageElement) {
+                    errorMessageElement.textContent = errorMessage; // Define o texto da mensagem
+                    errorMessageElement.style.display = 'block'; // Torna a área de erro visível
+                }
+
+                // Exibe o modal de login com erro
+                loginModal.show();
+            }
+
+            // Verifica se o modal de login deve ser exibido automaticamente após o cadastro
+            const showLoginModal = '@(TempData["ShowLoginModal"] ?? false)'; // Verifica o valor no TempData
+
+            if (showLoginModal === 'True') {
+                // Exibe o modal de login automaticamente após o cadastro
+                loginModal.show();
+            }
+
+            // Adiciona evento para o botão de perfil (menu de navegação)
+            document.getElementById("perfilBtn").addEventListener("click", function () {
+                var menu = document.getElementById("menu");
+                menu.classList.toggle("active"); // Alterna a visibilidade do menu de perfil
+            });
+
+            // Função para alternar a visibilidade dos filtros
+            function toggleFilterBox(boxId) {
+                var filterBox = document.getElementById(boxId);
+                filterBox.classList.toggle('active'); // Alterna a classe 'active' para mostrar/ocultar
+            }
+
+            // Adiciona evento de clique para os botões de filtro
+            document.querySelectorAll('.filter-toggle-btn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var targetId = this.getAttribute('onclick').match(/'([^']+)'/)[1]; // Pega o id do filtro
+                    toggleFilterBox(targetId); // Chama a função para alternar a visibilidade do filtro
+                });
+            });
+
+            // Filtro de categorias
+            function filterGames(category) {
+                var games = document.querySelectorAll('.game-cardFilter');
+                games.forEach(function(game) {
+                    if (category === 'all' || game.getAttribute('data-category') === category) {
+                        game.style.display = 'block';
+                    } else {
+                        game.style.display = 'none';
+                    }
+                });
+            }
+
+            // Ordenação de jogos por preço
+            function sortGames(order) {
+                var games = Array.from(document.querySelectorAll('.game-cardFilter'));
+                games.sort(function(a, b) {
+                    var priceA = parseFloat(a.getAttribute('data-price'));
+                    var priceB = parseFloat(b.getAttribute('data-price'));
+                    return order === 'asc' ? priceA - priceB : priceB - priceA;
+                });
+                var container = document.querySelector('.game-section__Filters');
+                container.innerHTML = ''; // Limpa os jogos exibidos
+                games.forEach(function(game) {
+                    container.appendChild(game); // Reinsere os jogos ordenados
+                });
+            }
+
+        });
+
+    </script>
+
+
+
+    <script src="./js/"></script>
+</body>
+
+
+</html>

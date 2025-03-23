@@ -1,0 +1,186 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    background: linear-gradient( 135deg, var(--color-bg1) 40%, var(--color-bg2) 90% ); /* Gradiente suave entre bg1 e bg2 */
+    color: var(--color-text-primary); /* Cor primária para o texto */
+    line-height: 1.6; /* Melhor espaçamento entre linhas para leitura confortável */
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-attachment: fixed;
+    margin-bottom: 60px;
+}
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-gradient); /* Gradiente galáctico */
+        opacity: 0.15; /* Transparência sutil para não sobrecarregar o visual */
+        z-index: -1;
+    }
+
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-overlay); /* Overlay com sombra sutil */
+        mix-blend-mode: multiply;
+        opacity: 0.3;
+        z-index: -2;
+        pointer-events: none;
+    }
+
+/*#region topbarUser*/
+.topbaradm-custom {
+    background-color: #333;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#logo-button {
+    background: var(--color-black); /* Cor de fundo */
+    border: 2px solid var(--color-black); /* Borda */
+    padding: 10px; /* Aumentando o espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    width: 60px; /* Largura do botão */
+    height: 60px; /* Altura do botão */
+    display: flex;
+    justify-content: center; /* Centralizando a imagem */
+    align-items: center; /* Centralizando a imagem */
+}
+.logoIdie {
+    width: 40px; /* Aumentando a largura da imagem */
+    height: 40px; /* Aumentando a altura da imagem */
+    object-fit: contain; /* Ajustando a imagem sem distorcer */
+}
+.topbaradm-custom {
+    display: flex;
+    background-color: black;
+    border: 2px solid var(--color-plus);
+    border-radius: 8px;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.topbar-menu-custom {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #444;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+    .topbar-menu-custom ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+        .topbar-menu-custom ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+    .topbar-menu-custom.hidden {
+        display: none;
+    }
+
+    .topbar-menu-custom.visible {
+        display: block;
+        margin-top: 5em;
+    }
+
+.topbaradm-container {
+    width: 100%;
+}
+
+.topbaradm-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+/* Estilo para o botão */
+#btnMode {
+    background: var(--color-black); /* Cor de fundo */
+    border: 2px solid var(--color-plus); /* Borda */
+    padding: 5px; /* Reduzindo o espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    width: 60px; /* Largura do botão */
+    height: 60px; /* Altura do botão */
+    display: flex;
+    justify-content: center; /* Centralizando a imagem */
+    align-items: center; /* Centralizando a imagem */
+}
+
+/* Estilo para a imagem */
+.moonimg {
+    width: 50px;
+    height: 50px;
+    object-fit: contain; /* Ajusta a imagem sem distorcer */
+}
+
+.logoIndie{
+    width:50px;
+    height:50px;
+}
+
+
+
+/* Media query para exibir o botão apenas em telas com 799px ou menos */
+@media (max-width: 999px) {
+    #logo-button {
+        display: flex; /* Mostra o botão */
+    }
+}
+
+/* Se quiser esconder o botão em resoluções maiores que 799px */
+@media (min-width: 1000px) {
+    #logo-button {
+        display: none; /* Esconde o botão */
+    }
+}
+/*#endregion*/

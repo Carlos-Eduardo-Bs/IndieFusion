@@ -1,0 +1,2483 @@
+
+/* Responsividade: Ajusta para telas menores */
+@media (max-width: 599px) {
+    /*#region destaque*/
+    .game-section__content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding-left: 4em;
+    }
+    /*#endregion*/
+
+
+
+    /*#region filtro*/
+    .game-section__Filters {
+        width: 93%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        justify-content: center;
+        margin: 20px 3.2em;
+    }
+
+
+    /* Estilizando cada card do filtro */
+    .game-cardFilter {
+        display: flex;
+        flex-direction: column;
+        /* Assegura que a imagem, o título e o preço fiquem empilhados */
+        align-items: center;
+        /* Alinha os itens centralizados */
+        border-radius: 5px;
+        /* Bordas arredondadas */
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        /* Sombra suave ao redor do card */
+    }
+
+        /* Garantindo que as imagens se ajustem corretamente dentro do card */
+        .game-cardFilter img {
+            width: 100%;
+            /* Faz a imagem ocupar toda a largura do card */
+            height: auto;
+            /* Mantém a proporção da imagem */
+            border-radius: 5px;
+            /* Borda arredondada nas imagens */
+            object-fit: cover;
+            /* Faz a imagem preencher o espaço sem distorcer */
+        }
+
+        /* Estilizando o título e preço */
+        .game-cardFilter h3,
+        .game-cardFilter span {
+            margin-top: 10px;
+            text-align: center;
+            /* Centraliza o texto */
+        }
+
+
+
+    .game-section__Filters {
+        width: 90%;
+        display: grid;
+        justify-content: center;
+     
+        gap: 20px;
+        margin: 20px 2.9em;
+        grid-template-columns: repeat(2, 1fr);
+        /* Para telas pequenas, usa 1 coluna */
+    }
+
+    /* Centralizando os botões de filtro */
+    /* Contêiner que organiza os botões */
+    .filter-buttons {
+        display: flex;
+        /* Usar flexbox para organizar os botões */
+        flex-wrap: wrap;
+        /* Permitir que os itens se ajustem para novas linhas */
+        justify-content: center;
+        /* Alinha os botões ao centro horizontal */
+        gap: 10px;
+        /* Espaçamento entre os botões */
+        margin: 20px auto;
+        /* Espaçamento ao redor */
+    }
+
+    /* Botões com o mesmo tamanho */
+    .filter-toggle-btn,
+    .game-section__filters button,
+    .filters-left button,
+    .filters-right button {
+        background-color: var(--color-plus);
+        color: var(--color-text);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-align: center;
+        flex: 1 0 30%;
+        /* Cada botão vai ocupar 30% do contêiner */
+        box-sizing: border-box;
+        /* Inclui padding e bordas no tamanho total */
+        min-width: 120px;
+        max-width: 150px;
+    }
+
+    .filters-left,
+    .filters-right {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* Contêiner específico para imagens de filtro */
+    .filter-images {
+        display: grid;
+        /* Usar grid para organizar as imagens */
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 colunas para as imagens */
+        gap: 10px;
+        /* Espaçamento entre as imagens */
+        justify-content: center;
+        /* Centralizar as imagens */
+        margin: 20px auto;
+        /* Espaçamento ao redor */
+    }
+
+        /* Estilo para as imagens de filtro */
+        .filter-images img {
+            width: 100%;
+            /* As imagens ocupam toda a largura das células da grade */
+            height: auto;
+            /* Mantém a proporção das imagens */
+            border-radius: 5px;
+            /* Borda arredondada nas imagens */
+        }
+
+    .game-section__filters-container {
+        width: 90%;
+        max-width: 1200px;
+        margin-left: 3em;
+        padding: 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--color-black);
+        border: 1px solid var(--color-plus);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .filter-buttons button {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .filter-toggle-btn {
+        /* Substitua com a classe correta do botão "Preço" */
+        margin-left: 4em;
+        /* Ajuste o valor conforme necessário para mover os botões para a direita */
+    }
+
+    .gameBlc {
+        background-color: var(--color-black);
+        color: var(--color-text);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--color-plus);
+        width: 85%;
+        margin-left: 3.3em;
+    }
+
+    /*#endregion*/
+
+    /*#region carrossel*/
+    .carousel {
+        grid-template-columns: repeat(4, 1fr);
+        /* Alterar para 4 colunas */
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 4);
+        /* Altere para 4 imagens por vez */
+    }
+
+
+    .carousel img {
+        width: 100%;
+        /* Ajusta as imagens para ocupar toda a largura disponível */
+        height: auto;
+        /* Mantém a proporção das imagens */
+    }
+
+    .carousel {
+        display: flex;
+        /* Flexbox para organizar as imagens horizontalmente */
+        overflow: hidden;
+        /* Esconde as imagens que não cabem na tela */
+        width: 100%;
+        /* O carrossel ocupa toda a largura disponível */
+        max-width: 100%;
+        /* Evita que ultrapasse os limites da tela */
+    }
+
+
+        /* Estilização dos botões do carrossel */
+        .carousel .carousel-controls button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    .carousel__button--prev {
+        left: 60px;
+    }
+
+    .carousel__button--next {
+        right: 10px;
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 3);
+        /* Inicialmente, 3 imagens por vez */
+        height: 200px;
+        /* Altura das imagens (ajuste conforme necessário) */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        /* Apenas para visualização */
+        box-sizing: border-box;
+        /* Garante que padding/borders não afetem o tamanho */
+    }
+
+    /*#endregion*/
+
+    /*#region table*/
+    .table {
+        border: none;
+    }
+
+        .table thead {
+            display: none; /* Esconde o cabeçalho */
+        }
+
+        .table tr {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+    .tableBlc_container2Filtro {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+        margin-left:4em;
+    }
+
+    .tableBlc_container2 {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+    }
+
+        .table td {
+            display: flex; /* Alinha os itens horizontalmente */
+            flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+            justify-content: space-between; /* Distribui os itens de forma uniforme */
+            align-items: center; /* Alinha verticalmente no centro */
+            border: none;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 5px;
+        }
+
+            .table td::before {
+                content: attr(data-label); /* Adiciona o título da coluna antes do valor */
+                flex: 0 0 40%; /* Define largura fixa para o título */
+                font-weight: bold;
+                color: #ccc;
+                text-align: left;
+                margin-right: 10px; /* Adiciona espaçamento entre o título e o valor */
+            }
+
+            .table td span {
+                flex: 1; /* Permite que o conteúdo se ajuste ao espaço restante */
+                text-align: left;
+            }
+
+            /* Estilo para os botões */
+            .table td .btn-action,
+            .table td .btn-delete {
+                display: inline-block; /* Garante que cada botão tenha seu próprio espaço */
+                padding: 5px 10px; /* Adiciona preenchimento interno */
+                margin: 5px 0; /* Adiciona espaçamento vertical entre botões */
+                border-radius: 5px; /* Bordas arredondadas */
+                text-align: center;
+                text-decoration: none; /* Remove o sublinhado */
+                color: white; /* Define a cor do texto */
+            }
+
+            .table td .btn-action {
+                background-color: purple; /* Define a cor padrão para ações */
+            }
+
+            .table td .btn-delete {
+                background-color: red; /* Cor para o botão de exclusão */
+            }
+
+        .table td {
+            flex-direction: column; /* Empilha os itens em dispositivos menores */
+            align-items: flex-start; /* Alinha os itens ao início */
+        }
+
+            .table td .btn-action,
+            .table td .btn-delete {
+                width: 100%; /* Faz com que os botões ocupem toda a largura disponível */
+                text-align: center; /* Centraliza o texto dentro dos botões */
+            }
+
+
+        /* #endregion */
+
+        /*#region topbarAdm*/
+        .table thead {
+            display: none; /* Esconde o cabeçalho */
+        }
+
+        .table tr {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .table td {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Distribui os itens uniformemente */
+            align-items: center; /* Alinha verticalmente ao centro */
+            border: none;
+            border-bottom: 1px solid var(--color-plus); /* Borda inferior personalizada */
+            padding: 10px 5px;
+        }
+
+            .table td::before {
+                content: attr(data-label); /* Adiciona o título da coluna */
+                flex: 0 0 40%; /* Largura fixa para o título */
+                font-weight: bold;
+                color: var(--color-text); /* Cor personalizada para o título */
+                text-align: left;
+                margin-right: 10px; /* Espaçamento entre o título e o valor */
+            }
+
+            .table td span {
+                flex: 1; /* Ajusta o conteúdo ao espaço restante */
+                text-align: left;
+                color: white; /* Texto branco */
+            }
+
+            /* Estilo para os botões */
+            .table td .btn-action,
+            .table td .btn-delete {
+                display: inline-block;
+                padding: 8px 15px; /* Preenchimento interno dos botões */
+                margin: 5px 0;
+                border-radius: 8px; /* Bordas arredondadas */
+                text-align: center;
+                text-decoration: none; /* Remove o sublinhado */
+                font-size: 14px;
+                transition: all 0.3s ease; /* Animação suave */
+            }
+
+            .table td .btn-action {
+                background-color: var(--color-detail); /* Cor personalizada para ações */
+                color: white; /* Texto branco */
+                border: 2px solid var(--color-detail); /* Borda da mesma cor do fundo */
+            }
+
+                .table td .btn-action:hover {
+                    background-color: var(--color-black); /* Fundo preto no hover */
+                    border-color: var(--color-plus); /* Borda roxa no hover */
+                    color: var(--color-plus); /* Texto roxo no hover */
+                }
+
+            .table td .btn-delete {
+                background-color: red; /* Fundo vermelho */
+                color: white; /* Texto branco */
+                border: 2px solid red; /* Borda vermelha */
+            }
+
+                .table td .btn-delete:hover {
+                    background-color: var(--color-black); /* Fundo preto no hover */
+                    border-color: var(--color-plus); /* Borda roxa no hover */
+                    color: var(--color-plus); /* Texto roxo no hover */
+                }
+
+        /* Ajuste para dispositivos menores */
+        .table td {
+            flex-direction: column; /* Empilha os itens */
+            align-items: flex-start; /* Alinha ao início */
+        }
+
+            .table td .btn-action,
+            .table td .btn-delete {
+                width: 100%; /* Botões ocupam toda a largura disponível */
+                text-align: center;
+            }
+
+    /* Estilização do menu superior */
+    .topbar__menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Distância do topo */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translateX(-50%);
+        background-color: var(--color-black); /* Fundo preto */
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+        width: 250px; /* Define largura fixa */
+        z-index: 100; /* Prioridade sobre outros elementos */
+    }
+
+        .topbar__menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .topbar__menu ul li {
+                text-align: center;
+                margin: 10px 0;
+            }
+
+                .topbar__menu ul li a {
+                    color: white; /* Texto branco */
+                    text-decoration: none;
+                    font-size: 16px;
+                    display: block;
+                    transition: color 0.3s ease; /* Transição suave */
+                }
+
+                    .topbar__menu ul li a:hover {
+                        color: var(--color-plus); /* Texto roxo no hover */
+                    }
+
+        /* Exibir o menu quando ativo */
+        .topbar__menu.active {
+            display: flex;
+            margin-top: 1.78em;
+            width: 100%;
+            background-color: var(--color-black); /* Fundo preto */
+            border: 2px solid var(--color-plus);
+        }
+
+    .hamburger-menu {
+        display: flex; /* Exibe o menu hamburguer */
+    }
+}
+/* Footer */
+/* #Footer */
+.footer__text h4 {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 10px 0;
+   
+}
+
+.footer__text p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.footer__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    
+}
+
+.footer__text-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  
+}
+
+/*#endregion*/
+
+/* #Footer */
+.footer__text- h4 {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.footer__text- p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.footer__logo- {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.footer__text-bottom- {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/*#endregion*/
+
+
+/* Mídia Query para Tablets (600px a 699px) */
+
+@media (min-width: 600px) and (max-width: 699px) {
+
+    /*#region destaque*/
+    .game-section__content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding-left: 4em;
+    }
+    /*#endregion*/
+
+    /*#region filtro */
+    .game-section__Filters {
+        width: 94%;
+        /* Ajuste da largura para telas médias */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 colunas para filtros */
+        gap: 20px;
+        justify-content: center;
+        margin: 20px 2.7em;
+    }
+
+    .game-cardFilter {
+        display: flex;
+        flex-direction: column;
+        /* Organiza os itens empilhados */
+        align-items: center;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .game-cardFilter img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .game-cardFilter h3,
+        .game-cardFilter span {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+    .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px auto;
+    }
+
+    .filter-toggle-btn,
+    .game-section__filters button,
+    .filters-left button,
+    .filters-right button {
+        background-color: var(--color-plus);
+        color: var(--color-text);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-align: center;
+        flex: 1 0 30%;
+        /* Botões distribuem-se em 30% do contêiner */
+        box-sizing: border-box;
+        min-width: 120px;
+        max-width: 150px;
+    }
+
+    .filter-images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 colunas */
+        gap: 10px;
+        justify-content: center;
+        margin: 20px auto;
+    }
+
+        .filter-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+    .game-section__filters-container {
+        width: 94%;
+        max-width: 1200px;
+        margin: 0 2.7em;
+        padding: 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--color-black);
+        border: 1px solid var(--color-plus);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .filter-buttons button {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .filter-toggle-btn {
+        margin-left: 4em;
+    }
+
+
+    .gameBlc {
+        background-color: var(--color-black);
+        color: var(--color-text);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--color-plus);
+        width: 89%;
+        margin-left: 4em;
+    }
+    .tableBlc_container2Filtro {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+        margin-left: 4em;
+    }
+
+    .tableBlc_container2 {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+    }
+
+    /*#endregion*/
+
+
+    /*#region carrossel */
+
+    .carousel {
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 imagens por vez */
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 4);
+        /* Ajuste para 4 imagens */
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel img {
+        width: 100%;
+        height: auto;
+    }
+
+    .carousel {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+    }
+
+        .carousel .carousel-controls button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    .carousel__button--prev {
+        left: 60px;
+    }
+
+    .carousel__button--next {
+        right: 10px;
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 3);
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*#endregion*/
+
+
+    /*#region tableAdm*/
+    .table thead {
+        display: none; /* Esconde o cabeçalho */
+    }
+
+    .table tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .table td {
+        display: flex; /* Alinha os itens horizontalmente */
+        flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+        justify-content: space-between; /* Distribui os itens de forma uniforme */
+        align-items: center; /* Alinha verticalmente no centro */
+        border: none;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 5px;
+    }
+
+        .table td::before {
+            content: attr(data-label); /* Adiciona o título da coluna antes do valor */
+            flex: 0 0 40%; /* Define largura fixa para o título */
+            font-weight: bold;
+            color: #ccc;
+            text-align: left;
+            margin-right: 10px; /* Adiciona espaçamento entre o título e o valor */
+        }
+
+        .table td span {
+            flex: 1; /* Permite que o conteúdo se ajuste ao espaço restante */
+            text-align: left;
+        }
+
+        /* Estilo para os botões */
+        .table td .btn-action,
+        .table td .btn-delete {
+            display: inline-block; /* Garante que cada botão tenha seu próprio espaço */
+            padding: 5px 10px; /* Adiciona preenchimento interno */
+            margin: 5px 0; /* Adiciona espaçamento vertical entre botões */
+            border-radius: 5px; /* Bordas arredondadas */
+            text-align: center;
+            text-decoration: none; /* Remove o sublinhado */
+            color: white; /* Define a cor do texto */
+        }
+
+        .table td .btn-action {
+            background-color: purple; /* Define a cor padrão para ações */
+        }
+
+        .table td .btn-delete {
+            background-color: red; /* Cor para o botão de exclusão */
+        }
+
+    .table td {
+        flex-direction: column; /* Empilha os itens em dispositivos menores */
+        align-items: flex-start; /* Alinha os itens ao início */
+    }
+
+        .table td .btn-action,
+        .table td .btn-delete {
+            width: 100%; /* Faz com que os botões ocupem toda a largura disponível */
+            text-align: center; /* Centraliza o texto dentro dos botões */
+        }
+    /* Estilização do menu */
+    .topbar__menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Altere para ajustar a distância do topo */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translateX(-50%); /* Ajusta a posição para o centro */
+        background-color: var(--color-black); /* Cor de fundo do menu */
+        padding: 10px 20px; /* Espaçamento interno */
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+        width: 250px; /* Define uma largura fixa */
+        z-index: 100; /* Garante que esteja acima de outros elementos */
+    }
+
+        .topbar__menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+            background: var(--color-black);
+        }
+
+            .topbar__menu ul li {
+                text-align: center; /* Centraliza o texto */
+                margin: 10px 0;
+            }
+
+                .topbar__menu ul li a {
+                    color: white;
+                    text-decoration: none;
+                    font-size: 16px;
+                    display: block;
+                }
+
+                    .topbar__menu ul li a:hover {
+                        color: #ddd; /* Cor ao passar o mouse */
+                    }
+
+        /* Exibir o menu quando ativo */
+        .topbar__menu.active {
+            display: flex;
+            margin-top: 1.78em;
+            width: 100%;
+            background: var(--color-black);
+            border: 2px solid var(--color-plus);
+        }
+
+    .hamburger-menu {
+        display: flex; /* Exibe o menu hamburguer */
+    }
+
+    /*#endregion*/
+
+    /* #Footer */
+    .footer__text h4 {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 10px 0;
+     
+    }
+
+    .footer__text p {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .footer__logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+       
+    }
+    /*#endregion*/
+
+    .footer__text- h4 {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 10px 0;
+        
+    }
+
+    .footer__text- p {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .footer__logo- {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+        
+    }
+}
+
+@media (min-width: 700px) and (max-width: 799px) {
+
+    /*#region destaque*/
+    .game-section__content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding-left: 4em;
+    }
+    /*#endregion*/
+
+
+    /*#region filtro */
+    .game-section__Filters {
+        width: 95%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 colunas para filtros */
+        gap: 20px;
+        justify-content: center;
+        margin: 20px 3.1em;
+    }
+
+    .game-cardFilter {
+        display: flex;
+        flex-direction: column;
+        /* Organiza os itens empilhados */
+        align-items: center;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .game-cardFilter img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .game-cardFilter h3,
+        .game-cardFilter span {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+    .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px auto;
+    }
+
+    .filter-toggle-btn,
+    .game-section__filters button,
+    .filters-left button,
+    .filters-right button {
+        background-color: var(--color-plus);
+        color: var(--color-text);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-align: center;
+        flex: 1 0 30%;
+        /* Botões distribuem-se em 30% do contêiner */
+        box-sizing: border-box;
+        min-width: 120px;
+        max-width: 150px;
+    }
+
+    .filter-images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 colunas */
+        gap: 10px;
+        justify-content: center;
+        margin: 20px auto;
+    }
+
+        .filter-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+    .game-section__filters-container {
+        width: 94%;
+        max-width: 1200px;
+        margin: 0 3.2em;
+        padding: 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--color-black);
+        border: 1px solid var(--color-plus);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .filter-buttons button {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .filter-toggle-btn {
+        margin-left: 4em;
+    }
+
+    .gameBlc {
+        background-color: var(--color-black);
+        color: var(--color-text);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--color-plus);
+        width: 91%;
+        margin-left: 4em;
+    }
+
+    .tableBlc_container2Filtro {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+        margin-left: 4em;
+    }
+
+    .tableBlc_container2 {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+    }
+
+
+    /*#endregion*/
+
+
+    /*#region carrossel */
+
+    .carousel {
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 imagens por vez */
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 4);
+        /* Ajuste para 4 imagens */
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel img {
+        width: 100%;
+        height: auto;
+    }
+
+    .carousel {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        max-width: 90%;
+        padding-right: 3em;
+    }
+
+        .carousel .carousel-controls button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    .carousel__button--prev {
+        left: 60px;
+    }
+
+    .carousel__button--next {
+        right: 10px;
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 3);
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*#endregion*/
+
+    /*#region tableAdm*/
+    .table thead {
+        display: none; /* Esconde o cabeçalho */
+    }
+
+    .table tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .table td {
+        display: flex; /* Alinha os itens horizontalmente */
+        flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+        justify-content: space-between; /* Distribui os itens de forma uniforme */
+        align-items: center; /* Alinha verticalmente no centro */
+        border: none;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 5px;
+    }
+
+        .table td::before {
+            content: attr(data-label); /* Adiciona o título da coluna antes do valor */
+            flex: 0 0 40%; /* Define largura fixa para o título */
+            font-weight: bold;
+            color: #ccc;
+            text-align: left;
+            margin-right: 10px; /* Adiciona espaçamento entre o título e o valor */
+        }
+
+        .table td span {
+            flex: 1; /* Permite que o conteúdo se ajuste ao espaço restante */
+            text-align: left;
+        }
+
+        /* Estilo para os botões */
+        .table td .btn-action,
+        .table td .btn-delete {
+            display: inline-block; /* Garante que cada botão tenha seu próprio espaço */
+            padding: 5px 10px; /* Adiciona preenchimento interno */
+            margin: 5px 0; /* Adiciona espaçamento vertical entre botões */
+            border-radius: 5px; /* Bordas arredondadas */
+            text-align: center;
+            text-decoration: none; /* Remove o sublinhado */
+            color: white; /* Define a cor do texto */
+        }
+
+        .table td .btn-action {
+            background-color: purple; /* Define a cor padrão para ações */
+        }
+
+        .table td .btn-delete {
+            background-color: red; /* Cor para o botão de exclusão */
+        }
+
+    .table td {
+        flex-direction: column; /* Empilha os itens em dispositivos menores */
+        align-items: flex-start; /* Alinha os itens ao início */
+    }
+
+        .table td .btn-action,
+        .table td .btn-delete {
+            width: 100%; /* Faz com que os botões ocupem toda a largura disponível */
+            text-align: center; /* Centraliza o texto dentro dos botões */
+        }
+    /* Estilização do menu */
+    .topbar__menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Altere para ajustar a distância do topo */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translateX(-50%); /* Ajusta a posição para o centro */
+        background-color: var(--color-black); /* Cor de fundo do menu */
+        padding: 10px 20px; /* Espaçamento interno */
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+        width: 250px; /* Define uma largura fixa */
+        z-index: 100; /* Garante que esteja acima de outros elementos */
+    }
+
+        .topbar__menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+            background: var(--color-black);
+        }
+
+            .topbar__menu ul li {
+                text-align: center; /* Centraliza o texto */
+                margin: 10px 0;
+            }
+
+                .topbar__menu ul li a {
+                    color: white;
+                    text-decoration: none;
+                    font-size: 16px;
+                    display: block;
+                }
+
+                    .topbar__menu ul li a:hover {
+                        color: #ddd; /* Cor ao passar o mouse */
+                    }
+
+        /* Exibir o menu quando ativo */
+        .topbar__menu.active {
+            display: flex;
+            margin-top: 1.78em;
+            width: 100%;
+            background: var(--color-black);
+            border: 2px solid var(--color-plus);
+        }
+
+    .hamburger-menu {
+        display: flex; /* Exibe o menu hamburguer */
+    }
+
+    /*#endregion*/
+    .tableBlc_container2Filtro {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+        margin-left: 4em;
+    }
+
+    .tableBlc_container2 {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+    }
+
+    /* Footer */
+    .footer__text h4 {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 10px 0;
+        
+    }
+
+    .footer__text p {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .footer__logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+       
+    }
+    /*#endregion*/
+
+    .footer__text h4 {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 10px 0;
+        
+    }
+
+    .footer__text p {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .footer__logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+        
+    }
+}
+
+@media (min-width: 800px) and (max-width: 899px) {
+
+    /*#region destaque*/
+    .game-section__content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding-left: 4em;
+    }
+    /*#endregion*/
+
+
+    /*#region filtro */
+    .game-section__Filters {
+        width: 96%;
+        /* Ajuste da largura para telas médias */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 colunas para filtros */
+        gap: 20px;
+        justify-content: center;
+        margin: 20px 2.6em;
+    }
+
+    .game-cardFilter {
+        display: flex;
+        flex-direction: column;
+        /* Organiza os itens empilhados */
+        align-items: center;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .game-cardFilter img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .game-cardFilter h3,
+        .game-cardFilter span {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+    .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px auto;
+    }
+
+    .filter-toggle-btn,
+    .game-section__filters button,
+    .filters-left button,
+    .filters-right button {
+        background-color: var(--color-plus);
+        color: var(--color-text);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-align: center;
+        flex: 1 0 30%;
+        /* Botões distribuem-se em 30% do contêiner */
+        box-sizing: border-box;
+        min-width: 120px;
+        max-width: 150px;
+    }
+
+    .filter-images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 colunas */
+        gap: 10px;
+        justify-content: center;
+        margin: 20px auto;
+    }
+
+        .filter-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+    .game-section__filters-container {
+        width: 95%;
+        max-width: 1200px;
+        margin: 0 2.8em;
+        padding: 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--color-black);
+        border: 1px solid var(--color-plus);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .filter-buttons button {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .filter-toggle-btn {
+        margin-left: 4em;
+    }
+
+    .gameBlc {
+        background-color: var(--color-black);
+        color: var(--color-text);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--color-plus);
+        width: 92%;
+        margin-left: 4em;
+    }
+    .tableBlc_container2Filtro {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+        margin-left: 4em;
+    }
+
+    .tableBlc_container2 {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+    }
+
+
+    /*#endregion*/
+
+
+    /*#region carrossel */
+
+    .carousel {
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 imagens por vez */
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 4);
+        /* Ajuste para 4 imagens */
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel img {
+        width: 100%;
+        height: auto;
+    }
+
+    .carousel {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        max-width: 90%;
+        padding-right: 4em;
+    }
+
+        .carousel .carousel-controls button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    .carousel__button--prev {
+        left: 60px;
+    }
+
+    .carousel__button--next {
+        right: 10px;
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 3);
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*#endregion*/
+
+
+    /*#region tableAdm*/
+    .table thead {
+        display: none; /* Esconde o cabeçalho */
+    }
+
+    .table tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .table td {
+        display: flex; /* Alinha os itens horizontalmente */
+        flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+        justify-content: space-between; /* Distribui os itens de forma uniforme */
+        align-items: center; /* Alinha verticalmente no centro */
+        border: none;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 5px;
+    }
+
+        .table td::before {
+            content: attr(data-label); /* Adiciona o título da coluna antes do valor */
+            flex: 0 0 40%; /* Define largura fixa para o título */
+            font-weight: bold;
+            color: #ccc;
+            text-align: left;
+            margin-right: 10px; /* Adiciona espaçamento entre o título e o valor */
+        }
+
+        .table td span {
+            flex: 1; /* Permite que o conteúdo se ajuste ao espaço restante */
+            text-align: left;
+        }
+
+        /* Estilo para os botões */
+        .table td .btn-action,
+        .table td .btn-delete {
+            display: inline-block; /* Garante que cada botão tenha seu próprio espaço */
+            padding: 5px 10px; /* Adiciona preenchimento interno */
+            margin: 5px 0; /* Adiciona espaçamento vertical entre botões */
+            border-radius: 5px; /* Bordas arredondadas */
+            text-align: center;
+            text-decoration: none; /* Remove o sublinhado */
+            color: white; /* Define a cor do texto */
+        }
+
+        .table td .btn-action {
+            background-color: purple; /* Define a cor padrão para ações */
+        }
+
+        .table td .btn-delete {
+            background-color: red; /* Cor para o botão de exclusão */
+        }
+
+    .table td {
+        flex-direction: column; /* Empilha os itens em dispositivos menores */
+        align-items: flex-start; /* Alinha os itens ao início */
+    }
+
+        .table td .btn-action,
+        .table td .btn-delete {
+            width: 100%; /* Faz com que os botões ocupem toda a largura disponível */
+            text-align: center; /* Centraliza o texto dentro dos botões */
+        }
+    /* Estilização do menu */
+    .topbar__menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Altere para ajustar a distância do topo */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translateX(-50%); /* Ajusta a posição para o centro */
+        background-color: var(--color-black); /* Cor de fundo do menu */
+        padding: 10px 20px; /* Espaçamento interno */
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+        width: 250px; /* Define uma largura fixa */
+        z-index: 100; /* Garante que esteja acima de outros elementos */
+    }
+
+        .topbar__menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+            background: var(--color-black);
+        }
+
+            .topbar__menu ul li {
+                text-align: center; /* Centraliza o texto */
+                margin: 10px 0;
+            }
+
+                .topbar__menu ul li a {
+                    color: white;
+                    text-decoration: none;
+                    font-size: 16px;
+                    display: block;
+                }
+
+                    .topbar__menu ul li a:hover {
+                        color: #ddd; /* Cor ao passar o mouse */
+                    }
+
+        /* Exibir o menu quando ativo */
+        .topbar__menu.active {
+            display: flex;
+            margin-top: 1.78em;
+            width: 100%;
+            background: var(--color-black);
+            border: 2px solid var(--color-plus);
+        }
+
+    .hamburger-menu {
+        display: flex; /* Exibe o menu hamburguer */
+    }
+
+    /*#endregion*/
+    /* Footer */
+    .footer__text h4 {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 10px 0;
+       
+    }
+
+    .footer__text p {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .footer__logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+    
+    }
+    /*#endregion*/
+
+    .footer__text h4 {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 10px 0;
+       
+    }
+
+    .footer__text p {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .footer__logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+        
+    }
+}
+
+@media (min-width: 900px) and (max-width: 999px) {
+
+    /*#region destaque*/
+    .game-section__content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding-left: 4em;
+    }
+    /*#endregion*/
+
+
+    /*#region filtro */
+    .game-section__Filters {
+        width: 96%;
+        /* Ajuste da largura para telas médias */
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* 2 colunas para filtros */
+        gap: 20px;
+        justify-content: center;
+        margin: 20px 3em;
+    }
+
+    .game-cardFilter {
+        display: flex;
+        flex-direction: column;
+        /* Organiza os itens empilhados */
+        align-items: center;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .game-cardFilter img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .game-cardFilter h3,
+        .game-cardFilter span {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+    .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px auto;
+    }
+
+    .filter-toggle-btn,
+    .game-section__filters button,
+    .filters-left button,
+    .filters-right button {
+        background-color: var(--color-plus);
+        color: var(--color-text);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-align: center;
+        flex: 1 0 30%;
+        /* Botões distribuem-se em 30% do contêiner */
+        box-sizing: border-box;
+        min-width: 120px;
+        max-width: 150px;
+    }
+
+    .filter-images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 colunas */
+        gap: 10px;
+        justify-content: center;
+        margin: 20px auto;
+    }
+
+        .filter-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+    .game-section__filters-container {
+        width: 95.5%;
+        max-width: 1200px;
+        margin: 0 3.2em;
+        padding: 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--color-black);
+        border: 1px solid var(--color-plus);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .filter-buttons button {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .filter-toggle-btn {
+        margin-left: 4em;
+    }
+
+    .gameBlc {
+        background-color: var(--color-black);
+        color: var(--color-text);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--color-plus);
+        width: 93%;
+        margin-left: 4em;
+    }
+    .tableBlc_container2Filtro {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+        margin-left: 4em;
+    }
+
+    .tableBlc_container2 {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+    }
+
+
+    /*#endregion*/
+
+    /*#region carrossel */
+
+    .carousel {
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 imagens por vez */
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 4);
+        /* Ajuste para 4 imagens */
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel img {
+        width: 100%;
+        height: auto;
+    }
+
+    .carousel {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+        padding-right: 4em;
+    }
+
+        .carousel .carousel-controls button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    .carousel__button--prev {
+        left: 60px;
+    }
+
+    .carousel__button--next {
+        right: 10px;
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 3);
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*#endregion*/
+
+    /*#region tableAdm*/
+    .table thead {
+        display: none; /* Esconde o cabeçalho */
+    }
+
+    .table tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .table td {
+        display: flex; /* Alinha os itens horizontalmente */
+        flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+        justify-content: space-between; /* Distribui os itens de forma uniforme */
+        align-items: center; /* Alinha verticalmente no centro */
+        border: none;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 5px;
+    }
+
+        .table td::before {
+            content: attr(data-label); /* Adiciona o título da coluna antes do valor */
+            flex: 0 0 40%; /* Define largura fixa para o título */
+            font-weight: bold;
+            color: #ccc;
+            text-align: left;
+            margin-right: 10px; /* Adiciona espaçamento entre o título e o valor */
+        }
+
+        .table td span {
+            flex: 1; /* Permite que o conteúdo se ajuste ao espaço restante */
+            text-align: left;
+        }
+
+        /* Estilo para os botões */
+        .table td .btn-action,
+        .table td .btn-delete {
+            display: inline-block; /* Garante que cada botão tenha seu próprio espaço */
+            padding: 5px 10px; /* Adiciona preenchimento interno */
+            margin: 5px 0; /* Adiciona espaçamento vertical entre botões */
+            border-radius: 5px; /* Bordas arredondadas */
+            text-align: center;
+            text-decoration: none; /* Remove o sublinhado */
+            color: white; /* Define a cor do texto */
+        }
+
+        .table td .btn-action {
+            background-color: purple; /* Define a cor padrão para ações */
+        }
+
+        .table td .btn-delete {
+            background-color: red; /* Cor para o botão de exclusão */
+        }
+
+    .table td {
+        flex-direction: column; /* Empilha os itens em dispositivos menores */
+        align-items: flex-start; /* Alinha os itens ao início */
+    }
+
+        .table td .btn-action,
+        .table td .btn-delete {
+            width: 100%; /* Faz com que os botões ocupem toda a largura disponível */
+            text-align: center; /* Centraliza o texto dentro dos botões */
+        }
+    /* Estilização do menu */
+    .topbar__menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Altere para ajustar a distância do topo */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translateX(-50%); /* Ajusta a posição para o centro */
+        background-color: var(--color-black); /* Cor de fundo do menu */
+        padding: 10px 20px; /* Espaçamento interno */
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+        width: 250px; /* Define uma largura fixa */
+        z-index: 100; /* Garante que esteja acima de outros elementos */
+    }
+
+        .topbar__menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+            background: var(--color-black);
+        }
+
+            .topbar__menu ul li {
+                text-align: center; /* Centraliza o texto */
+                margin: 10px 0;
+            }
+
+                .topbar__menu ul li a {
+                    color: white;
+                    text-decoration: none;
+                    font-size: 16px;
+                    display: block;
+                }
+
+                    .topbar__menu ul li a:hover {
+                        color: #ddd; /* Cor ao passar o mouse */
+                    }
+
+        /* Exibir o menu quando ativo */
+        .topbar__menu.active {
+            display: flex;
+            margin-top: 1.78em;
+            width: 100%;
+            background: var(--color-black);
+            border: 2px solid var(--color-plus);
+        }
+
+    .hamburger-menu {
+        display: flex; /* Exibe o menu hamburguer */
+    }
+
+    /*#endregion*/
+
+    /* Footer */
+    .footer__text h4 {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 10px 0;
+        
+    }
+
+    .footer__text p {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .footer__logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+        
+    }
+
+    .footer__text- h4 {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 10px 0;
+        
+    }
+
+    .footer__text- p {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .footer__logo- {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+        
+    }
+}
+/*#endregion*/
+/* Mídia Query para Laptops e Desktops (1000px a 1199px) */
+@media (min-width: 1000px) and (max-width: 1199px) {
+    /*#region destaque*/
+    .game-section__content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding-left: 4em;
+    }
+    /*#endregion*/
+
+
+    /*#region filtro */
+    .game-section__Filters {
+        width: 96.8%;
+        /* Ajuste da largura para telas médias */
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* 2 colunas para filtros */
+        gap: 20px;
+        justify-content: center;
+        margin: 20px 2.6em;
+    }
+
+    .game-cardFilter {
+        display: flex;
+        flex-direction: column;
+        /* Organiza os itens empilhados */
+        align-items: center;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .game-cardFilter img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .game-cardFilter h3,
+        .game-cardFilter span {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+    .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px auto;
+    }
+
+    .filter-toggle-btn,
+    .game-section__filters button,
+    .filters-left button,
+    .filters-right button {
+        background-color: var(--color-plus);
+        color: var(--color-text);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-align: center;
+        flex: 1 0 30%;
+        /* Botões distribuem-se em 30% do contêiner */
+        box-sizing: border-box;
+        min-width: 120px;
+        max-width: 150px;
+    }
+
+    .filter-images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 colunas */
+        gap: 10px;
+        justify-content: center;
+        margin: 20px auto;
+    }
+
+        .filter-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+    .game-section__filters-container {
+        width: 96%;
+        max-width: 1200px;
+        margin: 0 3.2em;
+        padding: 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--color-black);
+        border: 1px solid var(--color-plus);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .filter-buttons button {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .filter-toggle-btn {
+        margin-left: 4em;
+    }
+
+    .gameBlc {
+        background-color: var(--color-black);
+        color: var(--color-text);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--color-plus);
+        width: 93%;
+        margin-left: 4em;
+    }
+    .tableBlc_container2Filtro {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+        margin-left: 4em;
+    }
+
+    .tableBlc_container2 {
+        width: 90%;
+        background-color: var(--color-black);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 4px solid var(--color-plus);
+    }
+
+
+    /*#endregion*/
+
+
+    /*#region carrossel */
+
+    .carousel {
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 imagens por vez */
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 4);
+        /* Ajuste para 4 imagens */
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel img {
+        width: 100%;
+        height: auto;
+    }
+
+    .carousel {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        max-width: 90%;
+        padding-right: 4em;
+    }
+
+        .carousel .carousel-controls button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    .carousel__button--prev {
+        left: 60px;
+    }
+
+    .carousel__button--next {
+        right: 10px;
+    }
+
+    .carousel__item {
+        flex: 0 0 calc(100% / 3);
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*#endregion*/
+
+}
+
+/* Mídia Query para Desktops grandes (1200px e acima) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+
+
+
+    /*#region filtro*/
+    .hero h2 {
+        font-size: 3rem;
+    }
+
+    .hero p {
+        font-size: 1.5rem;
+    }
+
+    .content {
+        justify-content: space-between;
+    }
+
+    .card {
+        width: 22%;
+    }
+
+    .filtro-categoria button {
+        width: auto;
+    }
+
+    /*#endregion*/
+
+    /*#region carrossel*/
+
+    .carrossel img {
+        width: 100%;
+        max-height: 500px;
+    }
+
+    /*#endregion*/
+}
+
+/* Ajustes para telas maiores até 4K */
+@media (min-width: 2560px) {
+    body {
+        font-size: 22px;
+        /* Ajuste da fonte para maior legibilidade */
+        line-height: 1.8;
+        /* Melhor espaçamento entre linhas */
+    }
+
+    .container {
+        width: 50%;
+        /* Ajusta para usar menos largura em telas muito grandes */
+        margin: 0 auto;
+        /* Centraliza o conteúdo */
+    }
+
+    .header {
+        font-size: 36px;
+        /* Aumenta o tamanho do título */
+        padding: 40px;
+        /* Mais espaçamento para elementos grandes */
+    }
+
+    .sidebar_container {
+        display: flex;
+        /* Cria um layout flexível para alinhar itens em linha */
+        align-items: flex-start;
+        /* Garante que os itens fiquem alinhados pelo topo */
+        gap: 20px;
+        /* Espaçamento entre a imagem e o texto */
+    }
+
+        .sidebar_container img {
+            flex-shrink: 0;
+            /* Garante que a imagem não seja redimensionada */
+            max-width: 150px;
+            /* Define uma largura máxima para as imagens */
+            height: auto;
+            /* Mantém a proporção das imagens */
+            margin: 0;
+            /* Remove qualquer margem extra */
+            object-fit: contain;
+            /* Assegura que a imagem fique bem ajustada */
+        }
+
+        .sidebar_container p {
+            flex-grow: 1;
+            /* Permite que o texto ocupe o espaço restante */
+            margin: 0;
+            /* Remove margens extras no texto */
+            text-align: left;
+            /* Alinha o texto à esquerda */
+        }
+
+
+    .navbar {
+        justify-content: space-between;
+        /* Alinha os links com espaçamento */
+        padding: 15px 30px;
+        /* Margens internas maiores */
+    }
+
+        .navbar a {
+            padding: 25px 40px;
+            /* Mais espaço para tornar os links mais clicáveis */
+            font-size: 20px;
+            /* Tamanho da fonte mais destacado */
+        }
+
+
+    .footer {
+        font-size: 18px;
+        /* Ajusta o rodapé para uma boa escala */
+        padding: 30px;
+        /* Mais espaçamento no rodapé */
+        text-align: center;
+        /* Centraliza o texto */
+    }
+
+    .button {
+        font-size: 20px;
+        /* Botões mais destacados */
+        padding: 15px 25px;
+        /* Botões maiores para telas grandes */
+    }
+
+    img {
+        max-width: 80%;
+        /* Evita que imagens ocupem todo o espaço horizontal */
+        height: auto;
+        /* Mantém proporção */
+        margin: 20px auto;
+        /* Centraliza imagens */
+        display: block;
+        /* Garante que fiquem alinhadas no centro */
+    }
+}
+
+@media (max-width: 576px) {
+    .table {
+        border: none;
+    }
+
+        .table thead {
+            display: none; /* Esconde o cabeçalho */
+        }
+
+        .table tr {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .table td {
+            display: flex; /* Alinha os itens horizontalmente */
+            flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+            justify-content: space-between; /* Distribui os itens de forma uniforme */
+            align-items: center; /* Alinha verticalmente no centro */
+            border: none;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 5px;
+        }
+
+            .table td::before {
+                content: attr(data-label); /* Adiciona o título da coluna antes do valor */
+                flex: 0 0 40%; /* Define largura fixa para o título */
+                font-weight: bold;
+                color: #ccc;
+                text-align: left;
+                margin-right: 10px; /* Adiciona espaçamento entre o título e o valor */
+            }
+
+            .table td span {
+                flex: 1; /* Permite que o conteúdo se ajuste ao espaço restante */
+                text-align: left;
+            }
+
+            /* Estilo para os botões */
+            .table td .btn-action,
+            .table td .btn-delete {
+                display: inline-block; /* Garante que cada botão tenha seu próprio espaço */
+                padding: 5px 10px; /* Adiciona preenchimento interno */
+                margin: 5px 0; /* Adiciona espaçamento vertical entre botões */
+                border-radius: 5px; /* Bordas arredondadas */
+                text-align: center;
+                text-decoration: none; /* Remove o sublinhado */
+                color: white; /* Define a cor do texto */
+            }
+
+            .table td .btn-action {
+                background-color: purple; /* Define a cor padrão para ações */
+            }
+
+            .table td .btn-delete {
+                background-color: red; /* Cor para o botão de exclusão */
+            }
+
+        .table td {
+            flex-direction: column; /* Empilha os itens em dispositivos menores */
+            align-items: flex-start; /* Alinha os itens ao início */
+        }
+
+            .table td .btn-action,
+            .table td .btn-delete {
+                width: 100%; /* Faz com que os botões ocupem toda a largura disponível */
+                text-align: center; /* Centraliza o texto dentro dos botões */
+            }
+
+
+    /*#endregion */
+
+
+    .modal-header {
+        background-color: var(--color-bg1);
+        color: #ffffff; /* Ajusta o texto para ser legível no fundo escuro /*/
+    }
+
+    .modal-body {
+        background-color: var(--color-bg1);
+        color: #ffffff; /* Ajusta o texto para ser legível no fundo escuro */
+    }
+
+    .modal-backdrop.modal-stack + .modal-backdrop {
+        z-index: 1050 !important; /* Fundo ajustado para o modal ativo */
+    }
+
+    .modal-header {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1rem;
+        border-bottom: 1px solid #0d6efd;
+        border-top-left-radius: calc(.3rem - 1px);
+        border-top-right-radius: calc(.3rem - 1px);
+    }
+
+    .btn-close {
+        background-color: transparent; /* Fundo transparente */
+        border: none; /* Remove a borda */
+        display: flex;
+        align-items: center; /* Alinha o conteúdo verticalmente */
+        justify-content: center; /* Centraliza o "X" */
+    }
+
+        .btn-close::after {
+            content: 'X'; /* Garante que o caractere "X" apareça */
+            font-size: 1.5rem; /* Ajuste o tamanho do "X" */
+            color: #ff0000; /*Cor vermelha */
+            margin: 0; /*  Certifique-se de que não há margens*/
+        }
+}
+
+/*#endregion*/

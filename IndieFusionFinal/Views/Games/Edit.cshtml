@@ -1,0 +1,250 @@
+﻿@model IndieFusionFinal.Models.Game
+
+@{
+    ViewData["Title"] = "Edit";
+    var username = Context.Session.GetString("Username"); // Obtém o nome de usuário da sessão
+    var imagePath = Context.Session.GetString("ImagePath") ?? "/IF/Img/Icones/PerfilWhite.png";
+}
+
+<section id="top" class="topbar">
+    <div class="topbar_container">
+        <div class="topbar__content">
+            <div class="logo-container">
+                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="topbar__logo">
+                        <h4 class="logo-text">
+                            INDIE
+                            <span> FUSION</span>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="topbar__menu" id="mainMenu">
+                <ul>
+                    <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+
+                    <li><a class="nav-link text-white" asp-area="" asp-controller="Users" asp-action="Index">Usuarios</a></li>
+                    <li><a class="nav-link text-white" asp-area="" asp-controller="UserTypes" asp-action="Index">TipoUsuario</a></li>
+                    <li><a class="nav-link text-white" asp-area="" asp-controller="Genres" asp-action="Index">Genero</a></li>
+                    <li><a class="nav-link text-white" asp-area="" asp-controller="Classifications" asp-action="Index">Classifications</a></li>
+                </ul>
+            </nav>
+
+            <div class="topbar__menuhomePerfil">
+                <li class="perfil-container">
+                    <button id="perfilBtn">
+                        <img src="@Url.Content(imagePath)" alt="Perfil" class="img-thumbnail" />
+                    </button>
+                    <span id="perfilNome" class="perfil-nome">@username.ToUpper()</span>
+                    <div id="menu" class="menu">
+                        <a asp-area="" asp-controller="Users" asp-action="Index">Área Restrita</a>
+                        <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                    </div>
+                </li>
+
+
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="mode-container">
+                    <button id="btnMode" class="topbar__btn">
+                         <img src="~/Img/Icones/moon.png" alt="Modo Escuro">
+                    </button>
+                    <span class="mode-nome">Temas</span>
+                </div>
+
+                <!-- Menu de seleção de temas -->
+
+
+                <div id="themeMenu" class="theme-menu">
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('light')">Light Mode</div>
+                        <div class="theme-options" id="light-options">
+                            <div class="theme-option" onclick="changeTheme('NebulosaSolarLightMode')">Nebulosa Solar</div>
+                            <div class="theme-option" onclick="changeTheme('AuroraNebulosaLightMode')">Aurora Nebulosa</div>
+                            <div class="theme-option" onclick="changeTheme('GalaxiaAzuladaLightMode')">Galáxia Azulada</div>
+                            <div class="theme-option" onclick="changeTheme('NebulosaLilasLightMode')">Nebulosa Lilás</div>
+                            <div class="theme-option" onclick="changeTheme('EstrelaDouradaLightMode')">Estrela Dourada</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('dark')">Dark Mode</div>
+                        <div class="theme-options" id="dark-options">
+                            <div class="theme-option" onclick="changeTheme('NebulosaVermelhaMode')">Nebulosa Vermelha</div>
+                            <div class="theme-option" onclick="changeTheme('BuracoNegroMode')">Buraco Negro</div>
+                            <div class="theme-option" onclick="changeTheme('AuroraBorealMode')">Aurora Boreal</div>
+                            <div class="theme-option" onclick="changeTheme('EstrelaAzulMode')">Estrela Azul</div>
+                            <div class="theme-option" onclick="changeTheme('NebulosaLilasMode')">Nebulosa Lilás</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('neon')">Neon Mode</div>
+                        <div class="theme-options" id="neon-options">
+                            <div class="theme-option" onclick="changeTheme('Neon1Mode')">Neon Trifecta</div>
+                            <div class="theme-option" onclick="changeTheme('NeonSpectrumMode')">Neon Spectrum</div>
+                            <div class="theme-option" onclick="changeTheme('NeonVaporwaveMode')">Neon Vaporwave</div>
+                            <div class="theme-option" onclick="changeTheme('NeonCyberMode')">Neon Cyber</div>
+                            <div class="theme-option" onclick="changeTheme('NeonAuroraMode')">Neon Aurora</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('colors')">Cores Padrões</div>
+                        <div class="theme-options" id="colors-options">
+                            <div class="theme-option" onclick="changeTheme('GalaxiaPadraoMode')">Galáxia Padrão</div>
+                            <div class="theme-option" onclick="changeTheme('darkGalaxyAMOLEDMode')">Dark Galaxy</div>
+                            <div class="theme-option" onclick="changeTheme('GalaxiaPadraoLightMode')">Light Galaxy</div>
+                            <div class="theme-option" onclick="changeTheme('YingYangNeonGalaticoMode')">Ying Yang Galatico</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="tableT" class="tableBlc">
+    <div class="tableBlc_containerD">
+        <div class="Details_C">
+            <h1>Edit.</h1>
+
+            <h4>Game</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <!-- Título -->
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <!-- Produtora -->
+                        <div class="form-group">
+                            <label asp-for="Producer" class="control-label"></label>
+                            <input asp-for="Producer" class="form-control" />
+                            <span asp-validation-for="Producer" class="text-danger"></span>
+                        </div>
+
+                        <!-- Preço -->
+                        <div class="form-group">
+                            <label asp-for="price" class="control-label"></label>
+                            <input asp-for="price" class="form-control" />
+                            <span asp-validation-for="price" class="text-danger"></span>
+                        </div>
+
+                        <!-- Exibir Imagem Principal Atual -->
+                        <div class="form-group">
+                            <label class="control-label">Imagem Principal Atual</label>
+                            <div>
+                                @if (!string.IsNullOrEmpty(Model.ImagePath))
+                                {
+                                    <img src="@Model.ImagePath" alt="Imagem Principal Atual" style="width: 150px; height: auto;" />
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Upload da Nova Imagem Principal -->
+                        <div class="form-group">
+                            <label for="mainImageFile" class="control-label">Nova Imagem Principal</label>
+                            <input type="file" name="mainImageFile" class="form-control" accept="image/*" />
+                        </div>
+
+                        <!-- Exibir Imagem do Banner Atual -->
+                        <div class="form-group">
+                            <label class="control-label">Imagem do Banner Atual</label>
+                            <div>
+                                @if (!string.IsNullOrEmpty(Model.BannerImage))
+                                {
+                                    <img src="@Model.BannerImage" alt="Imagem do Banner Atual" style="width: 150px; height: auto;" />
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Upload da Nova Imagem do Banner -->
+                        <div class="form-group">
+                            <label for="bannerImageFile" class="control-label">Nova Imagem do Banner</label>
+                            <input type="file" name="bannerImageFile" class="form-control" accept="image/*" />
+                        </div>
+
+                        <!-- Exibir Outras Imagens Atuais -->
+                        <div class="form-group">
+                            <label class="control-label">Outras Imagens Atuais</label>
+                            <div>
+                                @if (!string.IsNullOrEmpty(Model.AdditionalImage1))
+                                {
+                                    <img src="@Model.AdditionalImage1" alt="Imagem Adicional 1" style="width: 100px; height: auto; margin: 5px;" />
+                                }
+                                @if (!string.IsNullOrEmpty(Model.AdditionalImage2))
+                                {
+                                    <img src="@Model.AdditionalImage2" alt="Imagem Adicional 2" style="width: 100px; height: auto; margin: 5px;" />
+                                }
+                                @if (!string.IsNullOrEmpty(Model.AdditionalImage3))
+                                {
+                                    <img src="@Model.AdditionalImage3" alt="Imagem Adicional 3" style="width: 100px; height: auto; margin: 5px;" />
+                                }
+                                @if (!string.IsNullOrEmpty(Model.AdditionalImage4))
+                                {
+                                    <img src="@Model.AdditionalImage4" alt="Imagem Adicional 4" style="width: 100px; height: auto; margin: 5px;" />
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Upload de Novas Imagens Adicionais -->
+                        <div class="form-group">
+                            <label for="additionalImageFiles" class="control-label">Novas Outras Imagens</label>
+                            <input type="file" name="additionalImageFiles" multiple class="form-control" accept="image/*" />
+                            <small class="text-muted">Selecione até 4 imagens adicionais.</small>
+                        </div>
+
+                        <!-- Dropdown para Classification -->
+                        <div class="form-group">
+                            <label asp-for="Classification_Id" class="control-label"></label>
+                            <select asp-for="Classification_Id" class="form-control" asp-items="ViewBag.Classification_Id"></select>
+                        </div>
+
+                        <!-- Dropdown para Genre -->
+                        <div class="form-group">
+                            <label asp-for="Genre_Id" class="control-label"></label>
+                            <select asp-for="Genre_Id" class="form-control" asp-items="ViewBag.Genre_Id"></select>
+                        </div>
+
+                        <!-- Dropdown para Genre2 (Opcional) -->
+                        <div class="form-group">
+                            <label asp-for="Genre2_Id" class="control-label">Segundo Gênero (Opcional)</label>
+                            <select asp-for="Genre2_Id" class="form-control" asp-items="ViewBag.Genre2_Id">
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Salvar" class="btn btn-primary" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+            @section Scripts {
+                @{
+                    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+                }
+            }
+        </div>
+    </div>
+</section>
+<script src="~/js/script.js"></script>

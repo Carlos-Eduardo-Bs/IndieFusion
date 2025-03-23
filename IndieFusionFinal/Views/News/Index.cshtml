@@ -1,0 +1,70 @@
+﻿@model List<IndieFusionFinal.Models.NewsModel>
+
+@{
+    ViewData["Title"] = "Notícias de Jogos";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+
+
+
+
+    <div class="container mt-4">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning" role="alert">
+                Nenhuma notícia disponível no momento.
+            </div>
+        }
+        else
+        {
+            <section id="newsT" class="newBlc">
+                <button class="home-btn">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </button>
+                <h3>Notícias</h3>
+                <div class="gameBlc_container">
+                    @if (Model != null && Model.Any())
+                    {
+                        <div class="row justify-content-center">
+                            @foreach (var news in Model)
+                            {
+                                <div class="col-md-6 col-12 mb-4">
+                                    <div class="cardN" style="width: 100%;">
+                                        @if (!string.IsNullOrEmpty(news.UrlToImage))
+                                        {
+                                            <a href="@news.Url">
+                                                <img src="@news.UrlToImage" class="card-img-top" alt="Imagem da notícia" style="height: 200px; width: 100%;" />
+                                            </a>
+                                        }
+                                        <div class="card-body text-center card-body-content">
+                                            <span class="card-text">@news.Title</span>
+                                            <p class="card-text">@news.Description</p>
+                                            <button class="saiba-mais-btn" >
+                                                <a href="@news.Url" style="color: var(--color-text-primary)">Leia mais</a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p>Nenhuma notícia encontrada.</p>
+                    }
+                </div>
+            </section>
+        }
+    </div>
+</body>
+</html>

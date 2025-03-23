@@ -1,0 +1,85 @@
+﻿
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Indie</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Indie.styles.css" asp-append-version="true" />
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="~/css/Style.css">
+    <link rel="stylesheet" href="~/css/Media.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+          referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" />
+    <title>IndieFusion</title>
+</head>
+
+<body>
+    <header>
+    </header>
+    <div class="container">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+            <div class="footer__top-bar"></div>
+            <div class="footer" style="position:relative; bottom: 0;">
+
+                <!-- Logo -->
+                <div class="footer__logo">
+                    <img src="~/Img/Icones/Logo.png" alt="Logo">
+                    <h4>Indie <span>Fusion</span></h4>
+                </div>
+
+                <!-- Texto principal -->
+                <div class="footer__text">
+                    <p>Copyright &copy; Indie Fusion 2024</p>
+                    <h4>
+                        © 2024 IndieFusion. Todos os direitos reservados. Todas as marcas são propriedade dos seus
+                        respectivos donos em outros países. IVA incluso em todos os preços onde aplicável.
+                    </h4>
+                </div>
+
+                <!-- Texto inferior com links e ícones -->
+                <div class="footer__text-bottom">
+                    <p>
+                        <a href="">Sobre a Indie </a>| <a href="">Empregos</a> | <a href="">Indieworks</a> | <a href="">Distribuição na Indie</a> |<a href="">Suporte</a>  |
+                        <a href="">
+                            <img src="~/Img/Icones/inst.png" alt="Instagram">
+                            IndieFusion
+                        </a>  |
+                        <a href="">
+                            <img src="~/Img/Icones/XTT.png" alt="X">
+                            IndieFusion
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Barra inferior branca -->
+            </div>
+            <div class="footer__bottom-bar"></div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Scripts -->
+    <script src="~/js/particles.min.js"></script>
+    <script src="~/js/app.js"></script>
+    <script src="~/js/stats.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+    <script src="~/js/script.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

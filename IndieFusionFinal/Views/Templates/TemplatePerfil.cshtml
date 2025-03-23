@@ -1,0 +1,295 @@
+﻿@model IndieFusionFinal.Models.User
+@{
+    ViewData["Title"] = "Cadastrar Usuário";
+    var userId = Context.Session.GetInt32("UserId");
+    var username = Context.Session.GetString("Username");
+    var userType = Context.Session.GetInt32("UserType");
+    var imagePath = Context.Session.GetString("ImagePath") ?? "/IF/Img/Icones/PerfilWhite.png";
+
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="./Css/Media.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+          referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" />
+    <title>IndieFusion</title>
+</head>
+<!-- Top Bar -->
+<section id="top" class="topbar">
+    <div class="topbar_container">
+        <div class="topbar__content">
+
+
+            <div class="logo-container">
+                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="topbar__logo">
+                        <h4 class="logo-text">
+                            INDIE
+                            <span> FUSION</span>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+
+            <div class="topbar__menuhome">
+                <ul>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Info</a>
+                    @if (userId == null)
+                    {
+                        <li>
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link " data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastrar</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="topbar__menuhomePerfil">
+                @if (userId != null)
+                {
+                    <li class="perfil-container">
+                        <button id="perfilBtn">
+                            <img src="@Url.Content(imagePath)" alt="Perfil" class="img-thumbnail" />
+                        </button>
+                        <span id="perfilNome" class="perfil-nome">@username.ToUpper()</span>
+                        <div id="menu" class="menu">
+                            @if (userType == 1)
+                            {
+                                <a asp-area="" asp-controller="Users" asp-action="Index">Área Restrita</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            }
+                            else if (userType == 2)
+                            {
+                                <a asp-area="" asp-controller="GameMakers" asp-action="GameUser">Meus Jogos</a>
+                                <a asp-area="" asp-controller="Templates" asp-action="TemplatePerfil">Perfil</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            }
+                            else
+                            {
+                                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a asp-area="" asp-controller="Templates" asp-action="TemplatePerfil">Perfil</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            }
+                        </div>
+                    </li>
+                }
+
+                <div class="mode-container">
+                    <button id="btnMode" class="topbar__btn">
+                        <img src="~/Img/Icones/moon.png" alt="Modo Escuro">
+                    </button>
+                    <span class="mode-nome">Temas</span>
+                </div>
+
+                <!-- Menu de seleção de temas -->
+
+
+                <div id="themeMenu" class="theme-menu">
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('light')">Light Mode</div>
+                        <div class="theme-options" id="light-options">
+                            <div class="theme-option" onclick="changeTheme('NebulosaSolarLightMode')">Nebulosa Solar</div>
+                            <div class="theme-option" onclick="changeTheme('AuroraNebulosaLightMode')">Aurora Nebulosa</div>
+                            <div class="theme-option" onclick="changeTheme('GalaxiaAzuladaLightMode')">Galáxia Azulada</div>
+                            <div class="theme-option" onclick="changeTheme('NebulosaLilasLightMode')">Nebulosa Lilás</div>
+                            <div class="theme-option" onclick="changeTheme('EstrelaDouradaLightMode')">Estrela Dourada</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('dark')">Dark Mode</div>
+                        <div class="theme-options" id="dark-options">
+                            <div class="theme-option" onclick="changeTheme('NebulosaVermelhaMode')">Nebulosa Vermelha</div>
+                            <div class="theme-option" onclick="changeTheme('BuracoNegroMode')">Buraco Negro</div>
+                            <div class="theme-option" onclick="changeTheme('AuroraBorealMode')">Aurora Boreal</div>
+                            <div class="theme-option" onclick="changeTheme('EstrelaAzulMode')">Estrela Azul</div>
+                            <div class="theme-option" onclick="changeTheme('NebulosaLilasMode')">Nebulosa Lilás</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('neon')">Neon Mode</div>
+                        <div class="theme-options" id="neon-options">
+                            <div class="theme-option" onclick="changeTheme('Neon1Mode')">Neon Trifecta</div>
+                            <div class="theme-option" onclick="changeTheme('NeonSpectrumMode')">Neon Spectrum</div>
+                            <div class="theme-option" onclick="changeTheme('NeonVaporwaveMode')">Neon Vaporwave</div>
+                            <div class="theme-option" onclick="changeTheme('NeonCyberMode')">Neon Cyber</div>
+                            <div class="theme-option" onclick="changeTheme('NeonAuroraMode')">Neon Aurora</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('colors')">Cores Padrões</div>
+                        <div class="theme-options" id="colors-options">
+                            <div class="theme-option" onclick="changeTheme('GalaxiaPadraoMode')">Galáxia Padrão</div>
+                            <div class="theme-option" onclick="changeTheme('darkGalaxyAMOLEDMode')">Dark Galaxy</div>
+                            <div class="theme-option" onclick="changeTheme('GalaxiaPadraoLightMode')">Light Galaxy</div>
+                            <div class="theme-option" onclick="changeTheme('YingYangNeonGalaticoMode')">Ying Yang Galatico</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- mainPerfil -->
+<main>
+    <div class="Main-Perfil">
+        <!-- banner -->
+        <!-- Banner Principal -->
+        <!-- Banner Principal -->
+        <!-- Banner Principal -->
+        <div class="banner">
+        </div>
+
+        <!-- Container do Perfil -->
+        <div class="perfil-container">
+            <div class="Inform-CardPerfil">
+                <!-- Imagem do Perfil -->
+                <div class="cardperfil-img">
+                    <img src="@Url.Content(Model?.ImagePath ?? "/Img/Icones/usuario.png")" alt="Imagem de Perfil">
+                </div>
+
+                <!-- Informações do Usuário -->
+                <div class="cardperfil-info">
+                    <span class="nickname">@Model?.NickName</span>
+                    <span class="apelido">@Model?.Name</span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- editar do usuario -->
+        <div class="Meusjogos">
+            <div class="grupoEsquerda">
+            </div>
+        </div>
+        <div class="EditPerfil-Container">
+            <div class="CardBio-Container">
+
+                <h1>Bio</h1>
+                <h4>Sou um programador Indie</h4>
+            </div>
+
+
+            <div class="gerenciarJogosContainer">
+                <form asp-action="TemplatePerfil" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+
+                    <!-- Container que agrupa os campos e a coluna de imagem -->
+                    <div class="profile-container">
+                        <!-- Campos do Formulário -->
+                        <div class="profile-fields">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" disabled />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="NickName" class="control-label"></label>
+                                <input asp-for="NickName" class="form-control" disabled />
+                                <span asp-validation-for="NickName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" disabled />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password" class="control-label"></label>
+                                <input asp-for="Password" class="form-control" disabled />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BirthDate" class="control-label"></label>
+                                <input asp-for="BirthDate" class="form-control" disabled />
+                                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Coluna da Imagem -->
+                        <div class="profile-image">
+                            <label asp-for="ImagePath" class="control-label">Imagem Atual</label>
+                            <div>
+                                <img src="@Model.ImagePath" alt="Imagem Atual" style="width: 150px;" />
+                            </div>
+                            <label for="imageFile" class="control-label">Nova Imagem</label>
+                            <!-- O input deve estar habilitado para enviar o arquivo -->
+                            <input type="file" class="form-control" disabled id="imageFile" name="imageFile" />
+                        </div>
+                    </div>
+
+                    <!-- Seção Oculta (UserTp) -->
+                    <div class="d-none">
+                        <input type="hidden" asp-for="UserTp" />
+                        <label asp-for="UserTp" class="control-label"></label>
+                        <select asp-for="UserTp" class="form-control" asp-items="ViewBag.UserTp" disabled></select>
+                        <span asp-validation-for="UserTp" class="text-danger"></span>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="form-buttons">
+                        <button type="button" id="editBtn" class="btn btn-primary btn-save">Editar</button>
+                        <input type="submit" value="Save" class="btn btn-primary btn-save" disabled id="saveBtn" />
+                        <!-- Se houver a necessidade de um botão Delete, crie um botão com forma diferente,
+                             mas evite criar outro form aninhado -->
+                        <button type="button" id="deleteBtn" class="btn btn-danger btn-delete" disabled>DeleteUser</button>
+                    </div>
+
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <p style="color: red;">@ViewBag.ErrorMessage</p>
+                    }
+                </form>
+            </div>
+
+        </div>
+
+        <script src="~/js/script.js"></script>
+    </div>
+
+    <script>
+        // Ativa/desativa o menu do perfil
+        document.getElementById("perfilBtn").addEventListener("click", function () {
+          var menu = document.getElementById("menu");
+          menu.classList.toggle("active");
+        });
+
+        // Habilita os campos do formulário para edição ao clicar no botão "Editar"
+        document.getElementById("editBtn").addEventListener("click", function () {
+          // Seleciona todos os inputs e selects dentro do container do perfil
+          var fields = document.querySelectorAll('.gerenciarJogosContainer input, .gerenciarJogosContainer select');
+          fields.forEach(function(field) {
+            field.disabled = false;
+          });
+
+          // Habilita os botões de salvar e deletar
+          document.getElementById("saveBtn").disabled = false;
+          document.getElementById("deleteBtn").disabled = false;
+        });
+    </script>
+
+</main>
+
+<!-- Scripts -->
+<script src="./js/particles.min.js"></script>
+<script src="./js/app.js"></script>
+<script src="./js/stats.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+<script src="./js/script.js"></script>

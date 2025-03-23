@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndieFusionFinal", "IndieFusionFinal.csproj", "{570C3DDD-5FD6-4394-9C9C-342C7001828C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndieFusionDesk", "..\IndieFusionDesk\IndieFusionDesk.csproj", "{A1AB8EC3-5B1F-4A2C-B732-48A1F61E4707}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndieFusionAPI", "..\IndieFusionAPI\IndieFusionAPI.csproj", "{9FA9E3FE-34C8-465E-A733-03681367EF94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{570C3DDD-5FD6-4394-9C9C-342C7001828C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570C3DDD-5FD6-4394-9C9C-342C7001828C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570C3DDD-5FD6-4394-9C9C-342C7001828C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570C3DDD-5FD6-4394-9C9C-342C7001828C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1AB8EC3-5B1F-4A2C-B732-48A1F61E4707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1AB8EC3-5B1F-4A2C-B732-48A1F61E4707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1AB8EC3-5B1F-4A2C-B732-48A1F61E4707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1AB8EC3-5B1F-4A2C-B732-48A1F61E4707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FA9E3FE-34C8-465E-A733-03681367EF94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FA9E3FE-34C8-465E-A733-03681367EF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FA9E3FE-34C8-465E-A733-03681367EF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FA9E3FE-34C8-465E-A733-03681367EF94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

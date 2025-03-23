@@ -1,0 +1,4685 @@
+﻿/*#region Reset e Global */
+
+@font-face {
+    font-family: 'Pixelgames';
+    src: url('../Font/Retro Gaming.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garantir que padding e borda sejam inclusos nas dimensões */
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-text);
+    list-style: none;
+}
+
+.container {
+    max-width: 100%;
+    padding-right: 0;
+    padding-left: var(--bs-gutter-x, .75rem);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+html {
+    font-size: 16px;
+    /* Tamanho padrão ideal para mobile */
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient( 165deg, var(--color-bg1) 40%, var(--color-bg2) 90% ); /* Gradiente suave entre bg1 e bg2 */
+    color: var(--color-text-primary); /* Cor primária para o texto */
+    line-height: 1.6; /* Melhor espaçamento entre linhas para leitura confortável */
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-gradient); /* Gradiente galáctico */
+        opacity: 0.15; /* Transparência sutil para não sobrecarregar o visual */
+        z-index: -1;
+    }
+
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-overlay); /* Overlay com sombra sutil */
+        mix-blend-mode: multiply;
+        opacity: 0.3;
+        z-index: -2;
+        pointer-events: none;
+    }
+
+span {
+    color: var(--color-text-primary);
+}
+
+button {
+    background: var(--color-button-bg); /* Cor de fundo do botão */
+    color: var(--color-text-primary); /* Cor do texto */
+    border: 1px solid var(--color-border); /* Borda suave */
+    box-shadow: 0 4px 15px var(--color-plus-shadow); /* Sombra suave para dar profundidade */
+    transition: all 0.3s ease; /* Transição suave para interações */
+}
+
+    button:hover {
+        background: var(--color-detail); /* Cor de fundo ao passar o mouse */
+        color: var(--color-text-primary); /* Texto destacado */
+        box-shadow: 0 6px 20px var(--color-shadow); /* Sombra mais intensa ao passar o mouse */
+        transition: .3s;
+    }
+
+element.style {
+    padding: 0;
+}
+
+.form-control {
+    display: block;
+    width: 100%; /* Largura total */
+    padding: 12px; /* Ajuste no espaçamento interno */
+    font-size: 1rem; /* Tamanho da fonte */
+    font-weight: 400; /* Peso normal */
+    line-height: 1.5; /* Altura da linha */
+    color: var(--color-text-secondary); /* Texto branco */
+    background-color: var(--color-black); /* Fundo preto */
+    background-clip: padding-box; /* Clipa o fundo dentro do padding */
+    border: 3px solid var(--color-search); /* Borda inicial */
+    border-radius: 5px; /* Bordas arredondadas */
+    outline: none; /* Remove o contorno padrão */
+    -webkit-appearance: none; /* Remove o estilo padrão no Chrome/Safari */
+    -moz-appearance: none; /* Remove o estilo padrão no Firefox */
+    appearance: none; /* Remove o estilo padrão em navegadores modernos */
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+    /* Hover nos campos */
+    .form-control:hover {
+        border-color: var(--color-plus); /* Borda com --color-plus ao passar o mouse */
+    }
+
+    /* Foco nos campos */
+    .form-control:focus {
+        border-color: var(--color-plus); /* Borda com --color-plus ao focar */
+        box-shadow: 0 0 5px var(--color-plus); /* Adiciona um brilho leve */
+    }
+
+
+select {
+    width: 100%; /* Largura total do container pai */
+    padding: 12px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho do texto */
+    background-color: var(--color-black); /* Fundo preto */
+    color: #ffffff; /* Texto branco */
+    border: 3px solid var(--color-text); /* Borda inicial */
+    border-radius: 5px; /* Bordas arredondadas */
+    outline: none; /* Remove o contorno padrão */
+    transition: all 0.3s ease; /* Animação suave */
+    appearance: none; /* Remove o estilo padrão do browser */
+    cursor: pointer; /* Muda o cursor ao passar sobre o campo */
+}
+
+    /* Efeito hover nos campos select */
+    select:hover {
+        border-color: var(--color-plus); /* Borda roxa ao passar o mouse */
+    }
+
+    /* Foco com --color-plus */
+    select:focus {
+        border-color: var(--color-plus); /* Destaca a borda ao focar no campo */
+        box-shadow: 0 0 5px var(--color-plus); /* Adiciona luminosidade roxa no foco */
+    }
+
+    /* Opcional: para aumentar o contraste da opção selecionada */
+    select option {
+        background-color: var(--color-black); /* Fundo preto nas opções */
+        color: #ffffff; /* Texto branco */
+    }
+
+    /* Remove o azul padrão ao selecionar */
+    select:-moz-focusring {
+        color: #ffffff; /* Cor do texto */
+        background-color: var(--color-black); /* Fundo preto */
+        border-color: var(--color-plus); /* Destaca a borda */
+    }
+
+/*#region Noticias*/
+
+.saiba-mais-btn {
+    border-radius: 0.5em;
+    margin-top: auto; /* Isso empurra o botão para a parte inferior */
+}
+
+.cardG {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    background-color: var(--color-card-bg);
+    border: 2px solid var(--color-border);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    height: 25em;
+}
+
+.card-body-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Garante que o card-body ocupe todo o espaço disponível */
+}
+
+
+.saiba-mais-btn {
+    border-radius: 0.5em;
+    margin-top: auto; /* Isso empurra o botão para a parte inferior */
+    padding: 8px 16px; /* Aumenta o padding para tornar o botão um pouco maior */
+    font-size: 1em; /* Aumenta o tamanho da fonte */
+    background-color: var(--color-card-bg); /* Mantém a cor de fundo do botão */
+    border: 1px solid var(--color-border); /* Adiciona uma borda para melhorar a aparência */
+    cursor: pointer; /* Muda o cursor para pointer ao passar o mouse */
+    transition: background-color 0.3s ease; /* Adiciona uma transição suave */
+}
+
+.cardG img {
+    border: 2px solid var(--color-border); /* Adiciona uma borda com a cor da variável */
+    border-radius: 8px; /* Adiciona bordas arredondadas à imagem */
+    object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+    height: 200px; /* Mantém a altura fixa */
+    width: 100%; /* Garante que a imagem ocupe toda a largura do card */
+}
+
+.saiba-mais-btn:hover {
+    background-color: var(--color-border); /* Muda a cor de fundo ao passar o mouse */
+}
+
+
+/* Estilo para o botão Home */
+.home-btn {
+    position: absolute; /* Posiciona o botão de forma absoluta */
+    left: 20px; /* Distância da borda esquerda */
+    top: 20px; /* Distância do topo */
+    padding: 8px 16px; /* Padding para aumentar o tamanho do botão */
+    background-color: var(--color-card-bg); /* Cor de fundo do botão */
+    border: 1px solid var(--color-border); /* Borda do botão */
+    border-radius: 0.5em; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor pointer ao passar o mouse */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+    .home-btn:hover {
+        background-color: var(--color-border); /* Cor de fundo ao passar o mouse */
+    }
+
+/* Ajustes na seção #newsT para acomodar o botão */
+#newsT {
+    position: relative; /* Permite que o botão seja posicionado de forma absoluta dentro desta seção */
+    padding-top: 60px; /* Adiciona espaço no topo para o botão não sobrepor o conteúdo */
+}
+/*#endregion*/
+/*#region button*/
+
+.button2 {
+    display: flex; /* Define um layout flexível */
+    justify-content: center; /* Centraliza horizontalmente os botões */
+    align-items: center; /* Centraliza verticalmente */
+    gap: 10px; /* Adiciona espaçamento entre os botões */
+    margin-top: 20px; /* Adiciona espaçamento superior */
+    width: 100%;
+    flex-direction: row;
+}
+
+
+
+/* Botão verde para "Criar Novo" /*/
+
+.btn-create {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: var(--color-text-primary); /* Texto mais harmônico */
+    background-color: var(--color-button-bg); /* Usando a variável para o fundo */
+    border: 2px solid var(--color-plus); /* Borda com o tom do tema */
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+    .btn-create:hover {
+        background-color: var(--color-black); /* Alterando para um fundo suave ao passar o mouse */
+        border-color: var(--color-detail); /* Destacando com a cor de detalhe */
+        transform: scale(1.05); /* Pequeno aumento para um efeito de zoom */
+    }
+
+
+
+.btn-action {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: var(--color-text-primary); /* Texto harmonizado */
+    background-color: var(--color-button-bg);
+    border: 2px solid var(--color-detail); /* Usando a variável para a borda */
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+    .btn-action:hover {
+        background-color: var(--color-black);
+        border-color: var(--color-plus); /* Destacando a borda com cor de destaque */
+        color: var(--color-detail); /* Mudando a cor do texto para o azul neon */
+        transform: scale(1.05);
+    }
+
+/* Botão vermelho para "Excluir" */
+
+
+.btn-delete {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: var(--color-text-primary); /* Texto harmonizado */
+    background-color: red;
+    border: 2px solid var(--color-detail); /* Bordas em azul neon */
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+    .btn-delete:hover {
+        background-color: var(--color-black); /* Fundo suavizado ao passar o mouse */
+        border-color: var(--color-plus); /* Borda suavizada com o magenta neon */
+        color: var(--color-plus); /* Texto em magenta neon ao passar o mouse */
+        transform: scale(1.05); /* Efeito de zoom suave */
+    }
+
+
+/*#endregion*/
+
+/*#endregion*/
+
+/*#region CoresPadrões*/
+.GalaxiaPadraoMode:root {
+    --color-text-primary: rgba(255, 255, 255, 1); /* Texto principal */
+    --color-text-secondary: rgba(200, 200, 200, 1); /* Texto secundário */
+    --color-text-muted: rgba(150, 150, 150, 0.85); /* Texto discreto */
+    --color-text-highlight: rgba(138, 43, 226, 1); /* Azul-Roxo Galáctico */
+
+    --color-black: rgba(0, 0, 0, 1);
+    --color-bg1: rgba(8, 0, 13, 1);
+    --color-base: rgba(30, 24, 38, 1);
+    --color-search: rgba(53, 51, 56, 1);
+    --color-bg2: rgba(39, 30, 51, 1);
+    --color-detail: rgba(85, 10, 128, 1);
+    --color-plus: rgba(179, 83, 255, 1);
+    --color-plus-shadow: rgba(179, 83, 255, 0.15);
+    /* Novas variáveis */
+    --color-accent: rgba(255, 120, 255, 0.8);
+    --color-border: rgba(255, 255, 255, 0.3);
+    --color-gradient: linear-gradient(135deg, rgba(179, 83, 255, 1), rgba(85, 10, 128, 1));
+    --color-shadow: rgba(0, 0, 0, 0.5);
+    --color-overlay: rgba(0, 0, 0, 0.6);
+    --color-card-bg: rgba(24, 22, 40, 1); /* Fundo de cards */
+    --color-button-bg: rgba(179, 83, 255, 1); /* Fundo de botões */
+    --color-button-hover: rgba(200, 90, 255, 1); /* Cor ao passar o mouse */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória */
+}
+
+/* === Dark Galaxy Mode (AMOLED) === */
+.darkGalaxyAMOLEDMode:root {
+    --color-text-primary: rgba(255, 255, 255, 1); /* Texto principal (branco) */
+    --color-text-secondary: rgba(200, 200, 200, 1); /* Texto secundário (cinza claro) */
+    --color-text-muted: rgba(150, 150, 150, 0.85); /* Texto discreto (cinza mais suave) */
+    --color-text-highlight: rgba(138, 43, 226, 1); /* Azul-Roxo Galáctico (destaque roxo) */
+
+    --color-black: rgba(0, 0, 0, 1); /* Fundo preto absoluto (AMOLED) */
+    --color-bg1: rgba(0, 0, 0, 1); /* Fundo escuro principal (preto) */
+    --color-base: rgba(15, 15, 15, 1); /* Fundo secundário escuro (preto suave) */
+    --color-search: rgba(40, 40, 40, 1); /* Cor do campo de pesquisa (preto suave) */
+    --color-bg2: rgba(15, 15, 15, 1); /* Segundo plano em preto suave */
+    --color-detail: rgba(85, 10, 128, 1); /* Detalhes em roxo (identidade visual) */
+    --color-plus: rgba(179, 83, 255, 1); /* Cor de destaque roxa (vibrante) */
+    --color-plus-shadow: rgba(179, 83, 255, 0.15); /* Sombra suave para destaque */
+    /* Novas variáveis */
+    --color-accent: rgba(255, 120, 255, 1); /* Acento vibrante roxo claro */
+    --color-border: rgba(255, 255, 255, 0.3); /* Bordas suaves (branco suave) */
+    --color-gradient: linear-gradient(135deg, rgba(128, 0, 128, 0.7), rgba(0, 0, 0, 1));
+    --color-shadow: rgba(0, 0, 0, 0.6); /* Sombra profunda (escura) */
+    --color-overlay: rgba(0, 0, 0, 0.75); /* Overlay (mais denso) */
+
+    --color-card-bg: rgba(30, 30, 30, 1); /* Fundo de cards mais escuro */
+    --color-button-bg: rgba(179, 83, 255, 1); /* Fundo de botões (roxo) */
+    --color-button-hover: rgba(200, 90, 255, 1); /* Cor ao passar o mouse (roxo claro) */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória sutil */
+}
+
+
+.GalaxiaPadraoLightMode:root {
+    /* Cores de texto */
+    --color-text-primary: rgba(0, 0, 0, 1); /* Texto principal (preto puro) */
+    --color-text-secondary: rgba(80, 80, 80, 1); /* Texto secundário (cinza escuro) */
+    --color-text-muted: rgba(120, 120, 120, 0.85); /* Texto discreto (cinza médio) */
+    --color-text-highlight: rgba(138, 43, 226, 1); /* Roxo brilhante para destaque */
+    /* Cores de fundo e base */
+    --color-black: rgba(240, 235, 255, 1); /* Lilás muito claro (fundo principal) */
+    --color-bg1: rgba(255, 255, 255, 1); /* Fundo branco puro */
+    --color-base: rgba(245, 240, 255, 1); /* Fundo secundário (lilás claro) */
+    --color-search: rgba(230, 220, 255, 1); /* Cor de busca suave em lilás */
+    --color-bg2: rgba(220, 210, 240, 1); /* Fundo adicional (lilás médio) */
+    /* Cores de detalhes e destaques */
+    --color-detail: rgba(138, 43, 226, 1); /* Roxo vibrante (contraste quente) */
+    --color-plus: rgba(180, 100, 255, 1); /* Lilás pastel (contraste suave) */
+    --color-plus-shadow: rgba(180, 100, 255, 0.2); /* Sombra suave (lilás pastel) */
+    /* Cores de acento e bordas */
+    --color-accent: rgba(138, 43, 226, 0.8); /* Acento vibrante (roxo brilhante) */
+    --color-border: rgba(200, 200, 200, 0.3); /* Cor da borda (cinza suave) */
+    /* Gradiente */
+    --color-gradient: linear-gradient(135deg, rgba(245, 240, 255, 1), rgba(180, 100, 255, 1), rgba(138, 43, 226, 1)); /* Gradiente entre lilás claro, lilás pastel e roxo vibrante */
+    /* Sombras e overlays */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    --color-overlay: rgba(0, 0, 0, 0.2); /* Overlay claro */
+    /* Cores de componentes */
+    --color-card-bg: rgba(255, 255, 255, 1); /* Fundo de cards (branco puro) */
+    --color-button-bg: rgba(138, 43, 226, 1); /* Fundo de botões (roxo vibrante) */
+    --color-button-hover: rgba(160, 60, 240, 1); /* Cor ao passar o mouse (roxo mais forte) */
+    --color-divider: rgba(200, 200, 200, 0.15); /* Linha divisória (cinza suave) */
+}
+
+.YingYangNeonGalaticoMode:root {
+    /* Texto */
+    --color-text-primary: rgba(255, 255, 255, 0.95); /* Texto principal (branco levemente suavizado) */
+    --color-text-secondary: rgba(220, 220, 220, 1); /* Texto secundário suave */
+    --color-text-muted: rgba(150, 150, 150, 0.85); /* Texto discreto */
+    --color-text-highlight: rgba(148, 63, 246, 1); /* Roxo galáctico como destaque */
+    /* Fundo e planos */
+    --color-black: rgba(0, 0, 0, 1);
+    --color-bg1: rgba(0, 0, 0, 1);
+    --color-bg2: rgba(10, 10, 10, 1); /* Fundo mais intenso */
+    --color-base: rgba(25, 25, 25, 1); /* Fundo intermediário */
+    --color-search: rgba(30, 30, 30, 1); /* Campo de pesquisa */
+    /* Detalhes e efeitos */
+    --color-detail: rgba(148, 63, 246, 1); /* Roxo galáctico mais claro */
+    --color-plus: rgba(0, 200, 220, 1); /* Azul neon mais suave */
+    --color-plus-shadow: rgba(0, 200, 220, 0.25); /* Sombra suave */
+    --color-accent: rgba(255, 100, 180, 1); /* Rosa neon suavizado */
+    --color-border: rgba(255, 255, 255, 0.15);
+    --color-gradient: linear-gradient(135deg, var(--color-plus), var(--color-detail), var(--color-accent));
+    --color-shadow: rgba(0, 0, 0, 0.7); /* Sombra menos densa */
+    --color-overlay: rgba(0, 0, 0, 0.85); /* Overlay escuro */
+    /* Cards e botões */
+    --color-card-bg: rgba(20, 20, 20, 1); /* Fundo de cards escuros */
+    --color-button-bg: rgba(0, 200, 220, 1); /* Fundo de botões */
+    --color-button-hover: rgba(0, 220, 240, 0.8); /* Hover dos botões */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linhas divisórias */
+}
+/*#endregion*/
+
+/*#region NeonModes */
+.Neon1Mode:root {
+    --color-text-primary: rgba(0, 234, 255, 1); /* Texto principal em azul neon vibrante */
+    --color-text-secondary: rgba(0, 200, 220, 0.9); /* Texto secundário em tom de ciano claro */
+    --color-text-muted: rgba(0, 170, 190, 0.6); /* Texto discreto em tom mais suave */
+    --color-text-highlight: rgba(255, 77, 166, 1); /* Rosa Neon vibrante */
+
+    --color-black: rgba(10, 10, 10, 1);
+    --color-bg1: rgba(15, 15, 26, 1); /* Fundo escuro e profundo */
+    --color-base: rgba(26, 26, 46, 1); /* Fundo secundário profundo */
+    --color-search: rgba(31, 31, 51, 1); /* Cor de fundo da barra de busca */
+    --color-bg2: rgba(42, 42, 64, 1); /* Fundo suave de segunda camada */
+    --color-detail: rgba(170, 0, 255, 1); /* Detalhes roxos neon */
+    --color-plus: rgba(255, 77, 166, 1); /* Destaque em rosa neon */
+    --color-plus-shadow: rgba(255, 77, 166, 0.3); /* Sombra suave para o rosa neon */
+
+    --color-accent: rgba(255, 120, 180, 1); /* Acento em rosa neon suave */
+    --color-border: rgba(255, 255, 255, 0.2); /* Bordas finas e translúcidas */
+    --color-gradient: linear-gradient(135deg, rgba(255, 77, 166, 1), rgba(170, 0, 255, 1)); /* Gradiente futurista vibrante */
+    --color-shadow: rgba(0, 0, 0, 0.8); /* Sombra mais intensa para dar profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.7); /* Overlay mais escuro para foco no conteúdo */
+
+    --color-card-bg: rgba(24, 24, 40, 1); /* Fundo de cards com tom escuro */
+    --color-button-bg: rgba(255, 77, 166, 1); /* Botões com rosa neon vibrante */
+    --color-button-hover: rgba(255, 100, 180, 1); /* Hover mais intenso em rosa */
+    --color-divider: rgba(255, 255, 255, 0.1); /* Linhas divisórias mais sutis */
+}
+
+.NeonSpectrumMode:root {
+    --color-text-primary: rgba(180, 255, 170, 1); /* Verde neon suave e mais legível para o texto principal */
+    --color-text-secondary: rgba(150, 240, 150, 0.9); /* Verde suave para texto secundário */
+    --color-text-muted: rgba(120, 230, 130, 0.7); /* Verde claro e discreto para texto menos importante */
+    --color-text-highlight: rgba(255, 105, 255, 1); /* Magenta vibrante, mas suavizado para evitar excesso de contraste */
+
+    --color-black: rgba(16, 21, 18, 1); /* Fundo mais suave para melhorar contraste */
+    --color-bg1: rgba(22, 29, 27, 1); /* Fundo escuro mais equilibrado */
+    --color-base: rgba(34, 58, 52, 1); /* Tom cibernético moderado para o fundo */
+    --color-search: rgba(50, 80, 70, 1); /* Barra de busca com fundo equilibrado */
+    --color-bg2: rgba(48, 75, 73, 1); /* Fundo em camadas mais claras, mantendo contraste suave */
+    --color-detail: rgba(0, 155, 235, 1); /* Azul neon mais suave e harmonioso, mantendo o efeito vibrante */
+    --color-plus: rgba(255, 85, 215, 1); /* Magenta neon mais suave para destaque */
+    --color-plus-shadow: rgba(255, 85, 215, 0.25); /* Sombra suave no magenta para um efeito mais sutil */
+
+    --color-accent: rgba(255, 120, 230, 1); /* Acento suave e agradável de magenta */
+    --color-border: rgba(255, 255, 255, 0.25); /* Bordas mais suaves para um toque leve */
+    --color-gradient: linear-gradient(135deg, rgba(255, 85, 215, 1), rgba(0, 180, 255, 1)); /* Gradiente mais suave para destacar */
+    --color-shadow: rgba(0, 0, 0, 0.5); /* Sombra equilibrada para dar profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.5); /* Overlay mais suave para não obscurecer demais o conteúdo */
+
+    --color-card-bg: rgba(28, 40, 52, 1); /* Cards com fundo cibernético mais equilibrado */
+    --color-button-bg: rgba(255, 85, 215, 1); /* Botões com magenta neon suave */
+    --color-button-hover: rgba(255, 105, 235, 1); /* Hover com magenta mais suave */
+    --color-divider: rgba(255, 255, 255, 0.1); /* Linhas divisórias sutis, para um toque discreto */
+}
+
+
+.NeonVaporwaveMode:root {
+    --color-text-primary: rgba(255, 0, 127, 1); /* Texto principal em rosa neon */
+    --color-text-secondary: rgba(230, 0, 110, 0.9); /* Texto secundário suave em rosa */
+    --color-text-muted: rgba(200, 0, 90, 0.7); /* Texto discreto em tom mais fraco de rosa */
+    --color-text-highlight: rgba(0, 200, 255, 1); /* Azul neon vibrante */
+
+    --color-black: rgba(13, 10, 22, 1);
+    --color-bg1: rgba(26, 19, 51, 1); /* Fundo profundo em roxo e azul */
+    --color-base: rgba(43, 25, 77, 1); /* Fundo secundário com tom futurista */
+    --color-search: rgba(57, 37, 102, 1); /* Barra de busca suave com tom futurista */
+    --color-bg2: rgba(56, 45, 90, 1); /* Fundo mais suave e harmonioso, mantendo o tom cibernético */
+    --color-detail: rgba(164, 0, 255, 1); /* Detalhes em roxo neon */
+    --color-plus: rgba(0, 200, 255, 1); /* Destaque em azul neon */
+    --color-plus-shadow: rgba(0, 200, 255, 0.3); /* Sombra suave no azul neon */
+
+    --color-accent: rgba(255, 120, 255, 1); /* Acento vibrante em rosa/roxo */
+    --color-border: rgba(255, 255, 255, 0.2); /* Bordas mais sutis */
+    --color-gradient: linear-gradient(135deg, rgba(0, 200, 255, 1), rgba(164, 0, 255, 1)); /* Gradiente vibrante e intenso */
+    --color-shadow: rgba(0, 0, 0, 0.7); /* Sombra mais profunda e cibernética */
+    --color-overlay: rgba(0, 0, 0, 0.7); /* Overlay escuro para melhorar o contraste */
+
+    --color-card-bg: rgba(32, 28, 72, 1); /* Cards com fundo escuro e futurista */
+    --color-button-bg: rgba(0, 200, 255, 1); /* Botões com azul neon */
+    --color-button-hover: rgba(0, 220, 255, 1); /* Hover mais intenso no azul */
+    --color-divider: rgba(255, 255, 255, 0.1); /* Linhas divisórias discretas */
+}
+
+.NeonCyberMode:root {
+    /* 🎨 Texto */
+    --color-text-primary: rgba(255, 255, 255, 1); /* Branco puro para máxima legibilidade */
+    --color-text-secondary: rgba(173, 255, 240, 0.85); /* Azul-ciano neon para textos secundários */
+    --color-text-muted: rgba(100, 255, 200, 0.6); /* Verde-ciano suave para textos menos importantes */
+    --color-text-highlight: rgba(0, 255, 255, 1); /* Ciano neon vibrante para destaques */
+    /* 🌌 Backgrounds */
+    --color-black: rgba(10, 10, 20, 1); /* Preto levemente azulado para não ser tão pesado */
+    --color-bg1: rgba(5, 15, 30, 1); /* Azul profundo para um fundo cyber */
+    --color-base: rgba(10, 20, 40, 1); /* Azul escuro sutil para profundidade */
+    --color-search: rgba(15, 25, 50, 1); /* Barra de busca em um azul médio */
+    --color-bg2: rgba(20, 35, 70, 1); /* Fundo secundário com um azul levemente mais vibrante */
+    /* ✨ Detalhes e realces */
+    --color-detail: rgba(0, 255, 180, 1); /* Verde neon para pequenos detalhes */
+    --color-plus: rgba(0, 200, 255, 1); /* Azul neon forte para botões e elementos de destaque */
+    --color-plus-shadow: rgba(0, 200, 255, 0.3); /* Sombra azul neon para efeitos sutis */
+    /* ⚡ Acentos e bordas */
+    --color-accent: rgba(50, 255, 230, 1); /* Acento verde-azulado vibrante */
+    --color-border: rgba(255, 255, 255, 0.2); /* Bordas levemente visíveis, sem exagero */
+    /* 🌈 Gradiente Neon Cyber */
+    --color-gradient: linear-gradient(180deg, rgba(0, 200, 255, 1), rgba(0, 255, 180, 1)); /* De azul neon para verde neon */
+    /* 🖥️ Sombras e overlays */
+    --color-shadow: rgba(0, 0, 0, 0.7); /* Sombra intensa, mas natural */
+    --color-overlay: rgba(0, 0, 0, 0.5); /* Overlay para suavizar os tons */
+    /* 🖼️ Elementos de UI */
+    --color-card-bg: rgba(15, 25, 50, 1); /* Cards com fundo azul escuro para destaque */
+    --color-button-bg: rgba(0, 200, 255, 1); /* Botões azul neon */
+    --color-button-hover: rgba(0, 255, 180, 1); /* Hover em verde neon */
+    --color-divider: rgba(255, 255, 255, 0.1); /* Divisórias sutis */
+}
+
+
+
+.NeonAuroraMode:root {
+    --color-text-primary: rgba(255, 255, 255, 1); /* Texto principal */
+    --color-text-secondary: rgba(200, 200, 200, 1); /* Texto secundário */
+    --color-text-muted: rgba(150, 150, 150, 0.85); /* Texto discreto */
+    --color-text-highlight: rgba(138, 43, 226, 1); /* Azul-Roxo Galáctico */
+
+    --color-black: rgba(0, 0, 0, 1);
+    --color-bg1: rgba(12, 33, 48, 1); /* Fundo principal */
+    --color-base: rgba(20, 42, 64, 1); /* Fundo secundário */
+    --color-search: rgba(27, 50, 79, 1); /* Fundo de pesquisa */
+    --color-bg2: rgba(35, 55, 89, 1); /* Fundo de elementos secundários */
+    --color-detail: rgba(0, 255, 163, 1); /* Verde vibrante */
+    --color-plus: rgba(186, 0, 255, 1); /* Roxo Neon */
+    --color-plus-shadow: rgba(186, 0, 255, 0.3); /* Brilho roxo suave */
+    /* Novas variáveis */
+    --color-accent: rgba(255, 120, 255, 0.8); /* Acento neon suave */
+    --color-border: rgba(255, 255, 255, 0.3); /* Cor da borda */
+    --color-gradient: linear-gradient(135deg, rgba(186, 0, 255, 1), rgba(0, 255, 163, 1)); /* Gradiente vibrante */
+    --color-shadow: rgba(0, 0, 0, 0.5); /* Sombra suave para profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.6); /* Overlay escuro */
+
+    --color-card-bg: rgba(20, 42, 64, 1); /* Fundo de cards */
+    --color-button-bg: rgba(186, 0, 255, 1); /* Fundo de botões */
+    --color-button-hover: rgba(200, 90, 255, 1); /* Cor ao passar o mouse */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória suave */
+}
+/*#endregion*/
+
+/*#region DarkModes */
+.NebulosaVermelhaMode:root {
+    --color-text-primary: rgba(255, 233, 255, 1); /* Texto principal */
+    --color-text-secondary: rgba(200, 200, 200, 1); /* Texto secundário */
+    --color-text-muted: rgba(150, 150, 150, 0.85); /* Texto discreto */
+    --color-text-highlight: rgba(255, 80, 90, 1); /* Destaque vermelho vibrante */
+
+    --color-black: rgba(20, 0, 20, 1); /* Fundo escuro com toque de vermelho */
+    --color-bg1: rgba(60, 0, 30, 1); /* Fundo principal com tom de vermelho */
+    --color-base: rgba(90, 0, 50, 1); /* Fundo secundário escuro em vermelho */
+    --color-search: rgba(140, 0, 80, 1); /* Cor de busca suave em vermelho */
+    --color-bg2: rgba(50, 0, 30, 1); /* Fundo secundário profundo */
+    --color-detail: rgba(255, 80, 90, 1); /* Detalhes em vermelho vibrante */
+    --color-plus: rgba(255, 140, 200, 1); /* Destaques neon em rosa */
+    --color-plus-shadow: rgba(255, 140, 200, 0.2); /* Sombra suave em rosa */
+    /* Novas variáveis */
+    --color-accent: rgba(255, 140, 200, 0.8); /* Acento suave em rosa neon */
+    --color-border: rgba(255, 255, 255, 0.3); /* Cor da borda */
+    --color-gradient: linear-gradient(135deg, rgba(255, 140, 200, 1), rgba(255, 80, 90, 1)); /* Gradiente suave entre rosa e vermelho */
+    --color-shadow: rgba(0, 0, 0, 0.5); /* Sombra */
+    --color-overlay: rgba(0, 0, 0, 0.6); /* Overlay escuro */
+
+    --color-card-bg: rgba(60, 0, 30, 1); /* Fundo de cards */
+    --color-button-bg: rgba(255, 140, 200, 1); /* Fundo de botões */
+    --color-button-hover: rgba(255, 180, 220, 1); /* Cor ao passar o mouse */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória */
+}
+
+
+.BuracoNegroMode:root {
+    --color-text-primary: rgba(220, 240, 255, 1); /* Texto principal */
+    --color-text-secondary: rgba(200, 200, 200, 1); /* Texto secundário */
+    --color-text-muted: rgba(150, 150, 150, 0.85); /* Texto discreto */
+    --color-text-highlight: rgba(60, 60, 140, 1); /* Azul suave para destaque */
+
+    --color-black: rgba(0, 0, 0, 1); /* Preto absoluto */
+    --color-bg1: rgba(10, 10, 40, 1); /* Fundo principal */
+    --color-base: rgba(15, 15, 60, 1); /* Fundo secundário */
+    --color-search: rgba(25, 25, 80, 1); /* Cor de busca suave em azul */
+    --color-bg2: rgba(20, 20, 50, 1); /* Fundo secundário suave */
+    --color-detail: rgba(60, 60, 140, 1); /* Detalhes suaves em azul */
+    --color-plus: rgba(120, 130, 180, 1); /* Destaques suaves em azul */
+    --color-plus-shadow: rgba(120, 130, 180, 0.2); /* Sombra suave azulada */
+    /* Novas variáveis */
+    --color-accent: rgba(120, 130, 180, 0.8); /* Acento suave em azul */
+    --color-border: rgba(255, 255, 255, 0.3); /* Cor da borda */
+    --color-gradient: linear-gradient(135deg, rgba(120, 130, 180, 1), rgba(60, 60, 140, 1)); /* Gradiente suave em azul */
+    --color-shadow: rgba(0, 0, 0, 0.5); /* Sombra */
+    --color-overlay: rgba(0, 0, 0, 0.6); /* Overlay escuro */
+
+    --color-card-bg: rgba(15, 15, 60, 1); /* Fundo de cards */
+    --color-button-bg: rgba(120, 130, 180, 1); /* Fundo de botões */
+    --color-button-hover: rgba(150, 160, 200, 1); /* Cor ao passar o mouse */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória */
+}
+
+.AuroraBorealMode:root {
+    /* Cores de texto */
+    --color-text-primary: rgba(240, 255, 250, 1); /* Texto principal (branco suave) */
+    --color-text-secondary: rgba(200, 200, 200, 1); /* Texto secundário (cinza claro) */
+    --color-text-muted: rgba(150, 150, 150, 0.85); /* Texto discreto (cinza médio) */
+    --color-text-highlight: rgba(15, 244, 220, 1); /* Verde neon para destaque */
+    /* Cores de fundo e base */
+    --color-black: rgba(5, 15, 25, 1); /* Fundo escuro profundo (quase preto com toque de azul) */
+    --color-bg1: rgba(10, 30, 40, 1); /* Fundo principal (verde-azulado escuro) */
+    --color-base: rgba(0, 50, 60, 1); /* Fundo secundário (verde-azulado médio) */
+    --color-search: rgba(0, 80, 90, 1); /* Cor de busca suave em verde-azulado */
+    --color-bg2: rgba(20, 10, 40, 1); /* Fundo adicional (roxo profundo) */
+    /* Cores de detalhes e destaques */
+    --color-detail: rgba(0, 180, 160, 1); /* Verde mais escuro e vibrante */
+    --color-plus: rgba(120, 100, 255, 1); /* Roxo neon (contraste frio) */
+    --color-plus-shadow: rgba(120, 100, 255, 0.2); /* Sombra suave (roxo neon) */
+    /* Cores de acento e bordas */
+    --color-accent: rgba(15, 244, 220, 0.8); /* Acento vibrante (verde neon) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Cor da borda (branca suave) */
+    /* Gradiente */
+    --color-gradient: linear-gradient(135deg, rgba(0, 50, 60, 1), rgba(120, 100, 255, 1), rgba(0, 180, 160, 1)); /* Gradiente entre verde-azulado, roxo neon e verde mais escuro */
+    /* Sombras e overlays */
+    --color-shadow: rgba(0, 0, 0, 0.5); /* Sombra */
+    --color-overlay: rgba(0, 0, 0, 0.6); /* Overlay escuro */
+    /* Cores de componentes */
+    --color-card-bg: rgba(10, 30, 40, 1); /* Fundo de cards (verde-azulado escuro) */
+    --color-button-bg: rgba(15, 244, 220, 1); /* Fundo de botões (verde neon) */
+    --color-button-hover: rgba(50, 255, 230, 1); /* Cor ao passar o mouse (verde neon mais forte) */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave) */
+}
+
+.EstrelaAzulMode:root {
+    /* Cores de texto */
+    --color-text-primary: rgba(255, 255, 255, 1); /* Texto principal (branco) */
+    --color-text-secondary: rgba(200, 200, 200, 1); /* Texto secundário (cinza claro) */
+    --color-text-muted: rgba(150, 150, 150, 0.85); /* Texto discreto (cinza médio) */
+    --color-text-highlight: rgba(50, 170, 255, 1); /* Azul neon para destaque */
+    /* Cores de fundo e base */
+    --color-black: rgba(10, 10, 30, 1); /* Fundo escuro profundo (quase preto com toque de azul) */
+    --color-bg1: rgba(0, 20, 40, 1); /* Fundo principal (azul escuro galáctico) */
+    --color-base: rgba(0, 40, 80, 1); /* Fundo secundário (azul médio) */
+    --color-search: rgba(0, 80, 140, 1); /* Cor de busca suave em azul */
+    --color-bg2: rgba(30, 10, 50, 1); /* Fundo adicional (roxo profundo) */
+    /* Cores de detalhes e destaques */
+    --color-detail: rgba(255, 100, 150, 1); /* Rosa neon (contraste quente) */
+    --color-plus: rgba(100, 50, 255, 1); /* Roxo neon (contraste frio) */
+    --color-plus-shadow: rgba(100, 50, 255, 0.2); /* Sombra suave (roxo neon) */
+    /* Cores de acento e bordas */
+    --color-accent: rgba(50, 170, 255, 0.8); /* Acento vibrante (azul neon) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Cor da borda (branca suave) */
+    /* Gradiente */
+    --color-gradient: linear-gradient(135deg, rgba(0, 40, 80, 1), rgba(100, 50, 255, 1), rgba(255, 100, 150, 1)); /* Gradiente entre azul, roxo neon e rosa neon */
+    /* Sombras e overlays */
+    --color-shadow: rgba(0, 0, 0, 0.5); /* Sombra */
+    --color-overlay: rgba(0, 0, 0, 0.6); /* Overlay escuro */
+    /* Cores de componentes */
+    --color-card-bg: rgba(0, 20, 40, 1); /* Fundo de cards (azul escuro galáctico) */
+    --color-button-bg: rgba(50, 170, 255, 1); /* Fundo de botões (azul neon) */
+    --color-button-hover: rgba(80, 190, 255, 1); /* Cor ao passar o mouse (azul neon mais forte) */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave) */
+}
+
+.NebulosaLilasMode:root {
+    /* Cores de texto */
+    --color-text-primary: rgba(255, 230, 255, 1); /* Texto principal (branco suave com toque de roxo) */
+    --color-text-secondary: rgba(200, 200, 200, 1); /* Texto secundário (cinza claro) */
+    --color-text-muted: rgba(150, 150, 150, 0.85); /* Texto discreto (cinza médio) */
+    --color-text-highlight: rgba(138, 43, 226, 1); /* Roxo brilhante para destaque */
+    /* Cores de fundo e base */
+    --color-black: rgba(20, 0, 30, 1); /* Fundo escuro profundo (quase preto com toque de roxo) */
+    --color-bg1: rgba(40, 0, 60, 1); /* Fundo principal (roxo escuro) */
+    --color-base: rgba(60, 0, 90, 1); /* Fundo secundário (roxo médio) */
+    --color-search: rgba(80, 0, 120, 1); /* Cor de busca suave em roxo */
+    --color-bg2: rgba(30, 0, 50, 1); /* Fundo adicional (roxo profundo) */
+    /* Cores de detalhes e destaques */
+    --color-detail: rgba(200, 150, 255, 1); /* Roxo neon mais claro e suave */
+    --color-plus: rgba(100, 150, 255, 1); /* Azul neon (contraste frio) */
+    --color-plus-shadow: rgba(100, 150, 255, 0.2); /* Sombra suave (azul neon) */
+    /* Cores de acento e bordas */
+    --color-accent: rgba(138, 43, 226, 0.8); /* Acento vibrante (roxo brilhante) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Cor da borda (branca suave) */
+    /* Gradiente */
+    --color-gradient: linear-gradient(135deg, rgba(60, 0, 90, 1), rgba(100, 150, 255, 1), rgba(200, 150, 255, 1)); /* Gradiente atualizado */
+    /* Sombras e overlays */
+    --color-shadow: rgba(0, 0, 0, 0.5); /* Sombra */
+    --color-overlay: rgba(0, 0, 0, 0.6); /* Overlay escuro */
+    /* Cores de componentes */
+    --color-card-bg: rgba(40, 0, 60, 1); /* Fundo de cards (roxo escuro) */
+    --color-button-bg: rgba(200, 150, 255, 1); /* Fundo de botões (roxo neon mais suave) */
+    --color-button-hover: rgba(220, 170, 255, 1); /* Cor ao passar o mouse (roxo neon mais claro) */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave) */
+}
+/*#endregion*/
+
+/*#region LightMode*/
+/* === Nebulosa Solar (Light Mode - Neon Cósmico) === */
+.NebulosaSolarLightMode:root {
+    /* Texto */
+    --color-text-primary: rgba(74, 0, 47, 1); /* Texto principal (rosa escuro) */
+    --color-text-secondary: rgba(170, 130, 145, 1); /* Texto secundário (bege rosado suave) */
+    --color-text-muted: rgba(200, 180, 190, 0.8); /* Texto discreto (bege rosado suave e leve) */
+    --color-text-highlight: rgba(255, 119, 169, 1); /* Texto destacado (rosa vibrante) */
+    /* Preto suave para contraste equilibrado */
+    --color-black: rgba(240, 230, 245, 1); /* Preto suave claro (cinza claro com um toque de roxo para suavizar) */
+    --color-bg1: rgba(250, 235, 245, 1); /* Fundo principal (suave e radiante, rosa claro) */
+    --color-base: rgba(255, 215, 230, 0.95); /* Fundo secundário (bege rosado suave) */
+    --color-search: rgba(245, 180, 205, 1); /* Barra de busca (rosa suave) */
+    --color-bg2: rgba(255, 190, 210, 1); /* Fundo adicional (rosa suave com toque de bege misturado) */
+    /* Detalhes */
+    --color-detail: rgba(210, 105, 120, 1); /* Detalhes (tom de vermelho rosado queimado, trazendo contraste sem fugir da paleta) */
+    --color-plus: rgba(255, 178, 212, 1); /* Destaques (rosa claro e suave) */
+    --color-plus-shadow: rgba(255, 178, 212, 0.3); /* Sombra suave (rosa claro) */
+    /* Introdução de cor fria para contraste */
+    --color-accent: rgba(175, 230, 225, 0.8); /* Acento suave (azul claro pastel) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Borda suave e discreta */
+    /* Gradiente suave entre o rosa claro e o azulado pastel com leve mistura de pêssego */
+    --color-gradient: linear-gradient(135deg, rgba(255, 178, 212, 1), rgba(175, 230, 225, 1), rgba(245, 210, 195, 1));
+    /* Sombra e sobreposições */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.2); /* Overlay discreto para modulação de elementos */
+    /* Fundo de cards e botões */
+    --color-card-bg: rgba(255, 220, 210, 1); /* Fundo de cards (bege rosado mais pastel, suave e claro) */
+    --color-button-bg: rgba(255, 119, 169, 1); /* Fundo de botões (rosa intenso) */
+    --color-button-hover: rgba(255, 140, 185, 1); /* Cor ao passar o mouse (rosa mais forte) */
+    /* Linha divisória */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave e discreta) */
+}
+
+
+
+
+
+/* === Aurora Nebulosa (Light Mode - Neon Cósmico) === */
+.AuroraNebulosaLightMode:root {
+    --color-text-primary: rgba(2, 69, 71, 1); /* Texto principal (verde-azulado escuro) */
+    --color-text-secondary: rgba(96, 173, 162, 1); /* Texto secundário (verde suave) */
+    --color-text-muted: rgba(140, 198, 183, 0.8); /* Texto discreto (verde claro e suave) */
+    --color-text-highlight: rgba(0, 163, 148, 1); /* Texto destacado (verde vibrante) */
+
+    --color-black: rgba(245, 235, 223, 1); /* Preto suave claro com um tom quente de creme para suavizar o contraste e harmonizar com os verdes */
+
+    --color-bg1: rgba(224, 249, 245, 1); /* Fundo suave com um toque de pêssego claro, criando uma suavidade acolhedora e contrastando com o verde */
+    --color-base: rgba(196, 242, 235, 0.95); /* Fundo brilhante */
+    --color-search: rgba(162, 227, 216, 1); /* Cor da barra de busca (verde suave) */
+
+    --color-bg2: rgba(245, 215, 190, 1); /* Fundo adicional (pêssego claro suave misturado com o verde) criando um contraste quente, mas suave */
+    /* Ajustes nas variáveis existentes para adicionar o tom pastel e o contraste quente */
+    --color-detail: rgba(0, 163, 148, 1); /* Detalhes (verde vibrante) */
+    --color-plus: rgba(231, 190, 174, 1); /* Destaques ajustados (pêssego suave com o verde para harmonia) */
+    --color-plus-shadow: rgba(231, 190, 174, 0.3); /* Sombra suave (pêssego suave misturado com o verde) */
+    /* Adicionando o contraste frio-quente ao gradiente */
+    --color-gradient: linear-gradient(135deg, rgba(96, 232, 208, 1), rgba(231, 190, 174, 1)); /* Gradiente suave entre o verde e o pêssego */
+
+    --color-accent: rgba(0, 140, 120, 0.8); /* Acento vibrante (verde intenso) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Borda suave e discreta */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.2); /* Overlay discreto para modulação de elementos */
+
+    --color-card-bg: rgba(196, 242, 235, 1); /* Fundo de cards (suave e vibrante) */
+    --color-button-bg: rgba(0, 163, 148, 1); /* Fundo de botões (verde intenso) */
+    --color-button-hover: rgba(0, 190, 170, 1); /* Cor ao passar o mouse (verde mais forte) */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave e discreta) */
+}
+
+
+/* === Galáxia Azulada (Light Mode - Neon Cósmico) === */
+.GalaxiaAzuladaLightMode:root {
+    /* Cores de texto */
+    --color-text-primary: rgba(0, 39, 74, 1); /* Texto principal (azul escuro) */
+    --color-text-secondary: rgba(91, 143, 168, 1); /* Texto secundário (azul suave) */
+    --color-text-muted: rgba(130, 173, 206, 0.8); /* Texto discreto (azul claro e suave) */
+    --color-text-highlight: rgba(0, 120, 220, 1); /* Texto destacado (azul menos intenso) */
+    /* Cores de fundo e base */
+    --color-black: rgba(230, 240, 250, 1); /* Azul pastel muito claro (contraste suave) */
+    --color-bg1: rgba(209, 236, 255, 1); /* Fundo suave (azul claro) */
+    --color-base: rgba(225, 243, 255, 0.95); /* Fundo brilhante (azul muito claro) */
+    --color-search: rgba(188, 227, 255, 1); /* Cor da barra de busca (azul suave) */
+    --color-bg2: rgba(200, 230, 220, 1); /* Fundo adicional (verde pastel) */
+    /* Cores de detalhes e destaques */
+    --color-detail: rgba(150, 200, 230, 1); /* Azul-claro pastel (contraste suave) */
+    --color-plus: rgba(120, 200, 180, 1); /* Verde pastel (contraste médio) */
+    --color-plus-shadow: rgba(120, 200, 180, 0.3); /* Sombra suave (verde pastel) */
+    /* Cores de acento e bordas */
+    --color-accent: rgba(0, 130, 230, 0.8); /* Acento vibrante (azul intenso) */
+    --color-border: rgba(200, 220, 240, 0.5); /* Borda suave (azul pastel) */
+    /* Gradiente */
+    --color-gradient: linear-gradient(135deg, rgba(209, 236, 255, 1), rgba(200, 230, 220, 1), rgba(150, 200, 230, 1)); /* Gradiente entre azul, verde pastel e azul-claro */
+    /* Sombras e overlays */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(200, 220, 240, 0.2); /* Overlay com tom azul pastel */
+    /* Cores de componentes */
+    --color-card-bg: rgba(209, 236, 255, 1); /* Fundo de cards (suave e vibrante) */
+    --color-button-bg: rgba(0, 120, 220, 1); /* Fundo de botões (azul mais suave) */
+    --color-button-hover: rgba(0, 140, 210, 1); /* Cor ao passar o mouse (azul mais escuro) */
+    --color-divider: rgba(200, 220, 240, 0.3); /* Linha divisória (azul pastel suave) */
+}
+
+/* === Nebulosa Lilás (Light Mode - Neon Cósmico) === */
+.NebulosaLilasLightMode:root {
+    /* Cores de texto */
+    --color-text-primary: rgba(62, 0, 72, 1); /* Texto principal (lilás escuro) */
+    --color-text-secondary: rgba(136, 96, 151, 1); /* Texto secundário (lilás suave) */
+    --color-text-muted: rgba(174, 130, 190, 0.8); /* Texto discreto (lilás claro e suave) */
+    --color-text-highlight: rgba(180, 102, 255, 1); /* Texto destacado (lilás vibrante) */
+    /* Cores de fundo e base */
+    --color-black: rgba(230, 220, 240, 1); /* Cinza claro com toque de lilás */
+    --color-bg1: rgba(245, 235, 255, 1); /* Fundo suave (lilás muito claro) */
+    --color-base: rgba(235, 215, 255, 0.95); /* Fundo brilhante (lilás claro) */
+    --color-search: rgba(225, 200, 255, 1); /* Cor da barra de busca (lilás suave) */
+    --color-bg2: rgba(230, 210, 255, 1); /* Fundo adicional (lilás claro com toque de rosa) */
+    /* Cores de detalhes e destaques */
+    --color-detail: rgba(255, 150, 180, 1); /* Rosa pastel (contraste quente) */
+    --color-plus: rgba(100, 180, 220, 1); /* Azul mais forte e vibrante */
+    --color-plus-shadow: rgba(100, 180, 220, 0.3); /* Sombra suave (azul mais forte) */
+    /* Cores de acento e bordas */
+    --color-accent: rgba(180, 90, 255, 0.8); /* Acento vibrante (lilás intenso) */
+    --color-border: rgba(210, 180, 240, 0.5); /* Borda suave (lilás pastel) */
+    /* Gradiente */
+    --color-gradient: linear-gradient(135deg, rgba(225, 200, 255, 1), rgba(100, 180, 220, 1), rgba(255, 150, 180, 1)); /* Gradiente entre lilás, azul forte e rosa pastel */
+    /* Sombras e overlays */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(210, 180, 240, 0.2); /* Overlay com tom lilás pastel */
+    /* Cores de componentes */
+    --color-card-bg: rgba(245, 235, 255, 1); /* Fundo de cards (suave e vibrante) */
+    --color-button-bg: rgba(180, 102, 255, 1); /* Fundo de botões (lilás intenso) */
+    --color-button-hover: rgba(200, 130, 255, 1); /* Cor ao passar o mouse (lilás mais forte) */
+    --color-divider: rgba(210, 180, 240, 0.3); /* Linha divisória (lilás pastel suave) */
+}
+
+/* === Estrela Dourada (Light Mode - Neon Cósmico) === */
+.EstrelaDouradaLightMode:root {
+    /* Cores de texto */
+    --color-text-primary: rgba(96, 68, 0, 1); /* Texto principal (dourado escuro) */
+    --color-text-secondary: rgba(178, 148, 86, 1); /* Texto secundário (dourado suave) */
+    --color-text-muted: rgba(215, 185, 120, 0.8); /* Texto discreto (dourado suave) */
+    --color-text-highlight: rgba(255, 187, 0, 1); /* Texto destacado (dourado brilhante) */
+    /* Cores de fundo e base */
+    --color-black: rgba(240, 230, 210, 1); /* Bege suave (contraste suave) */
+    --color-bg1: rgba(255, 248, 230, 1); /* Fundo suave (bege claro) */
+    --color-base: rgba(255, 242, 204, 0.95); /* Fundo brilhante (bege dourado) */
+    --color-search: rgba(255, 233, 161, 1); /* Cor da barra de busca (dourado suave) */
+    --color-bg2: rgba(255, 237, 184, 1); /* Fundo adicional (dourado claro) */
+    /* Cores de detalhes e destaques */
+    --color-detail: rgba(255, 150, 100, 1); /* Laranja pastel (contraste quente) */
+    --color-plus: rgba(120, 180, 200, 1); /* Azul pastel melhorado (contraste frio) */
+    --color-plus-shadow: rgba(120, 180, 200, 0.3); /* Sombra suave (azul pastel melhorado) */
+    /* Cores de acento e bordas */
+    --color-accent: rgba(255, 180, 60, 0.8); /* Acento vibrante (dourado intenso) */
+    --color-border: rgba(240, 230, 210, 0.5); /* Borda suave (bege suave) */
+    /* Gradiente */
+    --color-gradient: linear-gradient(135deg, rgba(255, 217, 102, 1), rgba(255, 150, 100, 1), rgba(120, 180, 200, 1)); /* Gradiente entre dourado, laranja pastel e azul pastel melhorado */
+    /* Sombras e overlays */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(240, 230, 210, 0.2); /* Overlay com tom bege suave */
+    /* Cores de componentes */
+    --color-card-bg: rgba(255, 242, 204, 1); /* Fundo de cards (suave e vibrante) */
+    --color-button-bg: rgba(255, 187, 0, 1); /* Fundo de botões (dourado vibrante) */
+    --color-button-hover: rgba(255, 210, 60, 1); /* Cor ao passar o mouse (dourado mais forte) */
+    --color-divider: rgba(240, 230, 210, 0.3); /* Linha divisória (bege suave) */
+}
+
+/*#endregion*/
+
+/*#endregion*/
+
+/*#region LightMode*/
+/* === Nebulosa Solar (Light Mode - Neon Cósmico) === */
+.NebulosaSolarLightMode:root {
+    /* Texto */
+    --color-text-primary: rgba(74, 0, 47, 1); /* Texto principal (rosa escuro) */
+    --color-text-secondary: rgba(170, 130, 145, 1); /* Texto secundário (bege rosado suave) */
+    --color-text-muted: rgba(200, 180, 190, 0.8); /* Texto discreto (bege rosado suave e leve) */
+    --color-text-highlight: rgba(255, 119, 169, 1); /* Texto destacado (rosa vibrante) */
+    /* Preto suave para contraste equilibrado */
+    --color-black: rgba(240, 230, 245, 1); /* Preto suave claro (cinza claro com um toque de roxo para suavizar) */
+    --color-bg1: rgba(250, 235, 245, 1); /* Fundo principal (suave e radiante, rosa claro) */
+    --color-base: rgba(255, 215, 230, 0.95); /* Fundo secundário (bege rosado suave) */
+    --color-search: rgba(245, 180, 205, 1); /* Barra de busca (rosa suave) */
+    --color-bg2: rgba(255, 190, 210, 1); /* Fundo adicional (rosa suave com toque de bege misturado) */
+    /* Detalhes */
+    --color-detail: rgba(255, 119, 169, 1); /* Detalhes (rosa vibrante) */
+    --color-plus: rgba(255, 178, 212, 1); /* Destaques (rosa claro e suave) */
+    --color-plus-shadow: rgba(255, 178, 212, 0.3); /* Sombra suave (rosa claro) */
+    /* Introdução de cor fria para contraste */
+    --color-accent: rgba(175, 230, 225, 0.8); /* Acento suave (azul claro pastel) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Borda suave e discreta */
+    /* Gradiente suave entre o rosa claro e o azulado pastel com leve mistura de pêssego */
+    --color-gradient: linear-gradient(135deg, rgba(255, 178, 212, 1), rgba(175, 230, 225, 1), rgba(245, 210, 195, 1));
+    /* Sombra e sobreposições */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.2); /* Overlay discreto para modulação de elementos */
+    /* Fundo de cards e botões */
+    --color-card-bg: rgba(255, 220, 210, 1); /* Fundo de cards (bege rosado mais pastel, suave e claro) */
+    --color-button-bg: rgba(255, 119, 169, 1); /* Fundo de botões (rosa intenso) */
+    --color-button-hover: rgba(255, 140, 185, 1); /* Cor ao passar o mouse (rosa mais forte) */
+    /* Linha divisória */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave e discreta) */
+}
+
+
+
+
+
+/* === Aurora Nebulosa (Light Mode - Neon Cósmico) === */
+.AuroraNebulosaLightMode:root {
+    --color-text-primary: rgba(2, 69, 71, 1); /* Texto principal (verde-azulado escuro) */
+    --color-text-secondary: rgba(96, 173, 162, 1); /* Texto secundário (verde suave) */
+    --color-text-muted: rgba(140, 198, 183, 0.8); /* Texto discreto (verde claro e suave) */
+    --color-text-highlight: rgba(0, 163, 148, 1); /* Texto destacado (verde vibrante) */
+
+    --color-black: rgba(245, 235, 223, 1); /* Preto suave claro com um tom quente de creme para suavizar o contraste e harmonizar com os verdes */
+
+    --color-bg1: rgba(224, 249, 245, 1); /* Fundo suave com um toque de pêssego claro, criando uma suavidade acolhedora e contrastando com o verde */
+    --color-base: rgba(196, 242, 235, 0.95); /* Fundo brilhante */
+    --color-search: rgba(162, 227, 216, 1); /* Cor da barra de busca (verde suave) */
+
+    --color-bg2: rgba(245, 215, 190, 1); /* Fundo adicional (pêssego claro suave misturado com o verde) criando um contraste quente, mas suave */
+    /* Ajustes nas variáveis existentes para adicionar o tom pastel e o contraste quente */
+    --color-detail: rgba(0, 163, 148, 1); /* Detalhes (verde vibrante) */
+    --color-plus: rgba(231, 190, 174, 1); /* Destaques ajustados (pêssego suave com o verde para harmonia) */
+    --color-plus-shadow: rgba(231, 190, 174, 0.3); /* Sombra suave (pêssego suave misturado com o verde) */
+    /* Adicionando o contraste frio-quente ao gradiente */
+    --color-gradient: linear-gradient(135deg, rgba(96, 232, 208, 1), rgba(231, 190, 174, 1)); /* Gradiente suave entre o verde e o pêssego */
+
+    --color-accent: rgba(0, 140, 120, 0.8); /* Acento vibrante (verde intenso) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Borda suave e discreta */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.2); /* Overlay discreto para modulação de elementos */
+
+    --color-card-bg: rgba(196, 242, 235, 1); /* Fundo de cards (suave e vibrante) */
+    --color-button-bg: rgba(0, 163, 148, 1); /* Fundo de botões (verde intenso) */
+    --color-button-hover: rgba(0, 190, 170, 1); /* Cor ao passar o mouse (verde mais forte) */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave e discreta) */
+}
+
+
+/* === Galáxia Azulada (Light Mode - Neon Cósmico) === */
+.GalaxiaAzuladaLightMode:root {
+    --color-text-primary: rgba(0, 39, 74, 1); /* Texto principal (azul escuro) */
+    --color-text-secondary: rgba(91, 143, 168, 1); /* Texto secundário (azul suave) */
+    --color-text-muted: rgba(130, 173, 206, 0.8); /* Texto discreto (azul claro e suave) */
+    --color-text-highlight: rgba(0, 140, 255, 1); /* Texto destacado (azul vibrante) */
+
+    --color-black: rgba(235, 230, 250, 1); /* Preto suave claro (azul claro com cinza para suavizar o contraste) */
+
+    --color-bg1: rgba(225, 243, 255, 1); /* Fundo suave */
+    --color-base: rgba(209, 236, 255, 0.95); /* Fundo brilhante */
+    --color-search: rgba(188, 227, 255, 1); /* Cor da barra de busca (azul suave) */
+    --color-bg2: rgba(164, 219, 255, 1); /* Fundo adicional (azul claro) */
+    --color-detail: rgba(0, 140, 255, 1); /* Detalhes (azul vibrante) */
+    --color-plus: rgba(98, 184, 255, 1); /* Destaques (azul claro e suave) */
+    --color-plus-shadow: rgba(98, 184, 255, 0.3); /* Sombra suave (azul neon) */
+    /* Novas variáveis */
+    --color-accent: rgba(0, 130, 230, 0.8); /* Acento vibrante (azul intenso) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Borda suave e discreta */
+    --color-gradient: linear-gradient(135deg, rgba(98, 184, 255, 1), rgba(0, 140, 255, 1)); /* Gradiente suave entre o azul claro e o vibrante */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.2); /* Overlay discreto para modulação de elementos */
+
+    --color-card-bg: rgba(209, 236, 255, 1); /* Fundo de cards (suave e vibrante) */
+    --color-button-bg: rgba(0, 140, 255, 1); /* Fundo de botões (azul intenso) */
+    --color-button-hover: rgba(0, 160, 230, 1); /* Cor ao passar o mouse (azul mais forte) */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave e discreta) */
+}
+
+/* === Nebulosa Lilás (Light Mode - Neon Cósmico) === */
+.NebulosaLilasLightMode:root {
+    --color-text-primary: rgba(62, 0, 72, 1); /* Texto principal (lilás escuro) */
+    --color-text-secondary: rgba(136, 96, 151, 1); /* Texto secundário (lilás suave) */
+    --color-text-muted: rgba(174, 130, 190, 0.8); /* Texto discreto (lilás claro e suave) */
+    --color-text-highlight: rgba(180, 102, 255, 1); /* Texto destacado (lilás vibrante) */
+
+    --color-black: rgba(235, 220, 250, 1); /* Preto suave claro (um toque de lilás claro para suavizar o contraste) */
+
+    --color-bg1: rgba(251, 233, 255, 1); /* Fundo suave */
+    --color-base: rgba(245, 215, 255, 0.95); /* Fundo brilhante */
+    --color-search: rgba(235, 194, 255, 1); /* Cor da barra de busca (lilás suave) */
+    --color-bg2: rgba(240, 208, 255, 1); /* Fundo adicional (lilás claro) */
+    --color-detail: rgba(180, 102, 255, 1); /* Detalhes (lilás vibrante) */
+    --color-plus: rgba(220, 170, 255, 1); /* Destaques (lilás claro e suave) */
+    --color-plus-shadow: rgba(220, 170, 255, 0.3); /* Sombra suave (lilás claro) */
+    /* Novas variáveis */
+    --color-accent: rgba(180, 90, 255, 0.8); /* Acento vibrante (lilás intenso) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Borda suave e discreta */
+    --color-gradient: linear-gradient(135deg, rgba(220, 170, 255, 1), rgba(180, 102, 255, 1)); /* Gradiente suave entre o lilás claro e o vibrante */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.2); /* Overlay discreto para modulação de elementos */
+
+    --color-card-bg: rgba(245, 215, 255, 1); /* Fundo de cards (suave e vibrante) */
+    --color-button-bg: rgba(180, 102, 255, 1); /* Fundo de botões (lilás intenso) */
+    --color-button-hover: rgba(200, 130, 255, 1); /* Cor ao passar o mouse (lilás mais forte) */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave e discreta) */
+}
+
+/* === Estrela Dourada (Light Mode - Neon Cósmico) === */
+.EstrelaDouradaLightMode:root {
+    --color-text-primary: rgba(96, 68, 0, 1); /* Texto principal (dourado escuro) */
+    --color-text-secondary: rgba(178, 148, 86, 1); /* Texto secundário (dourado suave) */
+    --color-text-muted: rgba(215, 185, 120, 0.8); /* Texto discreto (dourado suave) */
+    --color-text-highlight: rgba(255, 187, 0, 1); /* Texto destacado (dourado brilhante) */
+
+    --color-black: rgba(245, 235, 200, 1); /* Preto suave claro (dourado suave para contraste) */
+
+    --color-bg1: rgba(255, 248, 230, 1); /* Fundo suave */
+    --color-base: rgba(255, 242, 204, 0.95); /* Fundo brilhante */
+    --color-search: rgba(255, 233, 161, 1); /* Cor da barra de busca (dourado suave) */
+    --color-bg2: rgba(255, 237, 184, 1); /* Fundo adicional (dourado claro) */
+    --color-detail: rgba(255, 187, 0, 1); /* Detalhes (dourado vibrante) */
+    --color-plus: rgba(255, 217, 102, 1); /* Destaques (dourado suave e claro) */
+    --color-plus-shadow: rgba(255, 217, 102, 0.3); /* Sombra suave (dourado claro) */
+    /* Novas variáveis */
+    --color-accent: rgba(255, 180, 60, 0.8); /* Acento vibrante (dourado intenso) */
+    --color-border: rgba(255, 255, 255, 0.3); /* Borda suave e discreta */
+    --color-gradient: linear-gradient(135deg, rgba(255, 217, 102, 1), rgba(255, 187, 0, 1)); /* Gradiente suave entre o dourado claro e o vibrante */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    --color-overlay: rgba(0, 0, 0, 0.2); /* Overlay discreto para modulação de elementos */
+
+    --color-card-bg: rgba(255, 242, 204, 1); /* Fundo de cards (suave e vibrante) */
+    --color-button-bg: rgba(255, 187, 0, 1); /* Fundo de botões (dourado vibrante) */
+    --color-button-hover: rgba(255, 210, 60, 1); /* Cor ao passar o mouse (dourado mais forte) */
+    --color-divider: rgba(255, 255, 255, 0.15); /* Linha divisória (branca suave e discreta) */
+}
+
+/*#endregion*/
+
+
+/*#region Mobile First*/
+
+/*#region Global - Base para Mobile First */
+html {
+    font-size: 16px;
+    /* Tamanho padrão inicial (mobile) */
+}
+
+body {
+    padding: 0;
+}
+
+/*#endregion*/
+
+
+
+
+/*#region Header e Topbar */
+
+/* Estilo geral para o Nav */
+nav {
+    width: 100%;
+    background-color: var(--color-base);
+}
+
+/* Estilos para a Topbar */
+#top {
+    background-color: var(--color-black);
+    border-bottom: 2px solid var(--color-plus);
+    padding: 1em 0;
+    position: sticky;
+    top: 0;
+    left: 3rem;
+    z-index: 104;
+    transition: left 0.5s ease;
+    box-shadow: 0 20px 15px var(--color-plus-shadow);
+}
+
+/* Conteúdo da Topbar */
+.topbar {
+    background-color: var(--color-black); /* Fundo preto */
+    border-bottom: 2px solid var(--color-plus); /* Borda inferior */
+    padding: 10px; /* Espaçamento interno */
+    position: sticky; /* Fixa no topo */
+    top: 0;
+    z-index: 104; /* Garante que esteja acima de outros elementos */
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+.topbar_container {
+    width: 100%;
+    max-width: 1200px; /* Largura máxima */
+    margin: 0 auto; /* Centraliza em telas maiores */
+    padding: 0 1em; /* Ajusta espaçamento interno */
+}
+
+.topbar__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.nav-link {
+    display: block;
+    color: var(--color-text-secondary);
+}
+
+
+    .nav-link:hover {
+        transition: .3s;
+        color: var(--color-detail);
+    }
+
+
+/* Logo */
+/* LogoName */
+.logo-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-text {
+    font-family: 'Pixelgames', sans-serif; /* Aplica a fonte personalizada */
+    font-size: 24px; /* Tamanho da fonte */
+    color: var(--color-text); /* Cor do texto */
+    font-weight: bold; /* Peso da fonte */
+}
+
+    .logo-text span {
+        font-family: 'Pixelgames', sans-serif; /* Aplica a fonte personalizada */
+        font-size: 24px; /* Tamanho da fonte */
+        color: var(--color-plus); /* Cor do texto */
+        font-weight: bold; /* Peso da fonte */
+    }
+
+/* Menu Navegação */
+.topbar__menu ul {
+    display: flex;
+    gap: 1em; /* Espaçamento entre itens */
+    list-style: none; /* Remove marcadores */
+    margin: 0;
+    padding: 0;
+    background: var(--color-black);
+}
+
+    .topbar__menu ul li a {
+        color: var(--color-text); /* Cor do texto */
+        text-decoration: none; /* Remove sublinhado */
+        font-size: 1rem;
+        transition: color 0.3s ease; /* Transição suave */
+    }
+
+        .topbar__menu ul li a:hover {
+            color: var(--color-plus); /* Cor ao passar o mouse */
+        }
+
+/* Menu Modal */
+.modal-header {
+    background-color: var(--color-bg1);
+    color: #ffffff; /* Ajusta o texto para ser legível no fundo escuro /*/
+}
+
+.modal-body {
+    background-color: var(--color-bg1);
+    color: #ffffff; /* Ajusta o texto para ser legível no fundo escuro */
+}
+
+.modal-backdrop.modal-stack + .modal-backdrop {
+    z-index: 1050 !important; /* Fundo ajustado para o modal ativo */
+}
+
+.modal-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #0d6efd;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+}
+
+/* Informações do Usuário */
+.user-name {
+    color: var(--color-text); /* Texto branco */
+    font-size: 1rem;
+    display: flex;
+    align-content: center;
+    text-transform: uppercase; /* Transforma o texto em maiúsculas */
+    text-align: center; /* Alinha o texto ao centro */
+    display: block; /* Faz o elemento ocupar uma linha completa, necessário para o alinhamento central */
+}
+
+/* Botão Hamburguer */
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+}
+
+    .hamburger-menu span {
+        display: block;
+        height: 3px;
+        background-color: var(--color-text); /* Branco */
+        transition: all 0.3s ease; /* Suave */
+    }
+
+/* Botão de Modo Escuro */
+#btnMode {
+    background: var(--color-black);
+    border: 2px solid var(--color-plus);
+    padding: 5px;
+    border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.topbar__btn {
+    background: var(--color-black);
+    border: 2px solid var(--color-plus);
+    border-radius: 0.5em;
+    padding: 0.5em;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+
+/* Menu de seleção de temas */
+.theme-menu {
+    display: flex; /* Mantém no fluxo para a animação */
+    position: absolute;
+    top: 100px;
+    right: 5em;
+    background: var(--color-black);
+    color: var(--color-text);
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    /* Animação inicial */
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+    /* Quando o menu estiver ativo */
+    .theme-menu.active {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+/* Título de categoria do menu */
+.theme-category {
+    padding: 14px 20px; /* Ajuste no padding para melhorar a estética */
+    margin-bottom: 12px; /* Espaçamento entre as categorias */
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid var(--color-detail);
+    color: var(--color-text-secondary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    /* Efeito hover nas categorias */
+    .theme-category:hover {
+        background-color: var(--color-plus);
+        color: var(--color-text-primary); /* Mudança de cor no hover para melhor contraste */
+    }
+
+/* Lista de itens no menu */
+.theme-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Itens do menu */
+.theme-menu li {
+    padding: 12px 20px; /* Mais padding para aumentar a área clicável */
+    margin-bottom: 8px; /* Espaçamento entre os itens */
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+    /* Efeito hover nos itens */
+    .theme-menu li:hover {
+        background-color: var(--color-bg2);
+        transform: scale(1.02); /* Efeito sutil de crescimento no hover */
+    }
+
+/* Efeito de animação para as opções */
+.theme-options {
+    display: none;
+    margin-left: 15px;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+    /* Quando as opções estiverem ativas */
+    .theme-options.active {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* Opções dentro das categorias */
+.theme-option {
+    width: 100%;
+    padding: 8px 15px;
+    border: 1px solid var(--color-detail);
+    background: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border-radius: 6px;
+}
+
+    /* Efeito hover nas opções */
+    .theme-option:hover {
+        background-color: var(--color-plus);
+        transform: scale(1.03); /* Sutil aumento no hover */
+        color: var(--color-text-primary); /* Melhor contraste de cor no hover */
+    }
+
+/* Estilo do botão de tema (topbar) */
+.topbar__btn img {
+    width: 2em;
+    height: 2em;
+    transition: transform 0.3s;
+}
+
+
+.theme-option.selected {
+    background-color: var(--color-plus);
+    font-weight: bold;
+    border: 2px solid var(--color-detail);
+}
+
+
+
+/* Hover no botão */
+#btnMode:hover {
+    background: var(--color-detail);
+    transform: scale(1.1); /* Aumento sutil do tamanho para chamar atenção */
+    transition: .3s;
+}
+
+/*#endregion */
+
+/*#region NavLeft*/
+/* Estilo geral para a NavLeft */
+#NavLeft {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 4rem; /* Largura inicial da NavLeft */
+    height: 100vh; /* Ocupa toda a altura visível da janela */
+    background-color: var(--color-black); /* Usando a cor de fundo principal */
+    border-right: 1px solid var(--color-plus); /* Borda de destaque com a cor "plus" */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 105; /* Prioridade maior que a TopBar */
+    transition: width 0.5s ease; /* Transição suave para expansão */
+}
+
+    #NavLeft:hover {
+        width: 16rem; /* Largura ao expandir */
+    }
+
+/* Estilos para os menus */
+.sidebar_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.sidebar__menu {
+    list-style: none;
+    padding: 1rem 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* Espaçamento entre os itens */
+}
+
+    .sidebar__menu li {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        position: relative;
+        cursor: pointer;
+        transition: background 0.4s ease-in-out, transform 0.4s ease-in-out, border-right 0.4s ease-in-out;
+    }
+
+        .sidebar__menu li:hover {
+            background-color: var(--color-bg2);
+            transform: scale(1.02);
+            border-right: 4px solid var(--color-plus);
+        }
+
+            .sidebar__menu li:hover img {
+                transform: scale(1.2);
+                background-color: var(--color-plus);
+            }
+
+            .sidebar__menu li:hover span {
+                opacity: 1;
+                transform: scale(1.1);
+                left: 5rem;
+                color: var(--color-text-highlight);
+            }
+
+    /* Logo - inicial escondido e aparece ao expandir a NavLeft */
+    .sidebar__menu .sidebar__logo {
+        left: -8rem;
+        opacity: 0;
+        transition: opacity 0.3s ease, left 0.3s ease;
+    }
+
+#NavLeft:hover .sidebar__logo {
+    left: 4rem;
+    opacity: 1;
+}
+
+.sidebar__menu .sidebar__logo img {
+    width: 4em;
+    height: 4em;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+    .sidebar__menu .sidebar__logo img:hover {
+        transform: scale(1.1);
+    }
+
+/* Estilo para os spans */
+.sidebar__menu span {
+    position: absolute;
+    left: 4rem;
+    opacity: 0;
+    white-space: nowrap;
+    font-size: 1rem;
+    transition: opacity 0.3s ease, transform 0.3s ease, left 0.3s ease, color 0.3s ease;
+    color: var(--color-text-secondary);
+}
+
+#NavLeft:hover .sidebar__menu span {
+    opacity: 1;
+    transform: scale(1.1);
+    left: 5rem;
+}
+
+/* Estilo das imagens */
+.sidebar__menu img {
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--color-bg1);
+    border-radius: 50%;
+    padding: 0.3rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/*#endregion*/
+
+
+/*#region table*/
+
+
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}
+
+
+
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+/*a:hover {
+    color: #0a58ca;
+}*/
+
+.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: .25em .25em;
+    color: white;
+    background: var(--color-detail);
+    border: 0;
+    border-radius: .25rem;
+    opacity: .5;
+}
+
+.form-label {
+    margin-bottom: .5rem;
+    color: var(--color-text-secondary);
+}
+
+
+/* Container centralizado e responsivo */
+.tableBlc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda a altura da tela */
+    overflow: hidden;
+}
+
+/* Estrutura do container da tabela */
+.tableBlc_container {
+    width: 90%;
+    max-height: 80vh; /* Mantém altura controlada */
+    overflow-y: auto;
+    background-color: var(--color-black);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais suave */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    .tableBlc_container:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 25px rgba(0, 255, 153, 0.3); /* Glow sutil ao passar o mouse */
+    }
+
+    /* Estilização da tabela */
+    .tableBlc_container table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--color-black);
+        border: 2px solid var(--color-plus);
+        transition: border-color 0.3s ease-in-out;
+    }
+
+        .tableBlc_container table:hover {
+            border-color: var(--color-text-highlight);
+        }
+
+        /* Cabeçalho da tabela */
+        .tableBlc_container table th {
+            background-color: var(--color-base);
+            color: var(--color-text-primary);
+            padding: 12px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--color-plus);
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        /* Células da tabela */
+        .tableBlc_container table td {
+            padding: 12px;
+            text-align: center;
+            color: var(--color-text-secondary);
+            border-bottom: 1px solid var(--color-border);
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        /* Alternância de cor entre as linhas */
+        .tableBlc_container table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .tableBlc_container table tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Efeito hover nas linhas */
+        .tableBlc_container table tr:hover {
+            background-color: var(--color-bg2);
+            transform: scale(1.001);
+            transition: all 0.3s ease-in-out;
+        }
+
+    /* Barra de rolagem personalizada */
+    .tableBlc_container::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .tableBlc_container::-webkit-scrollbar-thumb {
+        background: var(--color-plus);
+        border-radius: 5px;
+        transition: background 0.3s ease-in-out;
+    }
+
+        .tableBlc_container::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-highlight);
+        }
+
+
+
+/* Centraliza o bloco da tabela */
+.tableBlc2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+/* Estiliza o container do filtro */
+.tableBlc_container2Filtro {
+    width: 90%;
+    background-color: var(--color-black);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--color-plus);
+    margin-left: 4em;
+    transition: all 0.3s ease-in-out;
+}
+
+    .tableBlc_container2Filtro:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 255, 153, 0.4);
+    }
+
+    /* Título do filtro */
+    .tableBlc_container2Filtro h1 {
+        text-align: center;
+        color: var(--color-plus);
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+
+    /* Formulário */
+    .tableBlc_container2Filtro form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    /* Agrupamento de formulários */
+    .tableBlc_container2Filtro .form-group {
+        flex: 1 1 calc(50% - 20px);
+        min-width: 220px;
+    }
+
+    /* Botões */
+    .tableBlc_container2Filtro .btn {
+        padding: 12px 16px;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Botão primário */
+    .tableBlc_container2Filtro .btn-primary {
+        background-color: var(--color-detail);
+        color: var(--color-base);
+        border: 2px solid var(--color-detail);
+    }
+
+        .tableBlc_container2Filtro .btn-primary:hover {
+            background-color: transparent;
+            color: var(--color-detail);
+            border-color: var(--color-plus);
+        }
+
+    /* Botão secundário */
+    .tableBlc_container2Filtro .btn-secondary {
+        background-color: #6c757d;
+        color: var(--color-text-secondary);
+        border: 2px solid #6c757d;
+    }
+
+        .tableBlc_container2Filtro .btn-secondary:hover {
+            background-color: transparent;
+            border-color: var(--color-plus);
+        }
+
+/* Estiliza o container da tabela */
+.tableBlc_container2 {
+    width: 90%;
+    background-color: var(--color-black);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--color-plus);
+    transition: all 0.3s ease-in-out;
+}
+
+    .tableBlc_container2:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 255, 153, 0.4);
+    }
+
+    /* Título */
+    .tableBlc_container2 h1 {
+        text-align: center;
+        color: var(--color-plus);
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+
+    /* Formulário dentro do container da tabela */
+    .tableBlc_container2 form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    /* Estiliza os botões */
+    .tableBlc_container2 .btn {
+        padding: 12px 16px;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Botão primário */
+    .tableBlc_container2 .btn-primary {
+        background-color: var(--color-detail);
+        color: var(--color-base);
+        border: 2px solid var(--color-detail);
+    }
+
+        .tableBlc_container2 .btn-primary:hover {
+            background-color: transparent;
+            color: var(--color-detail);
+            border-color: var(--color-plus);
+        }
+
+    /* Botão secundário */
+    .tableBlc_container2 .btn-secondary {
+        background-color: #6c757d;
+        color: var(--color-text-secondary);
+        border: 2px solid #6c757d;
+    }
+
+        .tableBlc_container2 .btn-secondary:hover {
+            background-color: transparent;
+            border-color: var(--color-plus);
+        }
+
+    /* Estiliza a tabela */
+    .tableBlc_container2 table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        background-color: var(--color-black);
+        color: var(--color-text);
+        transition: border-color 0.3s ease-in-out;
+    }
+
+        .tableBlc_container2 table:hover {
+            border-color: var(--color-text-highlight);
+        }
+
+        /* Células da tabela */
+        .tableBlc_container2 table th,
+        .tableBlc_container2 table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 2px solid var(--color-plus);
+        }
+
+        /* Cabeçalho */
+        .tableBlc_container2 table th {
+            background-color: var(--color-detail);
+            color: var(--color-text);
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* Alternância de cor entre as linhas */
+        .tableBlc_container2 table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .tableBlc_container2 table tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Hover na linha */
+        .tableBlc_container2 table tr:hover {
+            background-color: var(--color-bg2);
+            transform: scale(1.01);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Estiliza imagens dentro da tabela */
+        .tableBlc_container2 table img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 5px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .tableBlc_container2 table img:hover {
+                transform: scale(1.1);
+            }
+
+    /* Barra de rolagem personalizada */
+    .tableBlc_container2::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .tableBlc_container2::-webkit-scrollbar-thumb {
+        background: var(--color-plus);
+        border-radius: 5px;
+        transition: background 0.3s ease-in-out;
+    }
+
+        .tableBlc_container2::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-highlight);
+        }
+
+
+
+.tableBlc_containerD {
+    max-height: 80%; /* Limita a altura máxima do container */
+    overflow-y: auto; /* Adiciona rolagem vertical para o conteúdo interno */
+    width: 90%; /* Define a largura máxima como 90% da tela */
+    background-color: var(--color-base); /* Fundo base para contraste */
+    padding: 20px;
+    border: 2px solid var(--color-plus);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--color-shadow); /* Sombra suave para destaque */
+    transition: box-shadow 0.4s ease, transform 0.3s ease-in-out; /* Animação suave ao interagir */
+}
+
+    .tableBlc_containerD:hover {
+        transform: scale(1.02); /* Zoom sutil ao passar o mouse */
+        box-shadow: 0 6px 20px var(--color-plus-shadow); /* Sombra mais intensa ao passar o mouse */
+    }
+
+/* Estilo da tabela */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove o espaço entre as células */
+    font-family: 'Arial', sans-serif;
+    color: var(--color-text-primary); /* Cor do texto principal */
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 2px solid var(--color-divider); /* Linha fina para separar as células */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave ao interagir */
+}
+
+th {
+    background-color: var(--color-bg2); /* Fundo mais escuro para os cabeçalhos */
+    color: var(--color-text-primary); /* Cor do texto dos cabeçalhos */
+}
+
+td {
+    background-color: var(--color-card-bg); /* Fundo das células */
+    color: var(--color-text-secondary); /* Cor do texto das células */
+}
+
+tr:hover td {
+    background-color: var(--color-detail); /* Destacar linha ao passar o mouse */
+    color: var(--color-text-primary); /* Texto mais destacado */
+}
+
+/* Estilo da barra de rolagem personalizada */
+.tableBlc_containerD::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+.tableBlc_containerD::-webkit-scrollbar-thumb {
+    background-color: var(--color-plus); /* Cor da barra de rolagem */
+    border-radius: 10px; /* Arredondamento do thumb */
+}
+
+.tableBlc_containerD::-webkit-scrollbar-track {
+    background-color: var(--color-bg1); /* Fundo da barra de rolagem */
+    border-radius: 10px; /* Arredondamento do track */
+}
+
+
+/*#region details*/
+/* Estilo geral para o container */
+.Details_C {
+    background-color: var(--color-bg1); /* Cor de fundo */
+    color: var(--color-text); /* Cor do texto */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+    /* Título principal */
+    .Details_C h1 {
+        font-size: 2rem;
+        color: var(--color-plus); /* Cor de destaque */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Subtítulos */
+    .Details_C h4 {
+        font-size: 1.5rem;
+        color: var(--color-text); /* Cor de detalhes */
+        margin-top: 20px;
+    }
+
+/* Separadores de seção */
+hr {
+    border: 1px solid var(--color-plus);
+    margin: 20px 0;
+}
+
+/* Lista de definição (detalhes) */
+.Details_C dl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center; /* Alinha os itens de forma consistente */
+}
+
+/* Definição dos rótulos */
+.Details_C dt {
+    width: 25%;
+    font-weight: bold;
+    color: var(--color-text); /* Cor de detalhes */
+}
+
+    .Details_C dt:hover {
+        color: var(--color-plus); /* Texto branco */
+    }
+
+/* Definição dos valores */
+.Details_C dd {
+    width: 70%;
+    font-size: 1rem;
+    color: var(--color-text); /* Texto branco */
+}
+
+    .Details_C dd:hover {
+        color: var(--color-plus); /* Texto branco */
+    }
+
+/* Estilo para a imagem */
+.image-container {
+    display: flex;
+    align-items: center;
+}
+
+.game-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    border: 3px solid var(--color-plus); /* Borda com cor de destaque */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-right: 20px; /* Espaçamento entre a imagem e o texto */
+}
+
+/* Ajuste para o texto "N/A" */
+.Details_C span {
+    color: var(--color-plus);
+}
+
+/* Links de ação */
+.Details_C a {
+    color: var(--color-black);
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+    /* Efeito de hover nos links */
+    .Details_C a:hover {
+        color: var(--color-detail); /* Cor ao passar o mouse */
+    }
+/* Sobrescrevendo estilos padrão do Bootstrap */
+.btn-primary,
+.btn {
+    display: inline-block;
+    padding: 15px 30px; /* Padding maior */
+    font-size: 18px; /* Fonte maior */
+    color: #ffffff; /* Texto branco */
+    background-color: #000000; /* Fundo preto */
+    border: 2px solid var(--color-plus); /* Borda personalizada */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-align: center; /* Centralização do texto */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+    /* Efeito hover */
+    .btn-primary:hover,
+    .btn:hover {
+        background-color: var(--color-plus); /* Fundo ao passar o mouse */
+        color: #000000; /* Texto preto */
+        transform: scale(1.05); /* Leve aumento no tamanho */
+    }
+
+    /* Efeito ativo */
+    .btn-primary:active,
+    .btn:active {
+        background-color: var(--color-detail); /* Fundo ao clicar */
+        color: #ffffff; /* Texto branco */
+        transform: scale(0.95); /* Leve redução no tamanho */
+    }
+/*#endregion*/
+
+
+
+/*#region gameblc */
+/* Estilo geral do container */
+.gameBlc {
+    background-color: var(--color-bg1); /* Fundo mais suave, usando o fundo primário da paleta */
+    color: var(--color-text); /* Cor do texto definida pela variável */
+    padding: 30px; /* Maior espaçamento interno para uma sensação de amplitude */
+    border-radius: 12px; /* Bordas arredondadas mais suaves */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Sombra mais suave e intensa */
+    border: 3px solid var(--color-plus); /* Borda em verde neon para dar destaque */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    margin-bottom: 2em;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transições suaves para hover */
+}
+
+    /* Efeito de hover no GameBlc: mudança de sombra e escala */
+    .gameBlc:hover {
+        box-shadow: 0 8px 30px rgba(0, 255, 255, 0.3); /* Sombra mais intensa para destaque */
+        transform: scale(1.002); /* Leve aumento do bloco no hover */
+    }
+
+.gameBlc_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    height: auto;
+    /*   display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;*/
+}
+
+/* Título da seção */
+.gameBlc h3 {
+    color: var(--color-plus); /* Cor de destaque para o título */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem; /* Aumentado para mais destaque */
+    font-weight: bold; /* Negrito para maior presença */
+    transition: color 0.3s ease; /* Transição de cor para um hover suave */
+}
+
+/* Efeito no título da seção */
+.gameBlc:hover h3 {
+    color: var(--color-text-highlight); /* Destaque no título ao passar o mouse */
+}
+
+/* Estilização para o container de cards dentro do GameBlc */
+.gameBlc_container .row {
+    /*    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;*/
+    justify-content: center;
+    transition: transform 0.3s ease; /* Transição suave para animações */
+}
+
+    /* Animação suave no hover das linhas */
+    .gameBlc_container .row:hover {
+        transform: translateY(-5px); /* Pequeno deslocamento para animação */
+    }
+
+/* Garantir que os cards tenham a mesma altura */
+
+/* Garantir que os cards tenham a mesma altura */
+
+/* Efeito hover */
+.cardG:hover {
+    border-color: var(--color-plus);
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(51, 255, 153, 0.3);
+}
+
+/* Ajuste na imagem */
+.card-img-top {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Efeito hover na imagem */
+.cardG:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Garantia de altura uniforme no conteúdo do card */
+.card-body {
+    flex-grow: 1; /* Faz com que o conteúdo se ajuste automaticamente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    color: var(--color-text-primary);
+}
+
+    /* Ajuste no texto */
+    .card-body .card-text {
+        margin: 5px 0;
+        font-size: 1rem;
+        font-weight: bold;
+        color: var(--color-text-primary);
+        transition: color 0.3s ease;
+    }
+
+/* Efeito hover no título */
+.cardG:hover .card-body .card-text {
+    color: var(--color-text-highlight);
+}
+
+/* Ajuste no preço */
+.card-body .card-text.price {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    font-weight: normal;
+    transition: color 0.3s ease;
+}
+
+/* Hover no preço */
+.cardG:hover .card-body .card-text.price {
+    color: var(--color-plus);
+}
+/*#endregion*/
+
+/*#region img*/
+
+/* Estilo da célula da tabela com a imagem e os links */
+.img-card {
+    text-align: center; /* Centraliza o conteúdo */
+    padding: 12px;
+    background-color: var(--color-black); /* Fundo preto */
+    border-radius: 12px;
+    border: 2px solid var(--color-black);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: border 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+    /* Efeito de hover na célula */
+    .img-card:hover {
+        border: 3px solid var(--color-plus);
+        transform: scale(1.015); /* Zoom mais sutil e agradável */
+        box-shadow: 0 6px 15px rgba(0, 255, 153, 0.3);
+        transition-delay: 0.8s; /* Delay na borda para sincronizar com os outros efeitos */
+    }
+
+    /* Imagem dentro da célula */
+    .img-card img {
+        width: 140px;
+        height: 140px;
+        border-radius: 10px;
+        margin-bottom: 8px;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease-in-out;
+    }
+
+        /* Efeito de hover na imagem */
+        .img-card img:hover {
+            transform: scale(1.08); /* Zoom progressivo */
+            filter: brightness(1.1) contrast(1.05);
+            transition-delay: 0.8s; /* Delay na borda para sincronizar com os outros efeitos */
+        }
+
+/* Links de ação */
+.card-actions {
+    margin-top: 10px;
+}
+
+.action-link {
+    color: #fff; /* Texto branco */
+    text-decoration: none;
+    margin: 0 5px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+    /* Efeito de hover nos links */
+    .action-link:hover {
+        color: var(--color-plus); /* Muda a cor do link ao passar o mouse */
+    }
+
+.table {
+    border: none;
+}
+
+/*#endregino*/
+
+
+
+/*#endregion*/
+
+/*#region login*/
+
+/* Centraliza o botão */
+
+/* Centraliza e estiliza o retângulo do login */
+#login {
+    display: flex; /* Ativa Flexbox */
+    flex-direction: column; /* Organiza os itens em coluna */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    width: 50%;
+    height: 30em;
+    max-width: 500px; /* Limita a largura máxima */
+    background: var(--color-black); /* Fundo preto */
+    color: #ffffff; /* Texto branco */
+    border: 3px solid var(--color-plus); /* Borda na cor personalizada */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    margin: 50px auto; /* Centraliza horizontalmente */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilo das divs que envolvem inputs */
+form div {
+    /*display: flex;*/
+    /*flex-direction: column;*/ /* Organiza label e input em coluna */
+    /*align-items: flex-start;*/ /* Alinha o label à esquerda */
+    /*margin-bottom: 1rem;*/ /* Espaçamento entre os campos */
+    /*width: 80%;*/ /* Largura total do container */
+}
+
+/* Estilo dos rótulos (labels) */
+label {
+    font-size: 14px; /* Tamanho do texto do label */
+    margin-bottom: 5px; /* Espaço entre o label e o input */
+    color: var(--color-text-secondary); /* Cor branca */
+}
+
+/* Estilo dos inputs */
+input[type="text"],
+input[type="password"] {
+    width: 100%; /* Largura total do container pai */
+    padding: 12px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho do texto */
+    background-color: var(--color-black); /* Fundo preto */
+    color: #ffffff; /* Texto branco */
+    border: 3px solid var(--color-text-primary);
+    border-radius: 5px; /* Bordas arredondadas */
+    outline: none; /* Remove o contorno padrão */
+    transition: all 0.3s ease; /* Animação suave */
+}
+
+    /* Efeito hover nos inputs */
+    input[type="text"]:hover,
+    input[type="password"]:hover {
+        border-color: var(--color-plus); /* Borda roxa ao passar o mouse */
+        border-width: 3px; /* Aumenta a espessura da borda */
+    }
+
+/* Estilo do botão */
+.btn-custom {
+    display: inline-block;
+    padding: 15px 30px; /* Tamanho do botão */
+    font-size: 18px; /* Tamanho da fonte */
+    color: #ffffff; /* Texto em branco */
+    background-color: #000000; /* Fundo preto */
+    border: 2px solid var(--color-plus); /* Borda inicial personalizada */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-align: center; /* Centraliza o texto */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: all 0.3s ease; /* Animação suave */
+}
+
+    /* Efeito hover no botão */
+    .btn-custom:hover {
+        background-color: var(--color-plus); /* Fundo personalizado no hover */
+        color: #ffffff; /* Texto branco */
+        border-color: #6a0dad; /* Borda roxa no hover */
+    }
+/*#endregion*/
+
+/*#region Cadastro*/
+#cadastro {
+    display: flex; /* Ativa Flexbox */
+    flex-direction: column; /* Organiza os itens em coluna */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    width: 50%;
+    height: auto;
+    max-width: 500px; /* Limita a largura máxima */
+    background: var(--color-black); /* Fundo preto */
+    color: #ffffff; /* Texto branco */
+    border: 2px solid var(--color-plus); /* Borda na cor personalizada */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    margin: 50px auto; /* Centraliza horizontalmente */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilo das divs que envolvem inputs */
+/*form div {
+    display: flex;
+    flex-direction: column;*/ /* Organiza label e input em coluna */
+/*align-items: flex-start;*/ /* Alinha o label à esquerda */
+/*margin-bottom: 1rem;*/ /* Espaçamento entre os campos */
+/*width: 80%;*/ /* Largura total do container */
+/*}*/
+
+/* Estilo dos rótulos (labels) */
+
+/* Estilo dos inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+    width: 100%; /* Largura total do container pai */
+    padding: 12px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho do texto */
+    background-color: var(--color-black); /* Fundo preto */
+    color: var(--color-text-highlight); /* Texto preto*/
+    border: 3px solid var(--color-search); /* Bordas inicialmente transparentes */
+    border-radius: 5px; /* Bordas arredondadas */
+    outline: none; /* Remove o contorno padrão */
+    transition: all 0.3s ease; /* Animação suave */
+}
+
+    /* Efeito hover nos inputs */
+    input[type="text"]:hover,
+    input[type="email"]:hover,
+    input[type="password"]:hover,
+    input[type="date"]:hover {
+        border-color: var(--color-plus); /* Borda roxa ao passar o mouse */
+        border-width: 3px; /* Aumenta a espessura da borda */
+    }
+
+/* Estilo do botão */
+button[type="submit"] {
+    display: inline-block;
+    padding: 15px 30px; /* Tamanho do botão */
+    font-size: 18px; /* Tamanho da fonte */
+    color: #ffffff; /* Texto em branco */
+    background-color: #000000; /* Fundo preto */
+    border: 2px solid var(--color-plus); /* Borda inicial personalizada */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-align: center; /* Centraliza o texto */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: all 0.3s ease; /* Animação suave */
+}
+
+    /* Efeito hover no botão */
+    button[type="submit"]:hover {
+        background-color: var(--color-plus); /* Fundo personalizado no hover */
+        color: #ffffff; /* Texto branco */
+        border-color: #6a0dad; /* Borda roxa no hover */
+    }
+
+/*#endregion*/
+/*#region Destaques*/
+
+/* Estilo geral */
+.game-section {
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    background-color: var(--color-bg1); /* Fundo escuro */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--color-shadow); /* Sombra suave */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+    .game-section:hover {
+        box-shadow: 0 8px 24px var(--color-shadow); /* Sombra mais intensa no hover */
+        transform: translateY(-4px); /* Efeito de levitação */
+    }
+
+    /* Título */
+    .game-section h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: var(--color-text-primary); /* Texto branco */
+        text-shadow: 0 2px 4px var(--color-shadow); /* Sombra no texto */
+    }
+
+/* Layout do conteúdo */
+.game-section__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para os game cards */
+.game-card {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    background-color: var(--color-card-bg); /* Fundo do card */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--color-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .game-card:hover {
+        transform: translateY(-8px); /* Efeito de levitação mais pronunciado */
+        box-shadow: 0 8px 24px var(--color-shadow); /* Sombra mais intensa no hover */
+    }
+
+/* Contêiner das imagens */
+.game-card__images {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Imagem principal */
+.game-card__main-image {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+    .game-card__main-image img {
+        width: 100%;
+        height: 410px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .game-card__main-image:hover img {
+        transform: scale(1.05); /* Efeito de zoom suave ao passar o mouse */
+    }
+
+/* Imagens adicionais */
+.game-card__additional-images {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.additional-images__row {
+    display: flex;
+    gap: 10px;
+}
+
+.game-card__additional-images img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+    box-shadow: 0 2px 8px var(--color-shadow); /* Sombra nas imagens adicionais */
+}
+
+    .game-card__additional-images img:hover {
+        transform: scale(1.2); /* Aumenta o tamanho da imagem em 1.2x */
+        box-shadow: 0 4px 16px var(--color-shadow); /* Sombra mais intensa no hover */
+        z-index: 10; /* Garante que a imagem aumentada fique acima das outras */
+    }
+
+/* Título e preço do jogo */
+.game-card h3 {
+    margin: 10px 0 5px;
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    padding: 0 20px;
+    transition: color 0.3s ease;
+}
+
+.game-card:hover h3 {
+    color: var(--color-plus); /* Destaque no hover */
+}
+
+.game-card span {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+    padding: 0 20px 20px;
+    transition: color 0.3s ease;
+}
+
+.game-card:hover span {
+    color: var(--color-plus); /* Destaque no hover */
+}
+
+/* Efeito de overlay nas imagens */
+.game-card__main-image::before,
+.game-card__additional-images img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-overlay); /* Overlay escuro */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.game-card__main-image:hover::before,
+.game-card__additional-images img:hover::before {
+    opacity: 0.3; /* Overlay visível ao passar o mouse */
+}
+/*#endregion */
+
+/*#region Carrocel*/
+/* Estilos para o Carrossel */
+.carousel {
+    position: relative;
+    max-width: 80%;
+    /* Ajuste a largura do carrossel */
+    margin: auto;
+    /* Centraliza o carrossel horizontalmente */
+    overflow: hidden;
+}
+
+.carousel__wrapper {
+    display: flex;
+    transition: transform 1s ease-in-out;
+}
+
+.carousel__item {
+    flex: 0 0 25%;
+    /* Cada item ocupa 25% da largura do carrossel (mostrando 4 imagens ao mesmo tempo) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+    .carousel__item img {
+        width: 80%;
+        /* Ajuste a largura das imagens para 80% da largura do item */
+        max-width: 200px;
+        /* Limite a largura máxima da imagem */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        opacity: 0.5;
+        /* Define a opacidade das imagens não ativas */
+    }
+
+    .carousel__item.active img {
+        transform: scale(1.2);
+        /* Destaca a imagem ativa com uma escala maior */
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+        /* Sombra mais forte */
+        opacity: 1;
+        /* A imagem ativa tem opacidade total */
+        z-index: 10;
+        /* Garantir que a imagem ativa fique sobre as outras */
+    }
+
+.carousel__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--color-detail);
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.5;
+}
+
+.carousel__button--prev {
+    left: 10px;
+}
+
+.carousel__button--next {
+    right: 10px;
+}
+
+.carousel__item p {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.carousel button:hover {
+    transition: .3s;
+    background: var(--color-detail);
+    color: var(--color-text-primary);
+    opacity: 0.9;
+}
+
+/*#endregion*/
+
+/*#region Filtro*/
+
+
+/* Esconde os elementos quando a classe 'hidden' for adicionada */
+.hidden {
+    display: none;
+}
+
+
+/* Estilização para limitar a área dos jogos */
+.game-section__Filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas com largura igual */
+    gap: 20px; /* Espaçamento entre os itens */
+    margin: 20px auto;
+    max-width: 1200px;
+    max-height: 800px;
+    overflow-y: auto; /* Adiciona rolagem vertical */
+    padding: 20px; /* Ajuste no padding para uma aparência mais arejada */
+    background-color: var(--color-bg1); /* Fundo escuro, mas suave */
+    border: solid 2px var(--color-plus); /* Borda suave com verde neon */
+    border-radius: 15px; /* Bordas mais arredondadas para um visual mais moderno */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra mais suave para criar profundidade */
+    transition: all 0.3s ease-in-out; /* Transição suave */
+}
+
+    .game-section__Filters:hover {
+        box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2); /* Efeito de destaque no hover */
+        transform: scale(1.01); /* Leve aumento ao passar o mouse */
+    }
+
+    /* Personalização da barra de rolagem */
+    .game-section__Filters::-webkit-scrollbar {
+        width: 10px; /* Largura da barra de rolagem */
+    }
+
+    .game-section__Filters::-webkit-scrollbar-thumb {
+        background-color: var(--color-plus); /* Cor da barra de rolagem */
+        border-radius: 10px; /* Bordas arredondadas na thumb */
+        transition: background-color 0.3s ease; /* Transição suave */
+    }
+
+        .game-section__Filters::-webkit-scrollbar-thumb:hover {
+            background-color: var(--color-detail); /* Mudança de cor quando o usuário passa o mouse */
+        }
+
+    .game-section__Filters::-webkit-scrollbar-track {
+        background-color: var(--color-bg2); /* Fundo do track da rolagem */
+        border-radius: 10px; /* Bordas arredondadas para suavizar o visual */
+    }
+
+    /* Efeito de transição para o scroll */
+    .game-section__Filters::-webkit-scrollbar-track {
+        transition: background-color 0.3s ease; /* Transição suave do track */
+    }
+
+    /* Estilo para os itens da seção */
+    .game-section__Filters > .filter-item {
+        background-color: var(--color-card-bg); /* Fundo dos itens da seção */
+        padding: 15px;
+        border-radius: 10px; /* Bordas arredondadas */
+        border: 1px solid var(--color-border); /* Borda sutil */
+        color: var(--color-text-primary); /* Cor do texto para boa legibilidade */
+        font-size: 16px;
+        text-align: center; /* Alinha o texto ao centro */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animações suaves */
+    }
+
+        /* Efeito ao passar o mouse sobre os itens */
+        .game-section__Filters > .filter-item:hover {
+            transform: scale(1.05); /* Leve aumento do item */
+            box-shadow: 0 4px 10px rgba(0, 255, 255, 0.2); /* Efeito de sombra */
+            background-color: var(--color-bg2); /* Mudança de cor de fundo */
+        }
+
+
+
+/* Dropdown geral */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    background-color: var(--color-plus);
+    color: var(--color-text-primary);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .dropdown-btn:hover {
+        background-color: var(--color-detail);
+    }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-black);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.filter-toggle-btn {
+    background-color: var(--color-button-bg); /* Cor base do botão */
+    color: var(--color-text-primary); /* Texto bem legível */
+    padding: 12px 24px; /* Melhor tamanho para UX */
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+    .filter-toggle-btn:hover {
+        background-color: var(--color-button-hover); /* Cor de hover */
+        border-color: var(--color-border); /* Borda sutil */
+        box-shadow: 0 0 12px var(--color-plus-shadow); /* Brilho suave */
+        transform: scale(1.05);
+    }
+
+    .filter-toggle-btn:active {
+        transform: scale(0.98);
+        box-shadow: 0 0 8px var(--color-plus-shadow); /* Reduz o brilho no clique */
+    }
+
+
+.dropdown-content button {
+    display: block;
+    width: 100%;
+    /* Alinha os botões no dropdown */
+    text-align: left;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: var(--color-black);
+    color: var(--color-text-primary);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .dropdown-content button:hover {
+        background-color: var(--color-detail);
+    }
+
+/* Barra de filtros */
+.game-section__filters {
+    display: flex;
+    justify-content: space-between;
+    /* Espaço entre os filtros à esquerda e à direita */
+    align-items: center;
+    /* Alinha os itens verticalmente */
+    background-color: var(--color-black);
+    /* Fundo da barra de filtros */
+    padding: 10px 20px;
+    border: 1px solid var(--color-plus);
+    border-radius: 10px;
+    /* Bordas arredondadas */
+}
+
+/* Botões de filtros à esquerda */
+.filters-left {
+    display: flex;
+    /* Organiza os botões horizontalmente */
+    flex-wrap: wrap;
+    /* Permite que os botões quebrem de linha, se necessário */
+    gap: 10px;
+    /* Espaçamento entre os botões */
+}
+
+/* Botões de filtros à direita */
+.filters-right {
+    display: flex;
+    /* Organiza os botões horizontalmente */
+    gap: 10px;
+    /* Espaçamento entre os botões */
+}
+
+
+
+/* Esconde os elementos quando a classe 'hidden' for adicionada */
+.hidden {
+    display: none;
+}
+
+/* Ajuste para a área de filtros */
+.game-section__filters {
+    display: flex;
+    justify-content: space-between;
+    /* Espaço entre os filtros à esquerda e à direita */
+    align-items: center;
+    /* Alinha os itens verticalmente */
+    background-color: var(--color-black);
+    /* Fundo da barra de filtros */
+    padding: 10px 20px;
+    border: 1px solid var(--color-plus);
+    border-radius: 10px;
+    /* Bordas arredondadas */
+}
+
+.game-section__filters-container {
+    width: 100%;
+    max-width: 1200px;
+    /* Define a largura máxima do retângulo */
+    margin: 0 auto;
+    /* Centraliza horizontalmente */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-black);
+    /* Fundo do retângulo */
+    border: 1px solid var(--color-plus);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    /* Sombra para o retângulo */
+}
+
+.filters-left,
+.filters-right {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+    .filters-left button,
+    .filters-right button {
+        padding: 10px 20px;
+        background-color: var(--color-plus);
+        color: var(--color-text-primary);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+/* Esconde os elementos quando a classe 'hidden' for adicionada */
+.hidden {
+    display: none;
+}
+
+/* Estilização para limitar a área dos jogos */
+.game-section__Filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 colunas */
+    gap: 20px;
+    /* Espaçamento entre os itens */
+    margin: 20px auto;
+    max-width: 1200px;
+    max-height: 800px;
+    /* Define altura máxima para 9 itens */
+    overflow-y: auto;
+    /* Adiciona rolagem vertical */
+    padding: 10px;
+    background-color: var(--color-black);
+    /* Cor de fundo opcional */
+    border-radius: 10px;
+    /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    /* Sombra opcional */
+}
+
+    /* Estilização opcional para personalizar a barra de rolagem */
+    .game-section__Filters::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .game-section__Filters::-webkit-scrollbar-thumb {
+        background-color: var(--color-plus);
+        /* Cor da barra de rolagem */
+        border-radius: 4px;
+    }
+
+    .game-section__Filters::-webkit-scrollbar-track {
+        background-color: var(--color-black);
+        /* Fundo do track da rolagem */
+    }
+
+
+/* Dropdown geral */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    background-color: var(--color-plus);
+    color: var(--color-text-primary);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .dropdown-btn:hover {
+        background-color: var(--color-detail);
+    }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-black);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilos gerais dos botões de filtro */
+.filter-toggle-btn,
+.game-section__filters button,
+.filters-left button,
+.filters-right button {
+    background-color: var(--color-plus);
+    color: var(--color-text-primary);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Adiciona transição suave ao hover */
+}
+
+    /* Efeito hover para botões */
+    .filter-toggle-btn:hover,
+    .game-section__filters button:hover,
+    .filters-left button:hover,
+    .filters-right button:hover {
+        background-color: var(--color-detail);
+        transform: scale(1.05);
+        /* Dá um leve aumento de tamanho ao botão */
+    }
+
+    /* Botões com a classe ativa */
+    .game-section__filters button.active,
+    .filters-left button.active,
+    .filters-right button.active {
+        background-color: var(--color-detail);
+    }
+
+/* Ajuste nos botões de dropdown */
+.dropdown-content button {
+    display: block;
+    width: 100%;
+    /* Alinha os botões no dropdown */
+    text-align: left;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: var(--color-black);
+    color: var(--color-text-primary);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .dropdown-content button:hover {
+        background-color: var(--color-detail);
+    }
+
+/* Barra de filtros */
+.game-section__filters {
+    display: flex;
+    justify-content: space-between;
+    /* Espaço entre os filtros à esquerda e à direita */
+    align-items: center;
+    /* Alinha os itens verticalmente */
+    background-color: var(--color-black);
+    /* Fundo da barra de filtros */
+    padding: 10px 20px;
+    border: 1px solid var(--color-plus);
+    border-radius: 10px;
+    /* Bordas arredondadas */
+}
+
+/* Ajuste para o contêiner dos filtros */
+.game-section__filters-container {
+    width: 100%;
+    max-width: 1200px;
+    /* Define a largura máxima do retângulo */
+    margin: 0 auto;
+    /* Centraliza horizontalmente */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-black);
+    /* Fundo do retângulo */
+    border: 1px solid var(--color-plus);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    /* Sombra para o retângulo */
+}
+
+/* Organiza os botões de categorias e preços na horizontal */
+.filters-left,
+.filters-right {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+
+/* Estilo dos cards de jogos */
+.game-cardFilter {
+    display: block;
+    text-align: center;
+    padding: 20px; /* Aumento no padding para mais espaço ao redor do conteúdo */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Sombra mais suave e ampla para profundidade */
+    border-radius: 12px; /* Bordas mais arredondadas para suavizar o visual */
+    background-color: var(--color-card-bg); /* Fundo do card com a variável definida */
+    border: 2px solid var(--color-border); /* Borda discreta com cor suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Transições suaves */
+    overflow: hidden; /* Evita que o conteúdo ultrapasse os limites arredondados */
+}
+
+    /* Efeito de hover: mudança de borda, escala e sombra */
+    .game-cardFilter:hover {
+        border-color: var(--color-plus); /* Borda em verde neon no hover */
+        transform: scale(1.05); /* Leve aumento do card para destacar */
+        box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3); /* Sombra mais intensa ao passar o mouse */
+    }
+
+    /* Imagens dos jogos */
+    .game-cardFilter img {
+        width: 100%;
+        max-width: 250px; /* Largura máxima da imagem aumentada para visual mais detalhado */
+        height: auto;
+        border-radius: 8px; /* Bordas mais suaves nas imagens */
+        margin-bottom: 15px; /* Maior espaçamento entre a imagem e o texto */
+        transition: transform 0.3s ease; /* Transição suave ao interagir com a imagem */
+    }
+
+        .game-cardFilter img:hover {
+            transform: scale(1.05); /* Leve aumento da imagem no hover */
+        }
+
+    /* Título do jogo */
+    .game-cardFilter h3 {
+        margin: 10px 0;
+        font-size: 1.4rem; /* Tamanho de fonte maior para o título */
+        color: var(--color-text-primary); /* Cor do texto principal */
+        font-weight: bold; /* Negrito para destacar o nome do jogo */
+        transition: color 0.3s ease; /* Transição suave para cor do título */
+    }
+
+    /* Efeito no título ao passar o mouse */
+    .game-cardFilter:hover h3 {
+        color: var(--color-text-highlight); /* Cor de destaque no título no hover */
+    }
+
+    /* Descrição e preço do jogo */
+    .game-cardFilter span {
+        color: var(--color-text-secondary); /* Cor suave para o texto secundário */
+        font-size: 1rem; /* Tamanho de fonte confortável para a descrição/preço */
+        font-weight: 500;
+        display: block;
+        margin-top: 5px; /* Margem superior para separar do título */
+        transition: color 0.3s ease; /* Transição suave para cor do texto */
+    }
+
+    /* Efeito de cor no hover para o texto */
+    .game-cardFilter:hover span {
+        color: var(--color-text-highlight); /* Destaque no texto secundário no hover */
+    }
+
+
+.game-section__filters button {
+    padding: 12px 18px; /* Ajuste do padding para melhorar a área de clique */
+    border: none;
+    background-color: var(--color-plus); /* Verde neon suave */
+    color: var(--color-text-primary); /* Texto primário (branco) para contraste */
+    cursor: pointer;
+    border-radius: 8px; /* Bordas mais arredondadas para um look mais fluído */
+    font-size: 14px; /* Tamanho de fonte mais adequado para um design limpo */
+    font-weight: 600; /* Peso da fonte para mais presença */
+    text-transform: uppercase; /* Maiúsculas para um toque mais "robótico" */
+    letter-spacing: 1px; /* Espaçamento entre letras para dar mais destaque ao texto */
+    transition: all 0.3s ease-in-out; /* Transição suave para todas as propriedades */
+    box-shadow: 0 4px 10px rgba(0, 200, 255, 0.2); /* Sombra suave para criar profundidade */
+}
+
+    .game-section__filters button.active {
+        background-color: var(--color-detail); /* Roxo neon para o estado ativo */
+        transform: scale(1.05); /* Leve aumento no botão quando ativo */
+    }
+
+    .game-section__filters button:hover {
+        background-color: var(--color-plus); /* Ao passar o mouse, volta para verde neon */
+        box-shadow: 0 8px 20px rgba(0, 200, 255, 0.3); /* Efeito de sombra mais intenso ao passar o mouse */
+        transform: scale(1.05); /* Leve aumento ao passar o mouse */
+    }
+
+    .game-section__filters button:focus {
+        outline: none; /* Remove a borda padrão do foco */
+        box-shadow: 0 0 15px var(--color-plus); /* Foco com um brilho suave */
+    }
+
+    .game-section__filters button:active {
+        transform: scale(0.98); /* Efeito de clique suave */
+        box-shadow: 0 4px 10px rgba(0, 200, 255, 0.2); /* Mantém a sombra ao clicar */
+    }
+
+.filters-left button.active,
+.filters-right button.active {
+    background-color: var(--color-detail);
+}
+
+.filters-left button:hover,
+.filters-right button:hover {
+    background-color: var(--color-detail);
+}
+
+.game-cardFilter {
+    display: block;
+    text-align: center;
+    padding: 20px; /* Aumento no padding para mais espaço ao redor do conteúdo */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Sombra mais suave e ampla para profundidade */
+    border-radius: 12px; /* Bordas mais arredondadas para suavizar o visual */
+    background-color: var(--color-card-bg); /* Fundo do card com a variável definida */
+    border: 2px solid var(--color-border); /* Borda discreta com cor suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Transições suaves */
+    overflow: hidden; /* Evita que o conteúdo ultrapasse os limites arredondados */
+}
+
+    /* Efeito de hover: mudança de borda, escala e sombra */
+    .game-cardFilter:hover {
+        border-color: var(--color-plus); /* Borda em verde neon no hover */
+        transform: scale(1.05); /* Leve aumento do card para destacar */
+        box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3); /* Sombra mais intensa ao passar o mouse */
+    }
+
+    /* Imagens dos jogos */
+    .game-cardFilter img {
+        width: 100%;
+        max-width: 200px; /* Largura máxima da imagem aumentada para visual mais detalhado */
+        height: auto;
+        border-radius: 8px; /* Bordas mais suaves nas imagens */
+        margin-bottom: 15px; /* Maior espaçamento entre a imagem e o texto */
+        transition: transform 0.3s ease; /* Transição suave ao interagir com a imagem */
+    }
+
+        .game-cardFilter img:hover {
+            transform: scale(1.05); /* Leve aumento da imagem no hover */
+        }
+
+    /* Título do jogo */
+    .game-cardFilter h3 {
+        margin: 10px 0;
+        font-size: 1.4rem; /* Tamanho de fonte maior para o título */
+        color: var(--color-text-primary); /* Cor do texto principal */
+        font-weight: bold; /* Negrito para destacar o nome do jogo */
+        transition: color 0.3s ease; /* Transição suave para cor do título */
+    }
+
+    /* Efeito no título ao passar o mouse */
+    .game-cardFilter:hover h3 {
+        color: var(--color-text-highlight); /* Cor de destaque no título no hover */
+    }
+
+    /* Descrição e preço do jogo */
+    .game-cardFilter span {
+        color: var(--color-text-secondary); /* Cor suave para o texto secundário */
+        font-size: 1rem; /* Tamanho de fonte confortável para a descrição/preço */
+        font-weight: 500;
+        display: block;
+        margin-top: 5px; /* Margem superior para separar do título */
+        transition: color 0.3s ease; /* Transição suave para cor do texto */
+    }
+
+    /* Efeito de cor no hover para o texto */
+    .game-cardFilter:hover span {
+        color: var(--color-text-highlight); /* Destaque no texto secundário no hover */
+    }
+
+
+
+
+
+/*#endregion*/
+
+/*#region Footer*/
+
+/* Estilos gerais do footer */
+.footer {
+    background-color: var(--color-bg1); /* Fundo escuro */
+    color: var(--color-text-primary); /* Texto branco */
+    text-align: center;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barras decorativas */
+.footer__top-bar,
+.footer__bottom-bar {
+    height: 2px;
+    background: var(--color-gradient); /* Gradiente galáctico */
+    margin: 0 auto;
+    width: 100%;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.footer__top-bar {
+    margin-bottom: 1px;
+}
+
+.footer__bottom-bar {
+    margin-top: 0px;
+}
+
+.footer:hover .footer__top-bar,
+.footer:hover .footer__bottom-bar {
+    opacity: 1;
+}
+
+/* Logo */
+.footer__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    transition: transform 0.3s ease;
+}
+
+    .footer__logo:hover {
+        transform: scale(1.05);
+    }
+
+    .footer__logo img {
+        width: 100px;
+        height: auto;
+        margin-bottom: 10px;
+        filter: drop-shadow(0 0 10px var(--color-plus-shadow));
+    }
+
+    .footer__logo h4 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--color-text-primary);
+    }
+
+        .footer__logo h4 span {
+            color: var(--color-plus);
+            text-shadow: 0 0 8px var(--color-plus-shadow));
+        }
+
+/* Texto principal */
+.footer__text {
+    margin: 20px auto;
+    max-width: 800px;
+    color: var(--color-text-secondary);
+}
+
+    .footer__text p {
+        font-size: 14px;
+        margin: 5px 0;
+        line-height: 1.6;
+    }
+
+    .footer__text h4 {
+        font-size: 16px;
+        font-weight: 400;
+        margin: 10px 0;
+        color: var(--color-text-muted);
+    }
+
+
+
+/* Links e ícones */
+.footer__links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+    .footer__links a {
+        color: var(--color-text-primary);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+        .footer__links a:hover {
+            color: var(--color-plus);
+            transform: translateY(-3px);
+        }
+
+    .footer__links img {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+        transition: transform 0.3s ease;
+    }
+
+        .footer__links img:hover {
+            transform: scale(1.2);
+        }
+
+/* Texto inferior */
+.footer__text-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+    color: var(--color-text-muted);
+    font-size: 12px;
+}
+
+    .footer__text-bottom img {
+        width: 20px;
+        /* Tamanho fixo dos ícones */
+        height: 20px;
+        vertical-align: middle;
+    }
+
+    .footer__text-bottom a {
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .footer__text-bottom a:hover {
+            color: var(--color-plus);
+        }
+
+/* Efeito de overlay ao passar o mouse */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-overlay);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.footer:hover::before {
+    opacity: 0.1;
+}
+
+/*#endregion*/
+
+/*#region Estilos para dispositivos*/
+
+
+/* #region Estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+    header .logo h1 {
+        font-size: 24px;
+    }
+
+    header nav ul {
+        list-style-type: none;
+        display: flex;
+        padding: 0;
+        margin: 0;
+    }
+
+        header nav ul li {
+            margin-left: 20px;
+            padding: 0;
+            margin: 0;
+            align-items: center;
+            display: flex;
+        }
+
+            header nav ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;
+                padding: 0;
+                margin: 0;
+            }
+
+.hero {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+
+/* Filtros de categoria - Ajuste dos botões */
+.filtro-categoria {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+    .filtro-categoria button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 5px;
+        flex-grow: 1;
+        text-align: center;
+        width: 100%;
+        max-width: 120px;
+        padding-left: 1em;
+    }
+
+        .filtro-categoria button:hover {
+            background-color: #555;
+        }
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 20px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    width: 30%;
+    text-align: center;
+}
+
+    .card h3 {
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        color: #666;
+    }
+
+
+/* Menu Hamburguer */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+    .hamburger-menu span {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        border-radius: 2px;
+    }
+
+.container {
+    padding: 0;
+}
+
+#tableT {
+    height: auto;
+    padding-top: 2em;
+}
+
+/* #endregion */
+
+
+.topbar__menuhomePerfil {
+    display: flex;
+    gap: 1em;
+}
+
+
+.perfil-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px; /* Largura fixa para evitar mudanças */
+}
+
+#perfilBtn {
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+    background: var(--color-black);
+    border: 2px solid var(--color-plus);
+    border-radius: 10em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    #perfilBtn img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    #perfilBtn:hover {
+        transform: scale(1.1);
+        background: var(--color-bg2);
+    }
+
+/* Ajuste no nome do perfil para evitar deslocamento */
+.perfil-nome {
+    width: 100%; /* Mantém alinhado ao botão */
+    text-align: center;
+    color: var(--color-text);
+    font-size: 14px;
+    white-space: nowrap; /* Evita que o texto quebre */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    margin-top: 5px; /* Espaço fixo abaixo do botão */
+}
+
+#perfilBtn:hover + .perfil-nome {
+    opacity: 1;
+}
+
+/* Ajuste no menu */
+.menu {
+    position: absolute;
+    top: 4em;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background: var(--color-black);
+    border: 1px solid var(--color-plus);
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 140px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    visibility: hidden;
+}
+
+    .menu a {
+        display: block;
+        padding: 8px;
+        text-decoration: none;
+        color: var(--color-text);
+        border-bottom: 1px solid var(--color-plus);
+    }
+
+        .menu a:last-child {
+            border-bottom: none;
+        }
+
+        .menu a:hover {
+            background: var(--color-plus);
+            color: var(--color-text);
+            transition: 0.3s;
+        }
+
+    .menu.active {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+        visibility: visible;
+    }
+
+.mode-nome {
+    width: 100%; /* Mantém alinhado ao botão */
+    text-align: center;
+    color: var(--color-text);
+    font-size: 14px;
+    white-space: nowrap; /* Evita que o texto quebre */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    margin-top: 5px; /* Espaço fixo abaixo do botão */
+}
+
+.mode-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px; /* Largura fixa para evitar mudanças */
+}
+
+/*#region perfil*/
+.banner {
+    width: 100%;
+    height: 200px; /* Ajuste conforme necessário */
+    background: url('./Img/Icones/banner.jpg') no-repeat center;
+    background-size: cover;
+}
+
+/* Container do Perfil */
+/* Container do Perfil */
+
+
+/* Card de Perfil */
+.Inform-CardPerfil {
+    width: 100%;
+    background-color: var(--color-card-bg);
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--color-shadow);
+    transition: all 0.3s ease;
+}
+
+/* Imagem do Perfil */
+.cardperfil-img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1.5rem;
+    background: var(--color-gradient);
+    transition: all 0.3s ease;
+}
+
+    .cardperfil-img img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+/* Informações do Usuário */
+.cardperfil-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .cardperfil-info .nickname {
+        font-weight: bold;
+        color: var(--color-plus);
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .cardperfil-info .apelido {
+        color: var(--color-text-secondary);
+        font-size: 1rem;
+    }
+
+/* Parte de editar perfil */
+.EditPerfil-Container {
+    display: flex;
+    width: 100%;
+    height: 50rem;
+    background: var(--color-bg2);
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--color-shadow);
+    transition: all 0.3s ease;
+}
+
+.CardBio-Container {
+    margin: 2rem;
+    width: 20rem;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--color-shadow);
+    transition: all 0.3s ease;
+    height: 36.5rem;
+}
+
+.gerenciarJogosContainer {
+    margin: 2rem;
+    width: 50rem;
+    background: var(--color-bg1);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    height: 36.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--color-shadow);
+    transition: all 0.3s ease;
+}
+
+.CardBio-Container h1 {
+    color: var(--color-text-primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.CardBio-Container h4 {
+    color: var(--color-text-secondary);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Formulário de Edição */
+.profile-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.profile-fields {
+    flex: 1;
+}
+
+.profile-image {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+    .profile-image img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--color-border);
+    }
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+    .form-group label {
+        color: var(--color-text-primary);
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        background-color: var(--color-base);
+        color: var(--color-text-primary);
+        transition: all 0.3s ease;
+    }
+
+        .form-group input:disabled {
+            background-color: var(--color-bg2);
+            color: var(--color-text-muted);
+        }
+
+/* Botões */
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.btn-primary, .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    background-color: var(--color-button-bg);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary:hover, .btn:hover {
+        background-color: var(--color-button-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px var(--color-shadow);
+    }
+
+.btn-danger {
+    background-color: var(--color-detail);
+}
+
+    .btn-danger:hover {
+        background-color: var(--color-plus);
+    }
+
+/* Animações e Transições */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.perfil-container, .Inform-CardPerfil, .EditPerfil-Container, .CardBio-Container, .gerenciarJogosContainer {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+
+
+/*#region Perfil jogos*/
+/* Contêiner principal */
+.AvaliaçãoInfo-Container {
+    width: 15em;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-card-bg); /* Fundo do card */
+    padding: 1.5em;
+    border-radius: 12px;
+    margin-left: 1em;
+    box-shadow: 0px 4px 6px var(--color-shadow); /* Sombra suave */
+    transition: all 0.3s ease-in-out;
+}
+
+    .AvaliaçãoInfo-Container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 12px var(--color-shadow); /* Sombra mais intensa no hover */
+    }
+
+/* Imagem do jogo */
+.jogo-imagem {
+    width: 100%;
+    height: 12em;
+    margin-bottom: 1.5em;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+    .jogo-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .jogo-imagem:hover img {
+        transform: scale(1.05);
+    }
+
+/* Contêiner das informações */
+.info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em; /* Espaçamento entre os itens */
+}
+
+/* Cada item de informação */
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75em;
+    background-color: var(--color-base); /* Fundo base */
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .info-item:hover {
+        background-color: var(--color-plus); /* Fundo destacado no hover */
+        transform: translateX(5px);
+    }
+
+/* Estilo para os rótulos (labels) */
+.info-label {
+    font-weight: bold;
+    color: var(--color-text-primary); /* Texto principal */
+    font-size: 0.9em;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Estilo para os valores */
+.info-value {
+    color: var(--color-text-secondary); /* Texto secundário */
+    font-size: 0.9em;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Efeito de hover nos valores */
+.info-item:hover .info-value {
+    color: var(--color-text-primary); /* Texto principal no hover */
+}
+
+/* Linha divisória entre os itens */
+.info-item:not(:last-child) {
+    border-bottom: 1px solid var(--color-divider); /* Linha divisória */
+}
+
+/* Banner Principal */
+.banner {
+    width: 100%;
+    height: 250px; /* Aumentei a altura para dar mais destaque */
+    background: url('./Img/Icones/banner.jpg') no-repeat center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
+    .banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-overlay); /* Usando a variável de overlay */
+        transition: all 0.5s ease-in-out;
+    }
+
+    .banner:hover::before {
+        background: rgba(0, 0, 0, 0.7); /* Overlay mais escuro no hover */
+    }
+
+/* Container do Perfil */
+.perfil-container {
+    width: 100%;
+    display: flex;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Card de Perfil */
+.Inform-CardPerfil {
+    width: 100%;
+    background-color: var(--color-card-bg); /* Usando a variável de fundo de card */
+    display: flex;
+    align-items: center;
+    padding: 1rem 5em;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px var(--color-shadow); /* Usando a variável de sombra */
+    transition: all 0.3s ease-in-out;
+}
+
+    .Inform-CardPerfil:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 12px var(--color-shadow); /* Sombra mais intensa no hover */
+    }
+
+/* Imagem do Perfil */
+.cardperfil-img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1rem;
+    background: var(--color-base); /* Usando a variável de fundo base */
+    transition: all 0.3s ease-in-out;
+}
+
+    .cardperfil-img img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .cardperfil-img:hover {
+        transform: scale(1.1);
+    }
+
+/* Informações do Usuário */
+.cardperfil-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .cardperfil-info .nickname {
+        font-weight: bold;
+        color: var(--color-plus); /* Usando a variável de destaque */
+        font-size: 1.2rem;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .cardperfil-info .apelido {
+        color: var(--color-text-secondary); /* Usando a variável de texto secundário */
+        font-size: 1rem;
+        transition: color 0.3s ease-in-out;
+    }
+
+/* Quando a sidebar está expandida */
+.sidebar-expandida ~ .perfil-container {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+}
+
+/* Parte de Jogos */
+.JogosInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: var(--color-bg1); /* Usando a variável de fundo de busca */
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Container principal */
+.JogosInfo-Container {
+    display: flex;
+    width: 70%;
+    /*    height: 50em;*/
+    align-items: flex-start;
+    padding: 1em;
+    border-radius: 10px;
+    background: var(--color-card-bg);
+    margin: 2em 0;
+    transition: all 0.3sease-in-out;
+    position: relative;
+}
+
+    .JogosInfo-Container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 12px var(--color-shadow); /* Sombra mais intensa no hover */
+    }
+
+/* Slide de Imagens */
+.SlideImageJogo_Container {
+    width: 60em;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 1em;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.image-slide {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+    .image-slide img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .image-slide img:hover {
+            transform: scale(1.05);
+        }
+
+/* Carrossel de Imagens */
+.carousel-container {
+    width: 80%;
+    height: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    margin-right: 10em;
+}
+
+.carousel {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+    gap: 1em;
+}
+
+.carousel-image {
+    width: 10em;
+    height: 5em;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+    .carousel-image:hover {
+        transform: scale(1.1);
+    }
+
+.carousel-button {
+    background-color: var(--color-button-bg); /* Usando a variável de fundo de botão */
+    border: none;
+    color: var(--color-text-primary); /* Usando a variável de texto primário */
+    font-size: 2em;
+    cursor: pointer;
+    padding: 0.5em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+    .carousel-button:hover {
+        background-color: var(--color-button-hover); /* Usando a variável de hover do botão */
+    }
+
+    .carousel-button.prev {
+        left: 0;
+    }
+
+    .carousel-button.next {
+        right: 0;
+    }
+
+.carousel-image.selected {
+    border: 3px solid var(--color-plus); /* Usando a variável de destaque */
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+/* AvaliaçãoInfo-Container */
+.AvaliaçãoInfo-Container {
+    width: 15em;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-bg2); /* Usando a variável de fundo de busca */
+    padding: 1em;
+    border-radius: 10px;
+    position: absolute; /* Posicionamento absoluto */
+    right: 1em; /* Alinha à direita */
+    top: 1em; /* Alinha ao topo */
+    transition: all 0.3s ease-in-out;
+}
+
+    .AvaliaçãoInfo-Container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 12px var(--color-shadow); /* Sombra mais intensa no hover */
+    }
+
+/* Imagem do jogo */
+.jogo-imagem {
+    width: 90%;
+    height: 10em;
+    margin-bottom: 1em;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+    .jogo-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .jogo-imagem:hover img {
+        transform: scale(1.05);
+    }
+
+/* Contêiner das informações */
+.info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em; /* Espaçamento entre os itens */
+}
+
+/* Cada item de informação */
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75em;
+    background-color: var(--color-base); /* Fundo base */
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .info-item:hover {
+        background-color: var(--color-plus); /* Fundo destacado no hover */
+        transform: translateX(5px);
+    }
+
+/* Estilo para os rótulos (labels) */
+.info-label {
+    font-weight: bold;
+    color: var(--color-text-primary); /* Texto principal */
+    font-size: 0.9em;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Estilo para os valores */
+.info-value {
+    color: var(--color-text-secondary); /* Texto secundário */
+    font-size: 0.9em;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Efeito de hover nos valores */
+.info-item:hover .info-value {
+    color: var(--color-text-primary); /* Texto principal no hover */
+}
+
+/* Linha divisória entre os itens */
+.info-item:not(:last-child) {
+    border-bottom: 1px solid var(--color-divider); /* Linha divisória */
+}
+
+
+/* Parte de comentarios */
+
+.Comentario-Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: var(--color-bg2); /* Usando a variável de fundo de busca */
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+/*#endregion*/
+
+/*#endregion*/
+
+/*/* Remove ou comente esta regra que afeta todos os divs do form */
+/* form div {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    width: 80%;
+} */
+
+/* Container que define as duas colunas */
+.profile-container {
+    display: flex; /* Ativa o modo Flex */
+    gap: 20px; /* Espaço horizontal entre colunas */
+    align-items: flex-start;
+}
+
+/* Coluna dos campos (cresce para ocupar o espaço) */
+.profile-fields {
+    flex: 1;
+}
+
+/* Coluna da imagem (se existir) 
+.profile-image {
+    flex: 0 0 200px;  largura fixa ou use flex: 1 para ocupar espaço 
+} */
+
+/* Deixe cada .form-group como bloco para empilhar label e input */
+.form-group {
+    display: block;
+    margin-bottom: 1rem;
+    width: 100%; /* Ajuste se quiser limitar */
+}
+
+/* Ajuste se estiver usando Bootstrap */
+.form-control {
+    width: 100%;
+}
+
+form div {
+    /*display: flex;*/
+    /*flex-direction: column;*/ /* Organiza label e input em coluna */
+    /*align-items: flex-start;*/ /* Alinha o label à esquerda */
+    /*margin-bottom: 1rem;*/ /* Espaçamento entre os campos */
+    /*width: 80%;*/ /* Largura total do container */
+}
+/* Container principal para os campos e imagem */
+.profile-container {
+    display: flex;
+    align-items: flex-start;
+    /* Aumente o gap conforme necessário */
+    gap: 40px; /* Exemplo: de 20px para 40px */
+}
+
+/* Seção da imagem em colunas */
+.profile-image {
+    display: flex;
+    flex-direction: column;
+    /* Um pequeno gap entre o label e a imagem ou entre elementos */
+    gap: 10px;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Form group padrão: cada campo fica com margem embaixo */
+.form-group {
+    display: block;
+    margin-bottom: 1rem; /* Ajuste conforme o espaço desejado */
+}
+
+/* Ajuste a margem da imagem, se quiser mais espaço */
+.profile-image img {
+    margin-top: 0.5rem;
+    /* ou margin-bottom, se quiser espaço abaixo da imagem */
+}
+
+.img-thumbnail {
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Container principal dos comentários */
+.ParteComentario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: var(--color-bg2);
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+}
+
+.ParteComentario-Container {
+    display: flex;
+    width: 70%;
+    align-items: flex-start;
+    padding: 1em;
+    border-radius: 10px;
+    background: var(--color-card-bg);
+    margin: 2em 0;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+    .ParteComentario-Container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 12px var(--color-shadow);
+    }
+
+/* Container do post de comentários */
+.PostComent-container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 1em;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Container dos comentários */
+.Comentario-Container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+    background-color: var(--color-bg2);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .Comentario-Container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 12px var(--color-shadow);
+    }
+
+/* Estilo para cada comentário */
+.review {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.75em;
+    background-color: var(--color-base);
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .review:hover {
+        background-color: var(--color-plus);
+        transform: translateX(5px);
+    }
+
+    /* Estilo para o texto do comentário */
+    .review p {
+        margin: 0;
+        color: var(--color-text-primary);
+        font-size: 0.9em;
+    }
+
+/* Estilo para o container de deixar comentário */
+.Comentar-container {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-bg2);
+    padding: 1em;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .Comentar-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 12px var(--color-shadow);
+    }
+
+/* Estilo para o formulário de comentário */
+.reviews {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+/* Estilo para os botões de like/dislike */
+/* Estilo para os botões de like/dislike */
+.like-dislike-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 1em;
+}
+
+    .like-dislike-buttons label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 0.5em;
+        background-color: var(--color-plus);
+        border: 2px solid transparent; /* Borda transparente */
+        transition: all 0.3s ease-in-out;
+    }
+
+        .like-dislike-buttons label:hover {
+            background-color: var(--color-detail);
+        }
+
+    .like-dislike-buttons input[type="radio"] {
+        display: none; /* Esconde os inputs */
+    }
+
+        /* Estilo do botão selecionado */
+        .like-dislike-buttons input[type="radio"]:checked + label {
+            background-color: #007bff; /* Cor de fundo quando selecionado */
+            border-color: #0056b3; /* Cor da borda quando selecionado */
+            color: #fff; /* Cor do texto quando selecionado */
+        }
+
+            /* Estilo da imagem dentro do botão selecionado */
+            .like-dislike-buttons input[type="radio"]:checked + label .like-dislike-img {
+                filter: brightness(0) invert(1); /* Faz a imagem ficar branca */
+            }
+
+.like-dislike-img {
+    width: 3em;
+    height: 3em;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Estilo para o textarea */
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin-bottom: 1em;
+    background: var(--color-search);
+    transition: all 0.3s ease-in-out;
+}
+
+    textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+/* Estilo para o botão de enviar comentário */
+.ComentButtonsub {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+/*#endregion*/
+
+.cardN {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    background-color: var(--color-card-bg);
+    border: 2px solid var(--color-border);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    height: 35em;
+}
+
+.newBlc {
+    background-color: var(--color-bg1); /* Fundo mais suave, usando o fundo primário da paleta */
+    color: var(--color-text); /* Cor do texto definida pela variável */
+    padding: 30px; /* Maior espaçamento interno para uma sensação de amplitude */
+    border-radius: 12px; /* Bordas arredondadas mais suaves */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Sombra mais suave e intensa */
+    border: 3px solid var(--color-plus); /* Borda em verde neon para dar destaque */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    margin-bottom: 2em;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transições suaves para hover */
+}
+
+    /* Efeito de hover no GameBlc: mudança de sombra e escala */
+    .newBlc:hover {
+        box-shadow: 0 8px 30px rgba(0, 255, 255, 0.3); /* Sombra mais intensa para destaque */
+    }
+
+    .newBlc h3 {
+        color: var(--color-plus); /* Cor de destaque para o título */
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2rem; /* Aumentado para mais destaque */
+        font-weight: bold; /* Negrito para maior presença */
+        transition: color 0.3s ease; /* Transição de cor para um hover suave */
+    }
+
+    /* Efeito no título da seção */
+    .newBlc:hover h3 {
+        color: var(--color-text-highlight); /* Destaque no título ao passar o mouse */
+    }
+
+/* Estilo do menu de perfil */
+#menu {
+    display: none; /* O menu começa oculto */
+    transition: all 0.3s ease; /* Animação suave para exibição do menu */
+}
+
+    /* Quando a classe "active" for adicionada ao menu, ele será exibido */
+    #menu.active {
+        display: block;
+    }
+
+/* A caixa de categorias começa oculta */
+#category-box, #price-box {
+    display: none; /* Começa invisível */
+}
+
+    /* Caixa de filtros quando ativa */
+    #category-box.active, #price-box.active {
+        display: block; /* Torna visível quando a classe 'active' é adicionada */
+    }

@@ -1,0 +1,175 @@
+﻿@model IEnumerable<IndieFusionFinal.Models.Game>
+
+@{
+    ViewData["Title"] = "Filtro de Jogos";
+}
+
+<header>
+    <nav>
+        <!-- Top Bar -->
+        <section id="top" class="topbar">
+            <div class="topbar_container">
+                <div class="topbar__content">
+                    <div class="logo-container">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                            <div class="topbar__logo">
+                                <h4 class="logo-text">
+                                    INDIE
+                                    <span> FUSION</span>
+                                </h4>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="topbar__menu"></div>
+                    <button id="btnMode" class="topbar__btn">
+                        <img src="~/Img/Icones/moon.png" alt="Modo Escuro">
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <section id="NavLeft" class="sidebar">
+            <div class="sidebar_container">
+                <ul class="sidebar__menu">
+                    <li><span>Menu</span><img src="~/Img/Icones/menuBar.webp" alt="Menu"></li>
+                    <li><a href="http://localhost:5186/Games/Filtro?nomeJogo=&Classification_Id=&Genre_Id=6"><span>Aventura</span></a><img src="~/Img/Icones/Bag.png" alt="Aventura"></li>
+                    <li><a href="http://localhost:5186/Games/Filtro?nomeJogo=&Classification_Id=&Genre_Id=2"><span>Plataforma</span></a><img src="~/Img/Icones/Block.png" alt="Plataforma"></li>
+                    <li><a href="http://localhost:5186/Games/Filtro?nomeJogo=&Classification_Id=&Genre_Id=3"><span>Corrida</span></a><img src="~/Img/Icones/Car.png" alt="Corrida"></li>
+                    <li><a href="http://localhost:5186/Games/Filtro?nomeJogo=&Classification_Id=&Genre_Id=8"><span>RPG</span></a><img src="~/Img/Icones/Dice.png" alt="RPG"></li>
+                    <li><a href="http://localhost:5186/Games/Filtro?nomeJogo=&Classification_Id=&Genre_Id=5"><span>Tiro</span></a><img src="~/Img/Icones/Mira.png" alt="Tiro"></li>
+                    <li><a href="http://localhost:5186/Games/Filtro?nomeJogo=&Classification_Id=&Genre_Id=1"><span>Luta</span></a><img src="~/Img/Icones/Punch.png" alt="Luta"></li>
+                    <li><a href="http://localhost:5186/Games/Filtro?nomeJogo=&Classification_Id=&Genre_Id=4"><span>Terror</span></a><img src="~/Img/Icones/Skel.png" alt="Terror"></li>
+                    <li><a href="http://localhost:5186/Games/Filtro?nomeJogo=&Classification_Id=&Genre_Id=1"><span>Info</span></a><img src="~/Img/Icones/inf.png" alt="Info"></li>
+                    <div class="sidebar__logo">
+                        <img src="~/Img/Icones/Logo.png" alt="Logo IndieFusion">
+                    </div>
+                </ul>
+            </div>
+        </section>
+    </nav>
+</header>
+
+<section id="tableT2" class="tableBlc2">
+    <div class="tableBlc_container2Filtro">
+
+<h2>Filtro de Jogos</h2>
+
+<!-- Formulário de Filtro -->
+<form method="get">
+    <div class="form-group">
+        <label for="nomeJogo">Buscar por nome:</label>
+        <input type="text" name="nomeJogo" placeholder="Digite o nome do jogo..."
+               value="@ViewData["NomeJogo"]" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Classification_Id">Classificação</label>
+        <select id="Classification_Id" name="Classification_Id" class="form-control" asp-items="ViewBag.Classification_Id">
+            <option value="">Todas</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Genre_Id">Gênero</label>
+        <select id="Genre_Id" name="Genre_Id" class="form-control" asp-items="ViewBag.Genre_Id">
+            <option value="">Todos</option>
+        </select>
+    </div>
+
+    <!-- Filtro adicional para o segundo gênero -->
+    <div class="form-group">
+        <label for="Genre2_Id">Segundo Gênero</label>
+        <select id="Genre2_Id" name="Genre2_Id" class="form-control" asp-items="ViewBag.Genre2_Id">
+            <option value="">Todos</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
+    </div>
+</section>
+
+<section id="gameT" class="gameBlc">
+<h3>Jogos</h3>
+    <div class="gameBlc_container">
+
+<!-- Exibição dos Jogos -->
+@if (Model != null && Model.Any()) // Verifica se há jogos no Model
+{
+    <div class="row">
+        @foreach (var game in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+                <!-- Cada jogo em um card -->
+                <div class="cardG" style="width: 100%;">
+                    @if (!string.IsNullOrEmpty(game.ImagePath))
+                    {
+                        <img src="@game.ImagePath" class="card-img-top" alt="@game.Title" style="height: 400px; width: 100%;" />
+                    }
+                    else
+                    {
+                        <img src="/images/default-image.png" class="card-img-top" alt="Imagem padrão" style="height: auto; width: 100%;" />
+                    }
+
+                    <div class="card-body text-center">
+                        <!-- Exibe o preço do jogo -->
+                        <p class="card-text" style="color:black;">@game.Title</p>
+                        @if (!string.IsNullOrEmpty(game.price))
+                        {
+
+                            <p class="card-text" style="color: black;">Preço: R$@game.price</p>
+                        }
+                        else
+                        {
+                            <p class="card-text">Preço: Não disponível</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Nenhum jogo encontrado.</p> <!-- Mensagem caso não existam jogos -->
+}
+    </div>
+</section>
+<script src="~/js/script.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const genreSelect = document.getElementById('Genre_Id');
+        const genre2Select = document.getElementById('Genre2_Id');
+
+        function updateSecondGenreOptions() {
+            const selectedValue = genreSelect.value;
+
+            // Habilitar todas as opções no segundo seletor
+            Array.from(genre2Select.options).forEach(option => {
+                option.disabled = false;
+            });
+
+            // Desabilitar a opção selecionada no primeiro seletor
+            if (selectedValue) {
+                const optionToDisable = genre2Select.querySelector(`option[value="${selectedValue}"]`);
+                if (optionToDisable) {
+                    optionToDisable.disabled = true;
+                }
+            }
+
+            // Garantir que a segunda seleção não tenha um valor inválido
+            if (genre2Select.value === selectedValue) {
+                genre2Select.value = '';
+            }
+        }
+
+        // Atualizar as opções sempre que o primeiro seletor mudar
+        genreSelect.addEventListener('change', updateSecondGenreOptions);
+
+        // Inicializar as opções no carregamento da página
+        updateSecondGenreOptions();
+    });
+</script>

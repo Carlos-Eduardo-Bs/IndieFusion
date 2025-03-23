@@ -1,0 +1,231 @@
+﻿@model IEnumerable<IndieFusionFinal.Models.Game>
+
+@{
+    ViewData["Title"] = "Index";
+    var username = Context.Session.GetString("Username"); // Obtém o nome de usuário da sessão usando Context
+    var imagePath = Context.Session.GetString("ImagePath") ?? "/IF/Img/Icones/PerfilWhite.png";
+}
+
+<section id="top" class="topbar">
+    <div class="topbar_container">
+        <div class="topbar__content">
+            <div class="logo-container">
+                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="topbar__logo">
+                        <h4 class="logo-text">
+                            INDIE
+                            <span> FUSION</span>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="topbar__menu" id="mainMenu">
+                <ul>
+                    <li><a class="nav-link text-white" asp-area="" asp-controller="GameMakers" asp-action="GameUser">MeusJogos</a></li>
+                </ul>
+            </nav>
+
+            <div class="topbar__menuhomePerfil">
+                <li class="perfil-container">
+                    <button id="perfilBtn">
+                        <img src="@Url.Content(imagePath)" alt="Perfil" class="img-thumbnail" />
+                    </button>
+                    <span id="perfilNome" class="perfil-nome">@username.ToUpper()</span>
+                    <div id="menu" class="menu">
+                        <a asp-area="" asp-controller="GameMakers" asp-action="GameUser">Meus Jogos</a>
+                        <a asp-area="" asp-controller="Templates" asp-action="TemplatePerfil">Perfil</a>
+                        <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                    </div>
+                </li>
+
+
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="mode-container">
+                    <button id="btnMode" class="topbar__btn">
+                        <img src="~/Img/Icones/moon.png" alt="Modo Escuro">
+                    </button>
+                    <span class="mode-nome">Temas</span>
+                </div>
+
+                <!-- Menu de seleção de temas -->
+
+
+                <div id="themeMenu" class="theme-menu">
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('light')">Light Mode</div>
+                        <div class="theme-options" id="light-options">
+                            <div class="theme-option" onclick="changeTheme('NebulosaSolarLightMode')">Nebulosa Solar</div>
+                            <div class="theme-option" onclick="changeTheme('AuroraNebulosaLightMode')">Aurora Nebulosa</div>
+                            <div class="theme-option" onclick="changeTheme('GalaxiaAzuladaLightMode')">Galáxia Azulada</div>
+                            <div class="theme-option" onclick="changeTheme('NebulosaLilasLightMode')">Nebulosa Lilás</div>
+                            <div class="theme-option" onclick="changeTheme('EstrelaDouradaLightMode')">Estrela Dourada</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('dark')">Dark Mode</div>
+                        <div class="theme-options" id="dark-options">
+                            <div class="theme-option" onclick="changeTheme('NebulosaVermelhaMode')">Nebulosa Vermelha</div>
+                            <div class="theme-option" onclick="changeTheme('BuracoNegroMode')">Buraco Negro</div>
+                            <div class="theme-option" onclick="changeTheme('AuroraBorealMode')">Aurora Boreal</div>
+                            <div class="theme-option" onclick="changeTheme('EstrelaAzulMode')">Estrela Azul</div>
+                            <div class="theme-option" onclick="changeTheme('NebulosaLilasMode')">Nebulosa Lilás</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('neon')">Neon Mode</div>
+                        <div class="theme-options" id="neon-options">
+                            <div class="theme-option" onclick="changeTheme('Neon1Mode')">Neon Trifecta</div>
+                            <div class="theme-option" onclick="changeTheme('NeonSpectrumMode')">Neon Spectrum</div>
+                            <div class="theme-option" onclick="changeTheme('NeonVaporwaveMode')">Neon Vaporwave</div>
+                            <div class="theme-option" onclick="changeTheme('NeonCyberMode')">Neon Cyber</div>
+                            <div class="theme-option" onclick="changeTheme('NeonAuroraMode')">Neon Aurora</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('colors')">Cores Padrões</div>
+                        <div class="theme-options" id="colors-options">
+                            <div class="theme-option" onclick="changeTheme('GalaxiaPadraoMode')">Galáxia Padrão</div>
+                            <div class="theme-option" onclick="changeTheme('darkGalaxyAMOLEDMode')">Dark Galaxy</div>
+                            <div class="theme-option" onclick="changeTheme('GalaxiaPadraoLightMode')">Light Galaxy</div>
+                            <div class="theme-option" onclick="changeTheme('YingYangNeonGalaticoMode')">Ying Yang Galatico</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="tableT2" class="tableBlc2">
+    <div class="tableBlc_container2">
+        <h1>Meus Jogos</h1>
+
+
+        <!-- Filtro de jogos -->
+        <form method="get" asp-action="GameUser">
+            <div class="form-group">
+                <label for="nomeJogo">Nome do Jogo:</label>
+                <input type="text" class="form-control" id="nomeJogo" name="NomeJogo" value="@ViewData["NomeJogo"]" />
+            </div>
+
+
+            <!-- Filtro por Classificação -->
+            <div class="form-group">
+                <label for="Classification_Id">Classificação</label>
+                <select id="Classification_Id" name="Classification_Id" class="form-control" asp-items="ViewBag.Classification_Id">
+                    <option value="">Todas</option>
+                </select>
+            </div>
+
+            <!-- Filtro por Gênero -->
+            <div class="form-group">
+                <label for="Genre_Id">Gênero</label>
+                <select id="Genre_Id" name="Genre_Id" class="form-control" asp-items="ViewBag.Genre_Id">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+
+            <!-- Filtro por Segundo Gênero -->
+            <div class="form-group">
+                <label for="Genre2_Id">Segundo Gênero (Opcional)</label>
+                <select id="Genre2_Id" name="Genre2_Id" class="form-control" asp-items="ViewBag.Genre2_Id">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+            <div class="button2">
+                <a asp-action="CreateGame" class="btn-create">Create New</a>
+
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a href="/GameMakers/GameUser" class="btn btn-primary">Limpar Filtros</a>
+                <a href="/Games/Filtro" class="btn-action">Filtrar Jogos</a>
+            </div>
+        </form>
+    </div>
+</section>
+<section id="tableT" class="tableBlc">
+    <div class="tableBlc_container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Title)</th>
+                    <th>@Html.DisplayNameFor(model => model.Producer)</th>
+                    <th>@Html.DisplayNameFor(model => model.price)</th>
+                    <th>@Html.DisplayNameFor(model => model.Classification)</th>
+                    <th>@Html.DisplayNameFor(model => model.Genre)</th>
+                    <th>Segundo Gênero</th>
+                    <th>Image</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-label="Título"><span>@Html.DisplayFor(modelItem => item.Title)</span></td>
+                        <td data-label="Produtor"><span>@Html.DisplayFor(modelItem => item.Producer)</span></td>
+                        <td data-label="Preço"><span>@($"R$ {item.price:F2}")</span></td> <!-- Alterado para adicionar "R$" no preço -->
+                        <td data-label="Classificação"><span>@Html.DisplayFor(modelItem => item.Classification.Description)</span></td>
+                        <td data-label="Gênero"><span>@Html.DisplayFor(modelItem => item.Genre.Description)</span></td>
+                        <td data-label="Gênero Secundário"><span>@(item.Genre2 != null ? item.Genre2.Description : "N/A")</span></td>
+                        <td data-label="Imagem e Ações" class="img-card">
+                            <span>
+                                <img src="@Url.Content(item.ImagePath)" alt="@item.Title" class="img-thumbnail" />
+                            </span>
+                            <div class="card-actions">
+                                <a asp-action="EditGame" asp-route-id="@item.Id" class="btn-action">Edit</a>
+                                <a asp-action="DetailsGame" asp-route-id="@item.Id" class="btn-action">Details</a>
+                                <a asp-action="DeleteGame" asp-route-id="@item.Id" class="btn-delete">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</section>
+<script src="~/js/script.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const genreSelect = document.getElementById('Genre_Id');
+        const genre2Select = document.getElementById('Genre2_Id');
+
+        function updateSecondGenreOptions() {
+            const selectedValue = genreSelect.value;
+
+            // Habilitar todas as opções no segundo seletor
+            Array.from(genre2Select.options).forEach(option => {
+                option.disabled = false;
+            });
+
+            // Desabilitar a opção selecionada no primeiro seletor
+            if (selectedValue) {
+                const optionToDisable = genre2Select.querySelector(`option[value="${selectedValue}"]`);
+                if (optionToDisable) {
+                    optionToDisable.disabled = true;
+                }
+            }
+
+            // Garantir que a segunda seleção não tenha um valor inválido
+            if (genre2Select.value === selectedValue) {
+                genre2Select.value = '';
+            }
+        }
+
+        // Atualizar as opções sempre que o primeiro seletor mudar
+        genreSelect.addEventListener('change', updateSecondGenreOptions);
+
+        // Inicializar as opções no carregamento da página
+        updateSecondGenreOptions();
+    });
+</script>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<IndieFusionFinal.Models.Classification>
+
+@{
+    ViewData["Title"] = "Index";
+    var username = Context.Session.GetString("Username"); // Obtém o nome de usuário da sessão usando Context
+    var imagePath = Context.Session.GetString("ImagePath") ?? "/IF/Img/Icones/PerfilWhite.png";
+
+}
+
+<section id="top" class="topbar">
+    <div class="topbar_container">
+        <div class="topbar__content">
+            <div class="logo-container">
+                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="topbar__logo">
+                        <h4 class="logo-text">
+                            INDIE
+                            <span> FUSION</span>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="topbar__menu" id="mainMenu">
+                <ul>
+                    <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+
+                    <li><a class="nav-link text-white" asp-area="" asp-controller="Users" asp-action="Index">Usuarios</a></li>
+                    <li><a class="nav-link text-white" asp-area="" asp-controller="UserTypes" asp-action="Index">TipoUsuario</a></li>
+                    <li><a class="nav-link text-white" asp-area="" asp-controller="Genres" asp-action="Index">Genero</a></li>
+                    <li><a class="nav-link text-white" asp-area="" asp-controller="Games" asp-action="Index">Jogos</a></li>
+                </ul>
+            </nav>
+
+            <div class="topbar__menuhomePerfil">
+                <li class="perfil-container">
+                    <button id="perfilBtn">
+                        <img src="@Url.Content(imagePath)" alt="Perfil" class="img-thumbnail" />
+                    </button>
+                    <span id="perfilNome" class="perfil-nome">@username.ToUpper()</span>
+                    <div id="menu" class="menu">
+                        <a asp-area="" asp-controller="Users" asp-action="Index">Área Restrita</a>
+                        <a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                    </div>
+                </li>
+
+
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="mode-container">
+                    <button id="btnMode" class="topbar__btn">
+                         <img src="~/Img/Icones/moon.png" alt="Modo Escuro">
+                    </button>
+                    <span class="mode-nome">Temas</span>
+                </div>
+
+                <!-- Menu de seleção de temas -->
+
+
+                <div id="themeMenu" class="theme-menu">
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('light')">Light Mode</div>
+                        <div class="theme-options" id="light-options">
+                            <div class="theme-option" onclick="changeTheme('NebulosaSolarLightMode')">Nebulosa Solar</div>
+                            <div class="theme-option" onclick="changeTheme('AuroraNebulosaLightMode')">Aurora Nebulosa</div>
+                            <div class="theme-option" onclick="changeTheme('GalaxiaAzuladaLightMode')">Galáxia Azulada</div>
+                            <div class="theme-option" onclick="changeTheme('NebulosaLilasLightMode')">Nebulosa Lilás</div>
+                            <div class="theme-option" onclick="changeTheme('EstrelaDouradaLightMode')">Estrela Dourada</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('dark')">Dark Mode</div>
+                        <div class="theme-options" id="dark-options">
+                            <div class="theme-option" onclick="changeTheme('NebulosaVermelhaMode')">Nebulosa Vermelha</div>
+                            <div class="theme-option" onclick="changeTheme('BuracoNegroMode')">Buraco Negro</div>
+                            <div class="theme-option" onclick="changeTheme('AuroraBorealMode')">Aurora Boreal</div>
+                            <div class="theme-option" onclick="changeTheme('EstrelaAzulMode')">Estrela Azul</div>
+                            <div class="theme-option" onclick="changeTheme('NebulosaLilasMode')">Nebulosa Lilás</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('neon')">Neon Mode</div>
+                        <div class="theme-options" id="neon-options">
+                            <div class="theme-option" onclick="changeTheme('Neon1Mode')">Neon Trifecta</div>
+                            <div class="theme-option" onclick="changeTheme('NeonSpectrumMode')">Neon Spectrum</div>
+                            <div class="theme-option" onclick="changeTheme('NeonVaporwaveMode')">Neon Vaporwave</div>
+                            <div class="theme-option" onclick="changeTheme('NeonCyberMode')">Neon Cyber</div>
+                            <div class="theme-option" onclick="changeTheme('NeonAuroraMode')">Neon Aurora</div>
+                        </div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-category" onclick="toggleThemeOptions('colors')">Cores Padrões</div>
+                        <div class="theme-options" id="colors-options">
+                            <div class="theme-option" onclick="changeTheme('GalaxiaPadraoMode')">Galáxia Padrão</div>
+                            <div class="theme-option" onclick="changeTheme('darkGalaxyAMOLEDMode')">Dark Galaxy</div>
+                            <div class="theme-option" onclick="changeTheme('GalaxiaPadraoLightMode')">Light Galaxy</div>
+                            <div class="theme-option" onclick="changeTheme('YingYangNeonGalaticoMode')">Ying Yang Galatico</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="tableT" class="tableBlc">
+    <div class="tableBlc_container">
+        <h1>Classificação</h1>
+
+        <p>
+            <a asp-action="Create" class="btn-create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-label="Descrição"><span>@Html.DisplayFor(modelItem => item.Description)</span></td>
+                        <td data-label="Ações">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn-action">Detalhes</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn-delete">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</section>
+<script src="~/js/script.js"></script>
