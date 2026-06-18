@@ -1,4 +1,4 @@
-# Sistema Corporativo Integrado (API, Desktop & Web)
+# IndieFusion (API, Desktop & Web)
 
 ## 💻 Sobre o Projeto
 Este é um sistema de grande porte desenvolvido para simular um ambiente corporativo robusto e integrado. A solução foi estruturada de forma modular, dividida em três ecossistemas principais que comunicam entre si para garantir a consistência dos dados e a separação de responsabilidades.
